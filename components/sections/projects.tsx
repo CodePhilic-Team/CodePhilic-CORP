@@ -84,8 +84,7 @@ export function Projects() {
                 WebkitBackdropFilter: "blur(20px)",
                 border: "1px solid var(--glass-border)",
               }}
-              whileHover={{ y: -4 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 } as never}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 200, damping: 20 } }}
             >
               {/* Glow accent */}
               <div
