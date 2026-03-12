@@ -6,7 +6,6 @@ import { ArrowRight } from "lucide-react";
 import { FloatingAssets } from "@/components/FloatingAsset";
 import GradientText from "@/components/GradientText";
 import Squares from "@/components/Squares";
-import DecryptedText from "@/components/DecryptedText";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
@@ -130,35 +129,17 @@ export function Hero() {
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.032, delayChildren: 0.25 } } }}
             className="font-sf font-semibold tracking-[-0.04em] leading-[1.05] flex flex-col items-center justify-center gap-1 sm:gap-4"
           >
-            <span className="block text-6xl md:text-8xl lg:text-[7.5rem] overflow-hidden">
-              <DecryptedText
-                text="CodePhilic"
-                animateOn="view"
-                sequential={true}
-                speed={95}
-                revealDirection="start"
-                className="text-foreground"
-                encryptedClassName="text-[#3B82F6]/50"
-                style={{ display: "inline-block", minWidth: "100%" }}
-              />
+            <span className="block text-6xl md:text-8xl lg:text-[7.5rem]">
+              CodePhilic
             </span>
-            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl overflow-hidden">
+            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
               <GradientText
                 colors={["#3B82F6", "#8B5CF6", "#F43F5E", "#3B82F6"]}
                 animationSpeed={5}
                 showBorder={false}
                 className="inline-block px-2 text-balance"
               >
-                <DecryptedText
-                  text="We Architect Imagination"
-                  animateOn="view"
-                  sequential={true}
-                  speed={105}
-                  revealDirection="center"
-                  className=""
-                  encryptedClassName="opacity-40"
-                  style={{ display: "inline-block", minWidth: "100%" }}
-                />
+                We Architect Imagination
               </GradientText>
             </span>
           </motion.h1>
