@@ -730,13 +730,7 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Gracefully check for WebGL support to avoid crashes on unsupported/sandboxed environments
     try {
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      if (!gl) {
-        console.warn('Ballpit: WebGL is not supported on this device/browser.');
-        return;
-      }
       spheresInstanceRef.current = createBallpit(canvas, { followCursor, ...props });
     } catch (err) {
       console.warn('Ballpit: Failed to initialize WebGL context.', err);

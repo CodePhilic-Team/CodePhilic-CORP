@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -11,8 +13,9 @@
   --color-card-foreground: var(--card-foreground);
   --color-border: var(--border);
 
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-outfit);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 @layer base {
@@ -57,6 +60,9 @@
     background-color: var(--background);
     color: var(--foreground);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern", "liga", "calt";
+    letter-spacing: -0.015em;
   }
   /* Remove all generic box-shadows */
   *, *::before, *::after {
@@ -72,14 +78,26 @@
     border: 1px solid var(--glass-border);
   }
 
-  /* Slow mesh drift animation */
-  @keyframes meshDrift {
-    0%   { transform: translate(0, 0) rotate(0deg); }
-    33%  { transform: translate(1%, 0.5%) rotate(0.3deg); }
-    66%  { transform: translate(-0.5%, 1%) rotate(-0.2deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
-  }
   .animate-mesh-drift {
     animation: meshDrift 28s ease-in-out infinite;
   }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  .animate-marquee-reverse {
+    animation: marquee 30s linear infinite reverse;
+  }
+}
+
+@keyframes meshDrift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(1%, 0.5%) rotate(0.3deg); }
+  66%  { transform: translate(-0.5%, 1%) rotate(-0.2deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }

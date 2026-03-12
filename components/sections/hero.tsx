@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { FloatingAssets } from "@/components/FloatingAsset";
 import GradientText from "@/components/GradientText";
 import Squares from "@/components/Squares";
+import DecryptedText from "@/components/DecryptedText";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
@@ -124,43 +125,53 @@ export function Hero() {
             Premium Software Agency
           </motion.div>
 
-          {/* H1 with character stagger */}
+          {/* H1 with DecryptedText — overflow:hidden prevents layout shift */}
           <motion.h1
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.032, delayChildren: 0.25 } } }}
-            className="font-heading font-bold tracking-tighter leading-[1.1] flex flex-col items-center justify-center gap-1 sm:gap-4"
+            className="font-sf font-semibold tracking-[-0.04em] leading-[1.05] flex flex-col items-center justify-center gap-1 sm:gap-4"
           >
-            <span className="block text-6xl md:text-8xl lg:text-[7.5rem]">
-              <SplitText text="CodePhilic" />
+            <span className="block text-6xl md:text-8xl lg:text-[7.5rem] overflow-hidden">
+              <DecryptedText
+                text="CodePhilic"
+                animateOn="view"
+                sequential={true}
+                speed={95}
+                revealDirection="start"
+                className="text-foreground"
+                encryptedClassName="text-[#3B82F6]/50"
+                style={{ display: "inline-block", minWidth: "100%" }}
+              />
             </span>
-            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl overflow-hidden">
               <GradientText
                 colors={["#3B82F6", "#8B5CF6", "#F43F5E", "#3B82F6"]}
                 animationSpeed={5}
                 showBorder={false}
                 className="inline-block px-2 text-balance"
               >
-                We Architect Imagination
+                <DecryptedText
+                  text="We Architect Imagination"
+                  animateOn="view"
+                  sequential={true}
+                  speed={105}
+                  revealDirection="center"
+                  className=""
+                  encryptedClassName="opacity-40"
+                  style={{ display: "inline-block", minWidth: "100%" }}
+                />
               </GradientText>
             </span>
           </motion.h1>
 
-          {/* Subtitle with character stagger */}
+          {/* Subtitle — plain, no decrypt */}
           <motion.p
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.018, delayChildren: 0.75 } } }}
+            variants={{
+              hidden: { opacity: 0, y: 12 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.6 } },
+            }}
             className="max-w-3xl mx-auto text-base md:text-xl text-foreground/60 leading-relaxed font-sans text-balance"
-            aria-label="Human-authored code. Flawless execution. We build high-performance web and mobile applications for visionaries who refuse to compromise on quality."
           >
-            {"Human-authored code. Flawless execution. We build high-performance web and mobile applications for visionaries who refuse to compromise on quality.".split("").map((ch, i) => (
-              <motion.span
-                key={i}
-                custom={i}
-                variants={charVariants}
-                className="inline-block will-change-transform"
-                style={{ whiteSpace: ch === " " ? "pre" : undefined }}
-              >
-                {ch}
-              </motion.span>
-            ))}
+            Human-authored code. Flawless execution. We build high-performance web and mobile applications for visionaries who refuse to compromise on quality.
           </motion.p>
 
           {/* CTAs */}

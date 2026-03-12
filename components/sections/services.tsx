@@ -5,9 +5,7 @@ import { motion, type Variants } from "framer-motion";
 import { Globe, Smartphone, Cloud, Cpu } from "lucide-react";
 import { ParticleCard, GlobalSpotlight } from "@/components/MagicBento";
 import ScrollFloat from "@/components/ScrollFloat";
-import dynamic from "next/dynamic";
-
-const Antigravity = dynamic(() => import("@/components/Antigravity"), { ssr: false });
+import DotGrid from "@/components/ui/dotgrid";
 
 const services = [
   {
@@ -61,8 +59,14 @@ export function Services() {
 
   return (
     <section id="services" className="py-24 md:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-100 dark:mix-blend-screen pointer-events-none overflow-visible">
-        <Antigravity count={150} color="#3B82F6" particleSize={1.5} lerpSpeed={1} smoothFactor={1} />
+      <div className="absolute inset-0 z-0 opacity-100 pointer-events-none">
+        <DotGrid
+          dotSize={12}
+          gap={24}
+          proximity={150}
+          activeColor="#3B82F6"
+          baseColor="rgba(148,163,184,0.15)"
+        />
       </div>
       <div className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col gap-4 mb-16 max-w-3xl">
