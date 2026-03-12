@@ -56,7 +56,7 @@ export function Footer() {
     >
       <div className="w-full relative py-12 md:py-24 overflow-hidden border-b border-slate-200 dark:border-white/[0.08]">
         <div className="absolute inset-0 z-0 opacity-10 dark:opacity-20 pointer-events-none">
-          <Ballpit count={100} followCursor={true} />
+          {/* <Ballpit count={100} followCursor={true} /> */}
         </div>
         <div className="relative z-10 flex justify-center mb-6 md:mb-10">
           <DecryptedText
