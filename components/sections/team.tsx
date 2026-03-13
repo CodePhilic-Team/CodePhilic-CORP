@@ -4,7 +4,22 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { FaGithub, FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
-const team = [
+type TeamMember = {
+  name: string;
+  image: string;
+  role: string;
+  bio: string;
+  initials: string;
+  accent: string;
+  social: {
+    linkedin?: string;
+    github?: string;
+    fb?: string;
+    twitter?: string;
+  };
+};
+
+const team: TeamMember[] = [
   {
     name: "Md.Rakibul Islam",
     image:"/team/rakibx.jpg",
@@ -104,7 +119,7 @@ export function Team() {
                 {/* Avatar */}
                 <div
                   className="size-16 rounded-full overflow-hidden ring-2 ring-offset-2 ring-offset-transparent"
-                  style={{ ringColor: member.accent, boxShadow: `0 0 0 2px ${member.accent}66` }}
+                  style={{ boxShadow: `0 0 0 2px ${member.accent}66` }}
                 >
                   <Image
                     src={member.image}
