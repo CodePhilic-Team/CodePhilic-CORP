@@ -2,40 +2,44 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
-
+import Image from "next/image";
+import { FaGithub, FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
 const team = [
   {
-    name: "Aryan Mehta",
+    name: "Md.Rakibul Islam",
+    image:"/team/rakibx.jpg",
     role: "Co-Founder & CEO",
     bio: "Full-stack architect with a passion for building scalable systems. Previously led engineering at two Y-Combinator startups.",
     initials: "AM",
     accent: "#3B82F6",
-    social: { twitter: "#", linkedin: "#", github: "#" },
+    social: {  linkedin: "https://www.linkedin.com/in/rakibul-islam-8372852bb/", github: "https://github.com/rakibtkg" ,fb:"#"},
   },
   {
-    name: "Priya Sharma",
+    name: "Md.Habibur Rahman",
+     image:"/team/himaloyx.jpg",
     role: "Co-Founder & CTO",
     bio: "Distributed systems engineer. Designed infrastructure handling 10M+ daily requests. Systems thinker, coffee enthusiast.",
     initials: "PS",
     accent: "#8B5CF6",
-    social: { twitter: "#", linkedin: "#", github: "#" },
+    social: { fb: "#", linkedin: "https://www.linkedin.com/in/habib007/", github: "https://github.com/himaloy007" },
   },
   {
-    name: "James Carter",
-    role: "Lead Frontend Engineer",
+    name: "Dhruba Paul",
+    role: "Co-Founder & CFO",
+    image:"/team/dhrubax.jpg",
     bio: "UI perfectionist obsessed with micro-interactions and performance. Contributor to open-source React tooling.",
     initials: "JC",
     accent: "#10B981",
-    social: { twitter: "#", linkedin: "#", github: "#" },
+    social: { fb: "#", linkedin: "https://www.linkedin.com/in/dhruba-paul-69342b363/", github: "https://github.com/DHRUBA-NIRO" },
   },
   {
-    name: "Sofia Nkosi",
-    role: "Product Designer",
+    name: "Iftekhar Ahmed Shuvo",
+    image:"/team/shuvox.jpg",
+    role: "Co-Founder & CMO",
     bio: "Bridging product thinking and visual craft. Formerly at Figma's design team. Ships designs that developers love to build.",
     initials: "SN",
     accent: "#F59E0B",
-    social: { twitter: "#", linkedin: "#", github: "#" },
+    social: { fb: "#", linkedin: "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/", github: "https://github.com/SHUVOika" },
   },
 ];
 
@@ -82,7 +86,7 @@ export function Team() {
               initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative rounded-3xl overflow-hidden flex flex-col"
+              className="group relative  overflow-hidden flex flex-col"
               style={{
                 background: "var(--glass-bg)",
                 backdropFilter: "blur(20px)",
@@ -99,13 +103,16 @@ export function Team() {
               <div className="p-7 flex flex-col gap-5 flex-1">
                 {/* Avatar */}
                 <div
-                  className="size-14 rounded-2xl flex items-center justify-center text-white font-bold font-heading text-lg"
-                  style={{
-                    background: `linear-gradient(135deg, ${member.accent}dd, ${member.accent}55)`,
-                    border: `1px solid ${member.accent}44`,
-                  }}
+                  className="size-16 rounded-full overflow-hidden ring-2 ring-offset-2 ring-offset-transparent"
+                  style={{ ringColor: member.accent, boxShadow: `0 0 0 2px ${member.accent}66` }}
                 >
-                  {member.initials}
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -124,27 +131,42 @@ export function Team() {
 
                 {/* Socials */}
                 <div className="flex items-center gap-3 pt-1">
-                  <a
-                    href={member.social.twitter}
-                    className="text-foreground/30 hover:text-foreground transition-colors"
-                    aria-label="Twitter"
-                  >
-                    <Twitter className="size-4" />
-                  </a>
-                  <a
-                    href={member.social.linkedin}
-                    className="text-foreground/30 hover:text-foreground transition-colors"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin className="size-4" />
-                  </a>
-                  <a
-                    href={member.social.github}
-                    className="text-foreground/30 hover:text-foreground transition-colors"
-                    aria-label="GitHub"
-                  >
-                    <Github className="size-4" />
-                  </a>
+                  {member.social.fb && (
+                    <a
+                      href={member.social.fb}
+                      className="text-foreground/30 hover:text-foreground transition-colors"
+                      aria-label="Facebook"
+                    >
+                      <FaFacebook className="size-4" />
+                    </a>
+                  )}
+                  {member.social.twitter && (
+                    <a
+                      href={member.social.twitter}
+                      className="text-foreground/30 hover:text-foreground transition-colors"
+                      aria-label="Twitter"
+                    >
+                      <FaTwitter className="size-4" />
+                    </a>
+                  )}
+                  {member.social.linkedin && (
+                    <a
+                      href={member.social.linkedin}
+                      className="text-foreground/30 hover:text-foreground transition-colors"
+                      aria-label="LinkedIn"
+                    >
+                      <FaLinkedin className="size-4" />
+                    </a>
+                  )}
+                  {member.social.github && (
+                    <a
+                      href={member.social.github}
+                      className="text-foreground/30 hover:text-foreground transition-colors"
+                      aria-label="GitHub"
+                    >
+                      <FaGithub className="size-4" />
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

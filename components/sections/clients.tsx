@@ -209,7 +209,7 @@ export function Clients() {
               key={client.name}
               variants={itemVariants}
               whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
-              className="group relative rounded-2xl p-5 flex flex-col gap-3 cursor-default overflow-hidden bg-white/25 dark:bg-white/5 border border-white/50 dark:border-white/10"
+              className="group relative rounded-xl p-5 flex flex-col gap-3 cursor-default overflow-hidden bg-white/25 dark:bg-white/5 border border-white/50 dark:border-white/10"
               style={{
                 backdropFilter: "blur(24px) saturate(180%)",
                 WebkitBackdropFilter: "blur(24px) saturate(180%)",
