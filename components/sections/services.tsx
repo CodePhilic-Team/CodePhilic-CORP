@@ -9,7 +9,7 @@ import DotGrid from "@/components/ui/dotgrid";
 
 const services = [
   {
-    title: "Web Architecture",
+    title: "Web Architecture & Generic Products",
     description:
       "High-performance web applications built with modern frameworks. Scalable, accessible, and ultra-fast digital experiences.",
     icon: Globe,
@@ -23,19 +23,34 @@ const services = [
     className: "md:col-span-1",
   },
   {
-    title: "Cloud Infrastructure",
+    title: "IoT Solutions",
     description:
-      "Robust, auto-scaling backend architectures on AWS, GCP, or Vercel. Zero-downtime deployments and global edge distribution.",
+      "End-to-end IoT platforms, device integration, and real-time data analytics for smart environments and industries.",
     icon: Cloud,
     className: "md:col-span-1",
   },
   {
-    title: "AI & Machine Learning",
+    title: "GPS Tracking Systems",
     description:
-      "Integrating intelligent capabilities into your product—from personalized recommendations to generative AI features. Precision engineering.",
+      "Custom GPS tracker solutions for fleet management, asset tracking, and personal safety with live location and analytics.",
+    icon: Cloud,
+    className: "md:col-span-2",
+  },
+  {
+    title: "AI-Based Web & App Solutions",
+    description:
+      "AI-powered websites and mobile apps: chatbots, recommendation engines, and automation for smarter user experiences.",
     icon: Cpu,
     className: "md:col-span-2",
   },
+  {
+    title: "SaaS & LMS Platforms",
+    description:
+      "Custom SaaS products and Learning Management Systems (LMS) for education, business, and productivity—scalable, secure, and feature-rich.",
+    icon: Cpu,
+    className: "md:col-span-1",
+  },
+ 
 ];
 
 // ─── Services section ─────────────────────────────────────────────────────────

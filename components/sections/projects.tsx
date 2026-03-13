@@ -6,40 +6,44 @@ import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
-    title: "NovaPay",
-    category: "Fintech · Web App",
+    title: "MBSTU WHEELs Mobile APP",
+    category: "GPS Tracking System · Android App",
     description:
-      "A real-time payment platform handling high-volume transactions with sub-100ms latency. Built with Next.js, Stripe Connect, and PostgreSQL on Supabase.",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Stripe"],
+      "Official MBSTU Wheels mobile app for real-time GPS tracking of university transport. Live location, route history, and notifications.",
+    tags: ["Android","iOS", "GPS", "Flutter", "IoT"],
     accent: "#3B82F6",
     span: "md:col-span-2",
+    link: "https://play.google.com/store/search?q=mbstu+wheels&c=apps&hl=bn"
   },
   {
-    title: "Orbita",
-    category: "SaaS · Dashboard",
+    title: "MBSTU WHEELS WEB APP",
+    category: "GPS Tracking · Web App",
     description:
-      "Analytics and observability SaaS for e-commerce brands. Real-time charts, cohort analysis, and AI-generated growth insights.",
-    tags: ["React", "Node.js", "MongoDB", "OpenAI"],
+      "Web dashboard for MBSTU Wheels: live bus tracking, route analytics, and admin controls for university transport.",
+    tags: ["React", "NEXT JS", "Express", "PostgreSQL"],
     accent: "#8B5CF6",
     span: "md:col-span-1",
+    link: "https://transport.mbstu.ac.bd/MBSTU-Wheels"
   },
   {
-    title: "Flox",
-    category: "Mobile · iOS & Android",
+    title: "MBSTU Transport WEBSITE",
+    category: "University Transport · Website",
     description:
-      "A social fitness app with workout tracking, live challenges, and friend leaderboards. 10k+ downloads in first month post-launch.",
-    tags: ["React Native", "Django", "PostgreSQL"],
+      "Official website for MBSTU transport: schedules, routes, and transport news for students and staff.",
+    tags: ["Next.js", "TypeScript", "TailwindCSS"],
     accent: "#10B981",
     span: "md:col-span-1",
+    link: "https://transport.mbstu.ac.bd/"
   },
   {
-    title: "CloudForge",
-    category: "DevOps · Platform",
+    title: "CPS DEPT ALUMNI WEBSITE",
+    category: "Alumni · Website",
     description:
-      "Internal developer platform for a Series B startup — one-click deployments, environment management, and cost dashboards across AWS regions.",
-    tags: ["Python", "AWS", "Terraform", "TypeScript"],
+      "Alumni portal for the Department of CPS: member directory, events, and news for graduates and faculty.",
+    tags: ["Next.js", "TypeScript","Express", "DigitalOcean"],
     accent: "#F59E0B",
     span: "md:col-span-2",
+    link: "https://cpsaa.org/"
   },
 ];
 
@@ -72,22 +76,28 @@ export function Projects() {
         {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {projects.map((project, i) => (
-            <motion.div
+            <a
               key={i}
-              initial={{ opacity: 0, y: 32 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-              className={`${project.span} group relative rounded-3xl overflow-hidden cursor-pointer`}
-              style={{
-                background: "var(--glass-bg)",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
-                border: "1px solid var(--glass-border)",
-              }}
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 200, damping: 20 } }}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`no-underline ${project.span}`}
             >
-              {/* Glow accent */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 32 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative rounded-3xl overflow-hidden cursor-pointer h-full"
+                style={{
+                  background: "var(--glass-bg)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
+                  border: "1px solid var(--glass-border)",
+                }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 200, damping: 20 } }}
+              >
+                {/* Glow accent */}
+                <div
                 className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
                 style={{
                   background: `radial-gradient(circle, ${project.accent}, transparent 70%)`,
@@ -137,6 +147,7 @@ export function Projects() {
                 </div>
               </div>
             </motion.div>
+            </a>
           ))}
         </div>
       </div>
