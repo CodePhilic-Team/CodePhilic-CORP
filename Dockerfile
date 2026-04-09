@@ -28,7 +28,7 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/ecosystem.config.js ./ecosystem.config.js
 
 # Expose Next.js default port
-EXPOSE 3000
+EXPOSE 3600
 
 # Start the app with PM2 ecosystem config
 CMD ["pm2-runtime", "ecosystem.config.js", "--only", "frontend"]
