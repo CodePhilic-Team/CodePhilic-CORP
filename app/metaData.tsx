@@ -658,11 +658,6 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
 <meta name="twitter:creator" content="@codephilic">
 <meta name="twitter:site" content="@codephilic">
 
-<!-- Icons -->
-<link rel="icon" type="image/jpeg" href="/CodePhilic.jpg">
-<link rel="apple-touch-icon" href="/CodePhilic.jpg">
-<link rel="mask-icon" href="/CodePhilic.jpg" color="#3B82F6">
-
 <!-- Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

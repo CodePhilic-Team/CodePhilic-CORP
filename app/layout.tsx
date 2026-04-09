@@ -25,8 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Manifest for PWA/Web App icons */}
-        <link rel="manifest" href="/manifest.webmanifest" />
+        {/* Favicon - Main icon for all browsers */}
+        <link rel="icon" href="/CodePhilic.jpg" type="image/jpeg" sizes="any" />
+        <link rel="shortcut icon" href="/CodePhilic.jpg" type="image/jpeg" />
 
         {/* Apple Touch Icon - for iOS home screen */}
         <link rel="apple-touch-icon" href="/CodePhilic.jpg" sizes="180x180" />
