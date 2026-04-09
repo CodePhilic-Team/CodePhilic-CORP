@@ -1,0 +1,360 @@
+# ==========================================
+# ROBOTS.TXT FOR CODEPHILIC
+# Website: https://code-philic.com
+# Generated: April 9, 2026
+# ==========================================
+
+# ========== GENERAL SEARCH ENGINE RULES ==========
+# All major search engines are allowed to crawl the website
+
+User-agent: *
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+Allow: /resources/
+Allow: /about
+Allow: /team
+Allow: /contact
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /register/
+Disallow: /auth/
+Disallow: /user/
+Disallow: /account/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /.next/
+Disallow: /api/internal/
+Disallow: /drafts/
+Disallow: /staging/
+Disallow: /preview/
+Disallow: /search/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*page=2
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /config/
+Disallow: /backup/
+
+# Allow crawling of static assets
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.ico$
+Allow: /public/
+
+# Crawl delay for general bots (in seconds)
+# Prevents server overload - requests can be up to 1 second apart
+Crawl-delay: 1
+
+# Request rate for general bots
+Request-rate: 1/1s
+
+# ========== GOOGLEBOT SPECIFIC RULES ==========
+# Google gets full access for better indexing
+
+User-agent: Googlebot
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+Allow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /register/
+Disallow: /auth/
+Disallow: /private/
+Disallow: /drafts/
+Disallow: /staging/
+Disallow: /preview/
+
+# Google can crawl more aggressively
+Crawl-delay: 0
+
+# ========== BINGBOT SPECIFIC RULES ==========
+# Bing gets full access for good search visibility
+
+User-agent: Bingbot
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /register/
+Disallow: /auth/
+Disallow: /private/
+Disallow: /drafts/
+
+# Bing crawler settings
+Crawl-delay: 1
+Request-rate: 1/1s
+
+# ========== YANDEX BOT RULES ==========
+# Yandex bot for search visibility in Russia and CIS countries
+
+User-agent: Yandexbot
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /drafts/
+
+Crawl-delay: 1
+
+# ========== OPENAI/CHATGPT CRAWLERS ==========
+# Allow AI assistants for knowledge graphs and AI training
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /services/
+Allow: /blog/
+Disallow: /admin/
+Disallow: /private/
+
+# ========== GOOGLE GEMINI & BARD CRAWLERS ==========
+# Allow Google's AI assistants (Gemini, Bard, etc.)
+
+User-agent: Gemini
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+
+User-agent: GoogleBot-Extended
+Allow: /
+Allow: /services/
+Allow: /blog/
+
+User-agent: Google-Extended
+Allow: /
+
+# ========== ANTHROPIC CLAUDE CRAWLER ==========
+# Allow Claude and other Anthropic AI assistants
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+Disallow: /admin/
+Disallow: /private/
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: claude-web
+Allow: /
+
+# ========== PERPLEXITY AI CRAWLER ==========
+# Allow Perplexity AI for search and research
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+
+User-agent: Perplexity
+Allow: /services/
+Allow: /blog/
+
+# ========== MICROSOFT COPILOT & COPILOT PRO ==========
+# Allow Microsoft's AI assistants
+
+User-agent: Copilot
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+
+User-agent: CopilotPro
+Allow: /
+
+User-agent: BingChat
+Allow: /
+
+User-agent: EdgeBot
+Allow: /services/
+Allow: /blog/
+
+# ========== META AI (LLAMA) CRAWLERS ==========
+# Allow Meta's AI assistants
+
+User-agent: MetaInfo
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+# ========== OTHER AI ASSISTANTS ==========
+# Allow other emerging AI platforms
+
+User-agent: Bytespider
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+
+User-agent: Xbot
+Allow: /
+
+User-agent: AISearchBot
+Allow: /
+Allow: /services/
+Allow: /blog/
+
+User-agent: DataForSeoBot
+Allow: /
+Disallow: /admin/
+
+User-agent: Slorp
+Allow: /services/
+Allow: /blog/
+
+User-agent: ImagesiftBot
+Allow: /
+
+User-agent: StormCrawler
+Allow: /
+
+# ========== APPLE SIRI & SPOTLIGHT BOT ==========
+# Apple Siri, Spotlight, and Apple Intelligence
+
+User-agent: Applebot
+Allow: /
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+
+User-agent: AppleBot
+Allow: /
+
+User-agent: Siritextdb
+Allow: /
+
+User-agent: Spotlightbot
+Allow: /services/
+Allow: /blog/
+
+# ========== SOCIAL MEDIA CRAWLERS ==========
+# Facebook, Twitter, LinkedIn, and other social platforms
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /services/
+Allow: /blog/
+Allow: /portfolio/
+Disallow: /admin/
+Disallow: /private/
+
+# ========== BLOCK MALICIOUS BOTS ==========
+# Disallow known aggressive crawlers and scrapers
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MojeekBot
+Disallow: /
+
+User-agent: DomainCrawler
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: WhatWeb
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: cURL
+Disallow: /
+Allow: /api/public
+
+# ========== SITEMAP LOCATION ==========
+# Critical for search engine discovery
+Sitemap: https://code-philic.com/sitemap.xml
+Sitemap: https://code-philic.com/sitemap-blog.xml
+Sitemap: https://code-philic.com/sitemap-portfolio.xml
+
+# ========== HOST PREFERENCE ==========
+# Prefer HTTPS over HTTP
+Host: https://code-philic.com
+
+# ========== COMMENTS & NOTES ==========
+# Last Updated: April 9, 2026
+# Total Entries: 60+ rules
+# Search Engine Coverage: Google, Bing, Yandex, DuckDuckGo, Baidu, ChatGPT, Apple
+# Security Level: Medium (blocks known aggressive crawlers)
+# AI Assistant Support: ChatGPT, Copilot, Claude, Bard
+#
+# Key Features:
+# ✅ Comprehensive search engine support
+# ✅ AI bot support (ChatGPT, GPT-4, etc.)
+# ✅ Social media crawler support
+# ✅ Aggressive crawler blocking
+# ✅ API protection
+# ✅ Admin area protection
+# ✅ Dynamic parameter handling
+# ✅ Multiple sitemap support
+# ✅ HTTPS preference
+#
+# Testing:
+# - Google Search Console: https://search.google.com/search-console/
+# - Bing Webmaster: https://www.bing.com/webmastertools/
+# - Test robots.txt: https://code-philic.com/robots.txt

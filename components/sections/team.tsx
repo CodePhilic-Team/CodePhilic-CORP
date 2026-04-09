@@ -22,39 +22,55 @@ type TeamMember = {
 const team: TeamMember[] = [
   {
     name: "Md.Rakibul Islam",
-    image:"/team/rakibx.jpg",
-    role: "Co-Founder & CEO",
+    image: "/team/rakibx.jpg",
+    role: "Leading Founder & CEO",
     bio: "Full-stack architect with a passion for building scalable systems. Previously led engineering at two Y-Combinator startups.",
     initials: "AM",
     accent: "#3B82F6",
-    social: {  linkedin: "https://www.linkedin.com/in/rakibul-islam-8372852bb/", github: "https://github.com/rakibtkg" ,fb:"#"},
+    social: {
+      linkedin: "https://www.linkedin.com/in/rakibul-islam-8372852bb/",
+      github: "https://github.com/rakibtkg",
+      fb: "#",
+    },
   },
   {
     name: "Md.Habibur Rahman",
-     image:"/team/himaloyx.jpg",
+    image: "/team/himaloyx.jpg",
     role: "Co-Founder & CTO",
     bio: "Distributed systems engineer. Designed infrastructure handling 10M+ daily requests. Systems thinker, coffee enthusiast.",
     initials: "PS",
     accent: "#8B5CF6",
-    social: { fb: "#", linkedin: "https://www.linkedin.com/in/habib007/", github: "https://github.com/himaloy007" },
+    social: {
+      fb: "#",
+      linkedin: "https://www.linkedin.com/in/habib007/",
+      github: "https://github.com/himaloy007",
+    },
   },
   {
     name: "Dhruba Paul",
     role: "Co-Founder & CFO",
-    image:"/team/dhrubax.jpg",
+    image: "/team/dhrubax.jpg",
     bio: "UI perfectionist obsessed with micro-interactions and performance. Contributor to open-source React tooling.",
     initials: "JC",
     accent: "#10B981",
-    social: { fb: "#", linkedin: "https://www.linkedin.com/in/dhruba-paul-69342b363/", github: "https://github.com/DHRUBA-NIRO" },
+    social: {
+      fb: "#",
+      linkedin: "https://www.linkedin.com/in/dhruba-paul-69342b363/",
+      github: "https://github.com/DHRUBA-NIRO",
+    },
   },
   {
     name: "Iftekhar Ahmed Shuvo",
-    image:"/team/shuvox.jpg",
+    image: "/team/shuvox.jpg",
     role: "Co-Founder & CMO",
     bio: "Bridging product thinking and visual craft. Formerly at Figma's design team. Ships designs that developers love to build.",
     initials: "SN",
     accent: "#F59E0B",
-    social: { fb: "#", linkedin: "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/", github: "https://github.com/SHUVOika" },
+    social: {
+      fb: "#",
+      linkedin: "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/",
+      github: "https://github.com/SHUVOika",
+    },
   },
 ];
 
@@ -73,7 +89,10 @@ export function Team() {
         }}
       />
 
-      <div className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10" ref={ref}>
+      <div
+        className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10"
+        ref={ref}
+      >
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -85,11 +104,11 @@ export function Team() {
             The Team
           </span>
           <h2 className="font-heading tracking-tighter text-4xl md:text-5xl font-bold text-foreground">
-            The people behind{" "}
-            <span className="text-[#3B82F6]">the craft</span>
+            The people behind <span className="text-[#3B82F6]">the craft</span>
           </h2>
           <p className="text-foreground/60 text-lg sm:text-xl font-sans leading-relaxed">
-            A tight-knit crew of engineers, designers, and product thinkers. Small enough to stay fast, experienced enough to get it right.
+            A tight-knit crew of engineers, designers, and product thinkers.
+            Small enough to stay fast, experienced enough to get it right.
           </p>
         </motion.div>
 
@@ -100,7 +119,11 @@ export function Team() {
               key={i}
               initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.5,
+                delay: 0.1 + i * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="group relative  overflow-hidden flex flex-col"
               style={{
                 background: "var(--glass-bg)",
@@ -112,7 +135,9 @@ export function Team() {
               {/* Top accent strip */}
               <div
                 className="h-1 w-full opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: `linear-gradient(90deg, ${member.accent}, transparent)` }}
+                style={{
+                  background: `linear-gradient(90deg, ${member.accent}, transparent)`,
+                }}
               />
 
               <div className="p-7 flex flex-col gap-5 flex-1">
@@ -131,7 +156,9 @@ export function Team() {
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-base font-bold font-heading text-foreground">{member.name}</h3>
+                  <h3 className="text-base font-bold font-heading text-foreground">
+                    {member.name}
+                  </h3>
                   <span
                     className="text-xs font-semibold font-heading uppercase tracking-wider"
                     style={{ color: member.accent }}

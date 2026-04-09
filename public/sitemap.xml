@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <!-- ========== PRIMARY PAGES - HIGHEST PRIORITY ========== -->
+  
+  <!-- Homepage - Top Priority -->
+  <url>
+    <loc>https://code-philic.com</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Service Pages - High Priority -->
+  <url>
+    <loc>https://code-philic.com/services</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Frontend Development Services -->
+  <url>
+    <loc>https://code-philic.com/services/nextjs-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/react-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Mobile Development Services -->
+  <url>
+    <loc>https://code-philic.com/services/flutter-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/mobile-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <!-- Backend Development Services -->
+  <url>
+    <loc>https://code-philic.com/services/nodejs-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/python-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <!-- Specialized Services - High Priority -->
+  <url>
+    <loc>https://code-philic.com/services/ai-chatgpt-integration</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>bi-weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/fullstack-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/saas-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/devops-cloud-solutions</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/enterprise-software</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/services/digital-transformation</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.83</priority>
+  </url>
+
+  <!-- Portfolio/Projects - High Priority -->
+  <url>
+    <loc>https://code-philic.com/portfolio</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Individual Portfolio Projects -->
+  <url>
+    <loc>https://code-philic.com/portfolio/mbstu-wheels-mobile</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>quarterly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/portfolio/mbstu-wheels-web</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>quarterly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/portfolio/mbstu-transport-website</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>quarterly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/portfolio/cps-alumni-website</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>quarterly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/portfolio/tourphilia-website</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>quarterly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <!-- ========== SECONDARY PAGES - MEDIUM PRIORITY ========== -->
+
+  <!-- About Page -->
+  <url>
+    <loc>https://code-philic.com/about</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Team Page -->
+  <url>
+    <loc>https://code-philic.com/team</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://code-philic.com/contact</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- ========== BLOG SECTION - MEDIUM PRIORITY ========== -->
+
+  <!-- Blog Index -->
+  <url>
+    <loc>https://code-philic.com/blog</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Categories -->
+  <url>
+    <loc>https://code-philic.com/blog/category/web-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/category/mobile-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/category/ai-integration</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/category/devops</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/category/software-architecture</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/category/tech-trends</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <!-- Sample Blog Posts (Update with actual blog posts) -->
+  <!-- Web Development Posts -->
+  <url>
+    <loc>https://code-philic.com/blog/nextjs-chatgpt-integration-guide</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/react-vs-nextjs-complete-comparison</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/fullstack-development-nodejs-react</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
+  <!-- AI Integration Posts -->
+  <url>
+    <loc>https://code-philic.com/blog/chatgpt-api-integration-production</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/llm-integration-patterns</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.77</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/ai-chatbot-development-guide</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.76</priority>
+  </url>
+
+  <!-- Mobile Development Posts -->
+  <url>
+    <loc>https://code-philic.com/blog/flutter-vs-react-native-2024</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/flutter-best-practices</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.73</priority>
+  </url>
+
+  <!-- Backend & DevOps Posts -->
+  <url>
+    <loc>https://code-philic.com/blog/nodejs-backend-best-practices</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.73</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/docker-kubernetes-complete-guide</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.73</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/devops-best-practices-2026</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <!-- Architecture Posts -->
+  <url>
+    <loc>https://code-philic.com/blog/microservices-architecture-guide</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.73</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/blog/saas-architecture-patterns</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <!-- Tech Trends Posts -->
+  <url>
+    <loc>https://code-philic.com/blog/web3-blockchain-development</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- ========== RESOURCE PAGES - MEDIUM-LOW PRIORITY ========== -->
+
+  <!-- Resources/Learning Center -->
+  <url>
+    <loc>https://code-philic.com/resources</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/resources/guides</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/resources/tutorials</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/resources/case-studies</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- ========== FOOTER LINKS - LOW PRIORITY ========== -->
+
+  <!-- Privacy & Legal Pages -->
+  <url>
+    <loc>https://code-philic.com/privacy-policy</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/terms-of-service</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <url>
+    <loc>https://code-philic.com/cookie-policy</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.25</priority>
+  </url>
+
+  <!-- Sitemap Index Info -->
+  <url>
+    <loc>https://code-philic.com/sitemap.xml</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.50</priority>
+  </url>
+
+</urlset>
