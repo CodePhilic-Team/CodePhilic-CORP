@@ -1,6 +1,5 @@
 "use client";
 
-
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { FloatingAssets } from "@/components/FloatingAsset";
@@ -62,19 +61,27 @@ function AnimatedButton({
       whileTap="tap"
       variants={{
         hover: { scale: 1.05 },
-        tap: { scale: 0.95 }
+        tap: { scale: 0.95 },
       }}
     >
-      <span className="relative z-10 flex items-center justify-center">{children}</span>
+      <span className="relative z-10 flex items-center justify-center">
+        {children}
+      </span>
       <motion.div
         className="absolute inset-0 pointer-events-none z-0 w-[150%] left-[-25%]"
         initial={{ x: "-100%", skewX: -20 }}
         variants={{
-          hover: { x: "100%" }
+          hover: { x: "100%" },
         }}
-        transition={{ repeat: Infinity, duration: 1, ease: "linear", repeatDelay: 0.2 }}
+        transition={{
+          repeat: Infinity,
+          duration: 1,
+          ease: "linear",
+          repeatDelay: 0.2,
+        }}
         style={{
-          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)",
         }}
       />
     </motion.button>
@@ -96,12 +103,14 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Squares 
+        <Squares
           direction="diagonal"
           speed={0.5}
           squareSize={40}
-          borderColor={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)"} 
-          hoverFillColor={isDark ? "rgba(59,130,246,0.1)" : "rgba(59,130,246,0.15)"}
+          borderColor={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)"}
+          hoverFillColor={
+            isDark ? "rgba(59,130,246,0.1)" : "rgba(59,130,246,0.15)"
+          }
         />
       </div>
       <FloatingAssets />
@@ -117,7 +126,11 @@ export function Hero() {
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 16 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.6, ease: "easeOut" },
+              },
             }}
             className="inline-flex items-center rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1 text-xs font-medium tracking-widest uppercase text-[#3B82F6]"
           >
@@ -126,7 +139,12 @@ export function Hero() {
 
           {/* H1 with DecryptedText — overflow:hidden prevents layout shift */}
           <motion.h1
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.032, delayChildren: 0.25 } } }}
+            variants={{
+              hidden: {},
+              show: {
+                transition: { staggerChildren: 0.032, delayChildren: 0.25 },
+              },
+            }}
             className="font-sf font-semibold tracking-[-0.04em] leading-[1.05] flex flex-col items-center justify-center gap-1 sm:gap-4"
           >
             <span className="block text-6xl md:text-8xl lg:text-[7.5rem]">
@@ -148,27 +166,60 @@ export function Hero() {
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 12 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.6 } },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.6, ease: "easeOut", delay: 0.6 },
+              },
             }}
             className="max-w-3xl mx-auto text-base md:text-xl text-foreground/60 leading-relaxed font-sans text-balance"
           >
-            Human-authored code. Flawless execution. We build high-performance web and mobile applications for visionaries who refuse to compromise on quality.
+            Human-authored code. Flawless execution. We build high-performance
+            web and mobile applications for visionaries who refuse to compromise
+            on quality.
           </motion.p>
 
           {/* CTAs */}
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 1.1 } },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.6, ease: "easeOut", delay: 1.1 },
+              },
             }}
             className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-8"
           >
-            <AnimatedButton className="group inline-flex items-center justify-center h-12 px-8 rounded-full bg-[#3B82F6] text-white text-sm font-medium transition-colors hover:bg-[#2563eb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/60">
+            <AnimatedButton
+              onClick={() => {
+                const element = document.getElementById("contact");
+                if (element) {
+                  element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }
+              }}
+              className="group inline-flex items-center justify-center h-12 px-8 rounded-full bg-[#3B82F6] text-white text-sm font-medium transition-colors hover:bg-[#2563eb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/60"
+            >
               Start your project
               <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" />
             </AnimatedButton>
 
-            <AnimatedButton className="inline-flex items-center justify-center h-12 px-8 rounded-full text-foreground text-sm font-medium backdrop-blur-md transition-colors hover:bg-foreground/10" style={{ border: '1px solid var(--border)' }}>
+            <AnimatedButton
+              onClick={() => {
+                const element = document.getElementById("work");
+                if (element) {
+                  element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }
+              }}
+              className="inline-flex items-center justify-center h-12 px-8 rounded-full text-foreground text-sm font-medium backdrop-blur-md transition-colors hover:bg-foreground/10"
+              style={{ border: "1px solid var(--border)" }}
+            >
               View our work
             </AnimatedButton>
           </motion.div>

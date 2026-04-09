@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- CONFIGURATION ---
-ROOT_DIR="/root/CodePhilic/CodePhilic-CORP"
+ROOT_DIR="/home/mbstu/CodePhilic/codephilic-website"
 SERVER_DIR="$ROOT_DIR/cpsaa-server"
 APP_DIR="$ROOT_DIR/cpsaa-app"
 ECOSYSTEM="$ROOT_DIR/ecosystem.config.js"

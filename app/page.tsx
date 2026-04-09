@@ -8,6 +8,7 @@ import { Team } from "@/components/sections/team";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { SpatialBackground } from "@/components/SpatialBackground";
+import { BackToTop } from "@/components/BackToTop";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Contact />
         <Footer />
       </main>
+      <BackToTop />
     </>
   );
 }

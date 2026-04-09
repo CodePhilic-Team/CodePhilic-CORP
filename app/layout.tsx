@@ -30,6 +30,9 @@ export default function RootLayout({
         {/* Bing Search Engine Verification */}
         <meta name="msvalidate.01" content="A121669086E98BFFA9212E3622A5DC5D" />
 
+        {/* Browser & Device Specific Meta Tags */}
+        <meta name="theme-color" content="#3B82F6" />
+
         {/* Structured Data - Organization Schema */}
         <script
           type="application/ld+json"

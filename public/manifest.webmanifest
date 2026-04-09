@@ -1,0 +1,21 @@
+{
+  "name": "CodePhilic",
+  "short_name": "CodePhilic",
+  "description": "CodePhilic - Premium Software Development Agency",
+  "dir": "auto",
+  "lang": "en-US",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "icons": [
+    {
+      "src": "/CodePhilic.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

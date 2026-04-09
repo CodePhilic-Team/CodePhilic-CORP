@@ -5,87 +5,87 @@ import { motion, useInView, type Variants } from "framer-motion";
 
 const clients = [
   {
-    name: "NovaPay",
-    industry: "FinTech",
-    initials: "NP",
+    name: "CPS Alumni Association",
+    industry: "Education",
+    initials: "CPS",
     accent: "#3B82F6",
-    description: "Digital payments infrastructure",
+    description: "Alumni network for CPS department at MBSTU",
   },
   {
-    name: "Orbita",
-    industry: "SaaS",
-    initials: "OR",
+    name: "MBSTU Wheels Website",
+    industry: "Transportation",
+    initials: "MW",
     accent: "#8B5CF6",
-    description: "Satellite data analytics platform",
+    description: "Real-time GPS tracking for MBSTU transport",
   },
   {
-    name: "Flox",
-    industry: "Logistics",
-    initials: "FL",
+    name: "MBSTU Wheels Mobile App",
+    industry: "Wheels",
+    initials: "MW",
     accent: "#10B981",
-    description: "Real-time fleet management",
+    description: "Mobile GPS tracking for university transport",
   },
   {
-    name: "CloudForge",
-    industry: "DevOps",
-    initials: "CF",
+    name: "MBSTU Transport Website",
+    industry: "Transportation",
+    initials: "MW",
     accent: "#F59E0B",
-    description: "CI/CD pipeline automation",
+    description: "Official website for MBSTU transport schedules and news",
   },
   {
-    name: "MedAxis",
-    industry: "HealthTech",
-    initials: "MA",
+    name: "TourPhilia",
+    industry: "Tourism",
+    initials: "TP",
     accent: "#F43F5E",
-    description: "Clinical workflow software",
+    description: "Comprehensive tourism website for local attractions",
   },
   {
-    name: "Stratum",
-    industry: "EdTech",
-    initials: "ST",
+    name: "MBSTU Fleet Management",
+    industry: "Logistics",
+    initials: "MFM",
     accent: "#06B6D4",
-    description: "Adaptive learning platform",
+    description: "Fleet management solution for MBSTU transportation",
   },
-  {
-    name: "Vortex",
-    industry: "E-Commerce",
-    initials: "VX",
-    accent: "#EC4899",
-    description: "Headless commerce engine",
-  },
-  {
-    name: "Ironclad",
-    industry: "LegalTech",
-    initials: "IC",
-    accent: "#6366F1",
-    description: "Contract lifecycle management",
-  },
+  // {
+  //   name: "Vortex",
+  //   industry: "E-Commerce",
+  //   initials: "VX",
+  //   accent: "#EC4899",
+  //   description: "Headless commerce engine",
+  // },
+  // {
+  //   name: "Ironclad",
+  //   industry: "LegalTech",
+  //   initials: "IC",
+  //   accent: "#6366F1",
+  //   description: "Contract lifecycle management",
+  // },
 ];
 
 const testimonials = [
   {
     quote:
-      "CodePhilic delivered a production-ready platform in half the time we expected. The code quality blew our engineering team away.",
-    author: "Arjun Mehta",
-    role: "CTO, NovaPay",
+      "CodePhilic built our alumni platform from ground up. The system seamlessly connects thousands of CPS alumni and has become the backbone of our community engagement. Outstanding execution.",
+    author: "",
+    role: "President, CPS Alumni Association",
     accent: "#3B82F6",
-    initials: "AM",
+    initials: "P",
   },
   {
     quote:
-      "They didn't just build features — they challenged our assumptions and made the product significantly better. True engineering partners.",
-    author: "Sofia Laurent",
-    role: "CEO, Orbita",
+      "Managing our transport fleet was chaos until CodePhilic delivered their GPS tracking and scheduling system. Real-time visibility, instant notifications, and zero downtime. Game-changer for our operations.",
+    author: "",
+    role: "Transport Director, MBSTU",
     accent: "#8B5CF6",
-    initials: "SL",
+    initials: "TD",
   },
   {
     quote:
-      "From API design to pixel-perfect UI, every layer was handled with precision. We've shipped faster ever since.",
-    author: "Marcus Cole",
-    role: "VP Engineering, Flox",
+      "The Wheels app helped me track every transport schedule at MBSTU. The interface is intuitive, notifications are spot-on, and it just works. Never missed a ride since I started using it.",
+    author: "",
+    role: "Student, MBSTU",
     accent: "#10B981",
-    initials: "MC",
+    initials: "ST",
   },
 ];
 
@@ -95,7 +95,12 @@ const containerVariants: Variants = {
 };
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.96 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 export function Clients() {
@@ -103,7 +108,10 @@ export function Clients() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const testimonialsRef = useRef<HTMLDivElement>(null);
-  const testimonialsInView = useInView(testimonialsRef, { once: true, margin: "-80px" });
+  const testimonialsInView = useInView(testimonialsRef, {
+    once: true,
+    margin: "-80px",
+  });
 
   return (
     <section id="clients" className="py-24 md:py-36 relative overflow-hidden">
@@ -117,11 +125,17 @@ export function Clients() {
             height: 640,
             top: "-12%",
             left: "-8%",
-            background: "radial-gradient(ellipse, rgba(59,130,246,0.28) 0%, rgba(59,130,246,0.06) 55%, transparent 75%)",
+            background:
+              "radial-gradient(ellipse, rgba(59,130,246,0.28) 0%, rgba(59,130,246,0.06) 55%, transparent 75%)",
             filter: "blur(48px)",
           }}
           animate={{ x: ["-2%", "7%", "-2%"], y: ["0%", "6%", "0%"] }}
-          transition={{ duration: 22, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
         />
         {/* Purple orb — center-right drift */}
         <motion.div
@@ -131,11 +145,18 @@ export function Clients() {
             height: 520,
             top: "25%",
             right: "-10%",
-            background: "radial-gradient(ellipse, rgba(139,92,246,0.24) 0%, rgba(139,92,246,0.05) 55%, transparent 75%)",
+            background:
+              "radial-gradient(ellipse, rgba(139,92,246,0.24) 0%, rgba(139,92,246,0.05) 55%, transparent 75%)",
             filter: "blur(52px)",
           }}
           animate={{ x: ["0%", "-9%", "0%"], y: ["0%", "7%", "0%"] }}
-          transition={{ duration: 26, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 5 }}
+          transition={{
+            duration: 26,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+            delay: 5,
+          }}
         />
         {/* Cyan orb — bottom-left drift */}
         <motion.div
@@ -145,11 +166,18 @@ export function Clients() {
             height: 420,
             bottom: "0%",
             left: "15%",
-            background: "radial-gradient(ellipse, rgba(6,182,212,0.18) 0%, rgba(6,182,212,0.04) 55%, transparent 75%)",
+            background:
+              "radial-gradient(ellipse, rgba(6,182,212,0.18) 0%, rgba(6,182,212,0.04) 55%, transparent 75%)",
             filter: "blur(44px)",
           }}
           animate={{ x: ["0%", "6%", "0%"], y: ["0%", "-8%", "0%"] }}
-          transition={{ duration: 19, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 10 }}
+          transition={{
+            duration: 19,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+            delay: 10,
+          }}
         />
         {/* Rose orb — bottom-right drift */}
         <motion.div
@@ -159,15 +187,25 @@ export function Clients() {
             height: 340,
             bottom: "10%",
             right: "12%",
-            background: "radial-gradient(ellipse, rgba(244,63,94,0.16) 0%, rgba(244,63,94,0.04) 55%, transparent 75%)",
+            background:
+              "radial-gradient(ellipse, rgba(244,63,94,0.16) 0%, rgba(244,63,94,0.04) 55%, transparent 75%)",
             filter: "blur(38px)",
           }}
           animate={{ x: ["0%", "-6%", "0%"], y: ["0%", "5%", "0%"] }}
-          transition={{ duration: 24, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 15 }}
+          transition={{
+            duration: 24,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+            delay: 15,
+          }}
         />
       </div>
 
-      <div className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10" ref={ref}>
+      <div
+        className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10"
+        ref={ref}
+      >
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -183,7 +221,8 @@ export function Clients() {
             <span
               className="inline-block"
               style={{
-                background: "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #F43F5E 100%)",
+                background:
+                  "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #F43F5E 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -193,7 +232,9 @@ export function Clients() {
             </span>
           </h2>
           <p className="text-foreground/55 text-lg sm:text-xl font-sans leading-relaxed">
-            From early-stage startups to growth-stage companies — these are the teams that handed us their most critical product challenges. Here&apos;s what we built together.
+            From early-stage startups to growth-stage companies — these are the
+            teams that handed us their most critical product challenges.
+            Here&apos;s what we built together.
           </p>
         </motion.div>
 
@@ -208,29 +249,41 @@ export function Clients() {
             <motion.div
               key={client.name}
               variants={itemVariants}
-              whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
+              whileHover={{
+                y: -6,
+                transition: { duration: 0.25, ease: "easeOut" },
+              }}
               className="group relative rounded-xl p-5 flex flex-col gap-3 cursor-default overflow-hidden bg-white/25 dark:bg-white/5 border border-white/50 dark:border-white/10"
               style={{
                 backdropFilter: "blur(24px) saturate(180%)",
                 WebkitBackdropFilter: "blur(24px) saturate(180%)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.18)",
+                boxShadow:
+                  "0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.18)",
               }}
             >
               {/* Inner radial glow on hover */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at top left, ${client.accent}1a 0%, transparent 65%)` }}
+                style={{
+                  background: `radial-gradient(ellipse at top left, ${client.accent}1a 0%, transparent 65%)`,
+                }}
               />
               {/* Top accent bar — faint at rest, full on hover */}
               <div
                 className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl opacity-30 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: `linear-gradient(90deg, ${client.accent}, ${client.accent}55, transparent)` }}
+                style={{
+                  background: `linear-gradient(90deg, ${client.accent}, ${client.accent}55, transparent)`,
+                }}
               />
 
               {/* Initials badge */}
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center text-sm font-bold font-heading text-white tracking-wide shrink-0"
-                style={{ background: `${client.accent}22`, color: client.accent, border: `1px solid ${client.accent}33` }}
+                style={{
+                  background: `${client.accent}22`,
+                  color: client.accent,
+                  border: `1px solid ${client.accent}33`,
+                }}
               >
                 {client.initials}
               </div>
@@ -274,13 +327,14 @@ export function Clients() {
         >
           {testimonials.map((t) => (
             <motion.div
-              key={t.author}
+              key={t.initials}
               variants={itemVariants}
               className="relative rounded-2xl p-7 flex flex-col gap-6 overflow-hidden bg-white/30 dark:bg-white/4 border border-white/55 dark:border-white/10"
               style={{
                 backdropFilter: "blur(28px) saturate(170%)",
                 WebkitBackdropFilter: "blur(28px) saturate(170%)",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.2)",
+                boxShadow:
+                  "0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.2)",
               }}
             >
               {/* Quote mark */}
@@ -298,13 +352,21 @@ export function Clients() {
               <div className="flex items-center gap-3 mt-auto">
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold font-heading shrink-0"
-                  style={{ background: `${t.accent}22`, color: t.accent, border: `1px solid ${t.accent}44` }}
+                  style={{
+                    background: `${t.accent}22`,
+                    color: t.accent,
+                    border: `1px solid ${t.accent}44`,
+                  }}
                 >
                   {t.initials}
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold font-heading text-foreground">{t.author}</span>
-                  <span className="text-xs text-foreground/50 font-sans">{t.role}</span>
+                  <span className="text-sm font-semibold font-heading text-foreground">
+                    {t.author}
+                  </span>
+                  <span className="text-xs text-foreground/50 font-sans">
+                    {t.role}
+                  </span>
                 </div>
               </div>
             </motion.div>

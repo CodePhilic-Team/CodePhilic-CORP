@@ -50,7 +50,6 @@ const services = [
     icon: Cpu,
     className: "md:col-span-1",
   },
- 
 ];
 
 // ─── Services section ─────────────────────────────────────────────────────────
@@ -86,11 +85,11 @@ export function Services() {
       <div className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col gap-4 mb-16 max-w-3xl">
           <h2 className="font-heading tracking-tighter text-4xl md:text-5xl font-bold text-foreground">
-            Engineering{" "}
-            <span className="text-[#3B82F6]">Excellence</span>
+            Engineering <span className="text-[#3B82F6]">Excellence</span>
           </h2>
           <p className="text-foreground/60 text-lg sm:text-xl font-sans leading-relaxed">
-            We don&apos;t just write code; we architect solutions. Our core disciplines cover the entire modern software stack.
+            We don&apos;t just write code; we architect solutions. Our core
+            disciplines cover the entire modern software stack.
           </p>
         </div>
 
@@ -111,13 +110,14 @@ export function Services() {
                 variants={item}
                 className={`${service.className} will-change-transform`}
               >
-                <ParticleCard 
-                  className="h-full rounded-3xl" 
+                <ParticleCard
+                  className="h-full rounded-3xl"
                   glowColor="59, 130, 246"
                   enableTilt={false}
                   enableMagnetism={false}
                   style={{
-                    background: "linear-gradient(to bottom right, var(--glass-bg), transparent)",
+                    background:
+                      "linear-gradient(to bottom right, var(--glass-bg), transparent)",
                     backdropFilter: "blur(20px)",
                     WebkitBackdropFilter: "blur(20px)",
                     border: "1px solid var(--glass-border)",
@@ -133,7 +133,10 @@ export function Services() {
                     >
                       <Icon
                         className="size-5"
-                        style={{ color: "#3B82F6", filter: "drop-shadow(0 0 6px rgba(59,130,246,0.5))" }}
+                        style={{
+                          color: "#3B82F6",
+                          filter: "drop-shadow(0 0 6px rgba(59,130,246,0.5))",
+                        }}
                       />
                     </div>
                     <h3 className="font-heading text-xl font-semibold mb-3 text-foreground">

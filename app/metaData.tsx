@@ -133,18 +133,13 @@ export const metadata: Metadata = {
 
   // Icons
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-icon.png",
+    icon: { url: "/CodePhilic.png", type: "image/png" },
+    apple: { url: "/CodePhilic.png", sizes: "180x180" },
     other: [
       {
-        rel: "icon",
-        sizes: "32x32",
-        url: "/favicon-32x32.png",
-      },
-      {
-        rel: "icon",
-        sizes: "16x16",
-        url: "/favicon-16x16.png",
+        rel: "mask-icon",
+        url: "/CodePhilic.png",
+        color: "#3B82F6",
       },
     ],
   },
@@ -156,7 +151,7 @@ export const organizationStructuredData = {
   "@type": "ProfessionalService",
   name: "CodePhilic",
   url: "https://code-philic.com",
-  logo: "https://code-philic.com/logo.png",
+  logo: "https://code-philic.com/CodePhilic.png",
   image: "https://code-philic.com/og-image.jpg",
   description:
     "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
@@ -445,7 +440,7 @@ export const teamStructuredData = {
   "@type": "Organization",
   name: "CodePhilic",
   url: "https://code-philic.com",
-  logo: "https://code-philic.com/logo.png",
+  logo: "https://code-philic.com/CodePhilic.png",
   description: "Premium software development agency",
   founders: teamMembers.map((member) => ({
     "@type": "Person",
@@ -559,7 +554,7 @@ export const companyInfo = {
   description:
     "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
   website: "https://code-philic.com",
-  logo: "https://code-philic.com/assets/images/logo.png",
+  logo: "https://code-philic.com/CodePhilic.png",
   email: "support@code-philic.com",
   phone: "+880123456789",
   location: {
@@ -664,19 +659,10 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
 <meta name="twitter:creator" content="@codephilic">
 <meta name="twitter:site" content="@codephilic">
 
-<!-- Apple Web App Meta Tags -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="CodePhilic">
-
 <!-- Icons -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" href="/apple-icon.png">
-
-<!-- Manifest -->
-<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/CodePhilic.png">
+<link rel="apple-touch-icon" href="/CodePhilic.png">
+<link rel="mask-icon" href="/CodePhilic.png" color="#3B82F6">
 
 <!-- Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -689,7 +675,7 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
   "@type": "Organization",
   "name": "CodePhilic",
   "url": "https://code-philic.com",
-  "logo": "https://code-philic.com/assets/images/logo.png",
+  "logo": "https://code-philic.com/CodePhilic.png",
   "description": "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
   "foundingDate": "2023",
   "founder": [
