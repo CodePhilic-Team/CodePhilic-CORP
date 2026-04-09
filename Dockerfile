@@ -17,6 +17,9 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+# Install PM2 for process management in container
+RUN npm install -g pm2
+
 # Copy necessary files
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
@@ -26,5 +29,5 @@ COPY --from=builder /app/package.json ./package.json
 # Expose Next.js default port
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+# Start the app with PM2 runtime
+CMD ["pm2-runtime", "start", "npm", "--name", "codephilic-app", "--", "start"]
