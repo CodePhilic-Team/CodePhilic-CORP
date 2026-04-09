@@ -25,9 +25,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/ecosystem.config.js ./ecosystem.config.js
 
 # Expose Next.js default port
 EXPOSE 3000
 
-# Start the app with PM2 runtime
-CMD ["pm2-runtime", "start", "npm", "--name", "codephilic-app", "--", "start"]
+# Start the app with PM2 ecosystem config
+CMD ["pm2-runtime", "ecosystem.config.js", "--only", "frontend"]
