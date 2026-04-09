@@ -10,6 +10,8 @@ import { Footer } from "@/components/sections/footer";
 import { SpatialBackground } from "@/components/SpatialBackground";
 import { BackToTop } from "@/components/BackToTop";
 
+export const revalidate = 60 * 60 * 24 * 7;
+
 export default function Home() {
   return (
     <>

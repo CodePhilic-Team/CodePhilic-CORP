@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+export const revalidate = 60 * 60 * 24 * 7;
+
 /**
  * Dynamic Sitemap Generator for Next.js 13+
  *
