@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { Metadata as MetadataType } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
@@ -27,6 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Manifest for PWA/Web App icons */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+
+        {/* Apple Touch Icon - for iOS home screen */}
+        <link rel="apple-touch-icon" href="/CodePhilic.jpg" sizes="180x180" />
+
         {/* Bing Search Engine Verification */}
         <meta name="msvalidate.01" content="A121669086E98BFFA9212E3622A5DC5D" />
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,16 +71,23 @@ export function Navbar() {
       >
         <div className="flex items-center w-full max-w-7xl mx-auto px-6 py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2.5 shrink-0">
+          <Link
+            href="/"
+            className="p-1 border-2 flex items-center gap-2.5 shrink-0 rounded-lg transition-colors"
+            style={{
+              borderColor:
+                resolvedTheme === "dark" ? "#ffffff" : "var(--border)",
+            }}
+          >
             <img
-              src="/CodePhilic.png"
+              src="/CodePhilic.jpg"
               alt="CodePhilic Logo"
               className="h-9 w-auto"
             />
-            <span className="font-heading font-semibold text-lg tracking-tight text-foreground">
+            {/* <span className="font-heading font-semibold text-lg tracking-tight text-foreground">
               CodePhilic
-            </span>
-          </a>
+            </span> */}
+          </Link>
 
           {/* Desktop pill nav — centred */}
           <nav

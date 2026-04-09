@@ -2,7 +2,7 @@ const { favicons } = require("favicons");
 const path = require("path");
 const fs = require("fs");
 
-const source = path.join(__dirname, "public", "CodePhilic.png");
+const source = path.join(__dirname, "public", "CodePhilic.jpg");
 const destination = path.join(__dirname, "public");
 
 const configuration = {

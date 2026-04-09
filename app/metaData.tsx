@@ -133,12 +133,11 @@ export const metadata: Metadata = {
 
   // Icons
   icons: {
-    icon: { url: "/CodePhilic.png", type: "image/png" },
-    apple: { url: "/CodePhilic.png", sizes: "180x180" },
+    icon: { url: "/CodePhilic.jpg", type: "image/jpeg" },
     other: [
       {
         rel: "mask-icon",
-        url: "/CodePhilic.png",
+        url: "/CodePhilic.jpg",
         color: "#3B82F6",
       },
     ],
@@ -151,7 +150,7 @@ export const organizationStructuredData = {
   "@type": "ProfessionalService",
   name: "CodePhilic",
   url: "https://code-philic.com",
-  logo: "https://code-philic.com/CodePhilic.png",
+  logo: "https://code-philic.com/CodePhilic.jpg",
   image: "https://code-philic.com/og-image.jpg",
   description:
     "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
@@ -440,7 +439,7 @@ export const teamStructuredData = {
   "@type": "Organization",
   name: "CodePhilic",
   url: "https://code-philic.com",
-  logo: "https://code-philic.com/CodePhilic.png",
+  logo: "https://code-philic.com/CodePhilic.jpg",
   description: "Premium software development agency",
   founders: teamMembers.map((member) => ({
     "@type": "Person",
@@ -554,7 +553,7 @@ export const companyInfo = {
   description:
     "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
   website: "https://code-philic.com",
-  logo: "https://code-philic.com/CodePhilic.png",
+  logo: "https://code-philic.com/CodePhilic.jpg",
   email: "support@code-philic.com",
   phone: "+880123456789",
   location: {
@@ -660,9 +659,9 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
 <meta name="twitter:site" content="@codephilic">
 
 <!-- Icons -->
-<link rel="icon" type="image/png" href="/CodePhilic.png">
-<link rel="apple-touch-icon" href="/CodePhilic.png">
-<link rel="mask-icon" href="/CodePhilic.png" color="#3B82F6">
+<link rel="icon" type="image/jpeg" href="/CodePhilic.jpg">
+<link rel="apple-touch-icon" href="/CodePhilic.jpg">
+<link rel="mask-icon" href="/CodePhilic.jpg" color="#3B82F6">
 
 <!-- Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -675,7 +674,7 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
   "@type": "Organization",
   "name": "CodePhilic",
   "url": "https://code-philic.com",
-  "logo": "https://code-philic.com/CodePhilic.png",
+  "logo": "https://code-philic.com/CodePhilic.jpg",
   "description": "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
   "foundingDate": "2023",
   "founder": [

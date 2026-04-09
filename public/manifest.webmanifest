@@ -12,9 +12,9 @@
   "theme_color": "#3B82F6",
   "icons": [
     {
-      "src": "/CodePhilic.png",
+      "src": "/CodePhilic.jpg",
       "sizes": "any",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any"
     }
   ]
