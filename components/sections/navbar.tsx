@@ -74,10 +74,14 @@ export function Navbar() {
           <Link
             href="/"
             className="p-1 border-2 flex items-center gap-2.5 shrink-0 rounded-lg transition-colors"
-            style={{
-              borderColor:
-                resolvedTheme === "dark" ? "#ffffff" : "var(--border)",
-            }}
+            style={
+              mounted
+                ? {
+                    borderColor:
+                      resolvedTheme === "dark" ? "#ffffff" : "var(--border)",
+                  }
+                : {}
+            }
           >
             <img
               src="/CodePhilic.jpg"
