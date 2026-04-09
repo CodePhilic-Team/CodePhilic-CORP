@@ -64,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       slug: "ai-chatgpt-integration",
       priority: 0.92,
-      changeFrequency: "bi-weekly" as const,
+      changeFrequency: "weekly" as const,
     },
     {
       slug: "fullstack-development",
@@ -174,7 +174,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (project) => ({
       url: `${baseUrl}/portfolio/${project.slug}`,
       lastModified: currentDate,
-      changeFrequency: "quarterly" as const,
+      changeFrequency: "monthly" as const,
       priority: project.priority,
     }),
   );
