@@ -28,22 +28,22 @@ export default function RootLayout({
         {/* Favicon - Standard .ico for all search engines and browsers */}
         <link
           rel="icon"
-          href="/favicon.ico"
+          href="/favicon.ico?v=2"
           type="image/x-icon"
           sizes="32x32"
         />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon" />
 
         {/* Favicon - PNG formats for modern browsers */}
         <link
           rel="icon"
-          href="/favicon-32x32.png"
+          href="/favicon-32x32.png?v=2"
           type="image/png"
           sizes="32x32"
         />
         <link
           rel="icon"
-          href="/favicon-16x16.png"
+          href="/favicon-16x16.png?v=2"
           type="image/png"
           sizes="16x16"
         />
@@ -51,7 +51,7 @@ export default function RootLayout({
         {/* Apple Touch Icon - for iOS home screen */}
         <link
           rel="apple-touch-icon"
-          href="/apple-touch-icon.png"
+          href="/apple-touch-icon.png?v=2"
           sizes="180x180"
         />
 
