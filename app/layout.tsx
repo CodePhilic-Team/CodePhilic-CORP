@@ -25,12 +25,35 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Favicon - Main icon for all browsers */}
-        <link rel="icon" href="/CodePhilic.jpg" type="image/jpeg" sizes="any" />
-        <link rel="shortcut icon" href="/CodePhilic.jpg" type="image/jpeg" />
+        {/* Favicon - Standard .ico for all search engines and browsers */}
+        <link
+          rel="icon"
+          href="/favicon.ico"
+          type="image/x-icon"
+          sizes="32x32"
+        />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+        {/* Favicon - PNG formats for modern browsers */}
+        <link
+          rel="icon"
+          href="/favicon-32x32.png"
+          type="image/png"
+          sizes="32x32"
+        />
+        <link
+          rel="icon"
+          href="/favicon-16x16.png"
+          type="image/png"
+          sizes="16x16"
+        />
 
         {/* Apple Touch Icon - for iOS home screen */}
-        <link rel="apple-touch-icon" href="/CodePhilic.jpg" sizes="180x180" />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-touch-icon.png"
+          sizes="180x180"
+        />
 
         {/* Bing Search Engine Verification */}
         <meta name="msvalidate.01" content="A121669086E98BFFA9212E3622A5DC5D" />
