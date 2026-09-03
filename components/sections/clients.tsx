@@ -46,6 +46,13 @@ const clients = [
     accent: "#06B6D4",
     description: "Fleet management solution for MBSTU transportation",
   },
+  {
+    name: "SOHH Automation System",
+    industry: "Hall Management",
+    initials: "SOHH",
+    accent: "#EAB308",
+    description: "Comprehensive hall and dining automation system for MBSTU",
+  },
   // {
   //   name: "Vortex",
   //   industry: "E-Commerce",
@@ -199,7 +206,7 @@ export function Clients() {
             </span>
           </h2>
           <p className="text-foreground/55 text-lg sm:text-xl font-sans leading-relaxed">
-            From institutional platforms and digital products to custom software systems, we build technology that solves real-world problems across education, transportation, tourism and digital operations.
+            From institutional platforms and digital products to custom software systems, we build technology that solves real-world problems across education, transportation, tourism, hall management, and digital operations.
           </p>
         </motion.div>
 

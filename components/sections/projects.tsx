@@ -19,10 +19,10 @@ const codephilicProducts: Project[] = [
     title: "TourizBook",
     category: "CODEPHILIC PRODUCT · LIVE",
     description: "A tourism-focused digital platform developed and owned by CodePhilic, designed to provide a modern experience for discovering destinations, attractions and travel-related services.",
-    tags: ["Next.js", "TypeScript", "Express", "DigitalOcean"],
+    tags: ["Next.js", "TypeScript", "Express"],
     accent: "#8B5CF6", // Purple
     span: "md:col-span-3",
-    link: "https://tourphilia.code-philic.com/",
+    link: "https://tourizbook.com/",
   }
 ];
 
@@ -31,10 +31,10 @@ const codephilicTechnology: Project[] = [
     title: "SOHH — Shahid Osman Hadi Hall Automation System",
     category: "CODEPHILIC-OWNED TECHNOLOGY · DEPLOYED AT SOHH / MBSTU",
     description: "A comprehensive hall management and dining automation system developed by CodePhilic for Shahid Osman Hadi Hall at Mawlana Bhashani Science and Technology University (MBSTU).",
-    tags: ["React", "Node.js", "Express", "MongoDB"],
+    tags: ["Next.js", "Express", "TypeScript", "MongoDB"],
     accent: "#06B6D4", // Cyan
     span: "md:col-span-2",
-    link: "#",
+    link: "https://sohh.mbstu.ac.bd/",
   },
   {
     title: "MBSTU WHEELs Platform",
@@ -43,16 +43,16 @@ const codephilicTechnology: Project[] = [
     tags: ["IoT", "GPS", "Real-time Tracking", "Cloud"],
     accent: "#06B6D4", // Cyan
     span: "md:col-span-1",
-    link: "#",
+    link: "https://transport.mbstu.ac.bd/MBSTU-Wheels/SignIn",
   },
   {
     title: "CPSAA Alumni Platform",
     category: "CODEPHILIC TECHNOLOGY · UNDER CONSTRUCTION",
     description: "An alumni platform currently under construction for the CPS Alumni Association, being developed as a commitment to support alumni engagement and digital operations.",
-    tags: ["React", "Node.js"],
+    tags: ["Next.js", "Express", "TypeScript"],
     accent: "#06B6D4", // Cyan
     span: "md:col-span-3",
-    link: "#",
+    link: "https://www.cpsaa.org/",
   }
 ];
 
@@ -70,16 +70,16 @@ const clientSolutions: Project[] = [
     title: "MBSTU WHEELs Web App",
     category: "INSTITUTIONAL SOLUTION · DEVELOPED BY CODEPHILIC",
     description: "Web-based transportation platform supporting live vehicle tracking, routes and transportation operations.",
-    tags: ["React", "NEXT JS", "PostgreSQL"],
+    tags: ["Next.js", "Express", "TypeScript", "PostgreSQL"],
     accent: "#3B82F6", // Blue
     span: "md:col-span-1",
-    link: "https://transport.mbstu.ac.bd/MBSTU-Wheels",
+    link: "https://transport.mbstu.ac.bd/MBSTU-Wheels/SignIn",
   },
   {
     title: "MBSTU Transport Website",
     category: "INSTITUTIONAL SOLUTION · DEVELOPED BY CODEPHILIC",
     description: "Official digital platform for MBSTU transportation information, schedules, routes and updates.",
-    tags: ["Next.js", "TypeScript", "TailwindCSS"],
+    tags: ["Next.js", "Express", "TypeScript", "TailwindCSS"],
     accent: "#3B82F6", // Blue
     span: "md:col-span-1",
     link: "https://transport.mbstu.ac.bd/",
@@ -91,16 +91,16 @@ const clientSolutions: Project[] = [
     tags: ["Next.js", "TypeScript", "Express"],
     accent: "#3B82F6", // Blue
     span: "md:col-span-1",
-    link: "https://cpsaa.org/",
+    link: "https://www.cpsaa.org/",
   },
   {
     title: "MBSTU Fleet Management",
     category: "INSTITUTIONAL SOLUTION · DEVELOPED BY CODEPHILIC",
     description: "Fleet management technology developed to support MBSTU transportation operations and vehicle management.",
-    tags: ["Dashboard", "Analytics", "Fleet Tools"],
+    tags: ["Next.js", "Express", "TypeScript", "Analytics"],
     accent: "#3B82F6", // Blue
     span: "md:col-span-1",
-    link: "#",
+    link: "https://transport.mbstu.ac.bd/",
   }
 ];
 
