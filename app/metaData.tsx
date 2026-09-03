@@ -8,10 +8,18 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   // Basic metadata
-  metadataBase: new URL("https://code-philic.com"),
-  title: "CodePhilic | Custom Software & AI Development Agency",
+  metadataBase: new URL("https://codephilic.com"),
+  alternates: {
+    canonical: "https://codephilic.com",
+    languages: {
+      "en-US": "https://codephilic.com",
+      "en-GB": "https://code-philic.com",
+      en: "https://codephilic.com",
+    },
+  },
+  title: "CodePhilic | We Architect Imagination",
   description:
-    "CodePhilic delivers scalable, secure software solutions. We are an expert full-stack development agency specializing in web, mobile apps, and AI integration.",
+    "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
 
   // Keywords for SEO - Focused primary and secondary keywords
   keywords: [
@@ -58,14 +66,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://code-philic.com",
+    url: "https://codephilic.com",
     siteName: "CodePhilic",
-    title: "CodePhilic | Custom Software & AI Development Agency",
+    title: "CodePhilic | We Architect Imagination",
     description:
-      "CodePhilic delivers scalable, secure software solutions. We are an expert full-stack development agency specializing in web, mobile apps, and AI integration.",
+      "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
     images: [
       {
-        url: "https://code-philic.com/og-image.jpg",
+        url: "https://www.codephilic.com/CodePhilic.jpg",
         width: 1200,
         height: 630,
         alt: "CodePhilic - Custom Software & AI Development Agency",
@@ -77,16 +85,16 @@ export const metadata: Metadata = {
   // Twitter Card metadata
   twitter: {
     card: "summary_large_image",
-    title: "CodePhilic | Custom Software & AI Development Agency",
+    title: "CodePhilic | We Architect Imagination",
     description:
-      "CodePhilic delivers scalable, secure software solutions. Expert full-stack development agency for web, mobile, and AI integration.",
-    images: ["https://code-philic.com/og-image.jpg"],
+      "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
+    images: ["https://www.codephilic.com/CodePhilic.jpg"],
     creator: "@codephilic",
     site: "@codephilic",
   },
 
   // Additional SEO metadata
-  authors: [{ name: "Rakibul Islam", url: "https://code-philic.com" }],
+  authors: [{ name: "Rakibul Islam", url: "https://codephilic.com" }],
   creator: "CodePhilic",
   publisher: "CodePhilic",
   robots: {
@@ -99,15 +107,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-image-preview": "large",
       "max-video-preview": -1,
-    },
-  },
-
-  // Alternate language versions
-  alternates: {
-    canonical: "https://code-philic.com",
-    languages: {
-      "en-US": "https://code-philic.com",
-      en: "https://code-philic.com",
     },
   },
 
@@ -149,11 +148,11 @@ export const organizationStructuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "CodePhilic",
-  url: "https://code-philic.com",
-  logo: "https://code-philic.com/CodePhilic.jpg",
-  image: "https://code-philic.com/og-image.jpg",
+  url: "https://codephilic.com",
+  logo: "https://codephilic.com/CodePhilic.jpg",
+  image: "https://codephilic.com/og-image.jpg",
   description:
-    "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
+    "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
   knowsAbout: [
     "Software Development",
     "Web Applications",
@@ -170,9 +169,9 @@ export const organizationStructuredData = {
     {
       "@type": "Person",
       name: "Md. Rakibul Islam",
-      jobTitle: "Leading Founder & CEO",
+      jobTitle: "Leading Founder & CEO · Managing Director · Director",
       description:
-        "Full-stack architect with a passion for building scalable systems. Previously led engineering at two Y-Combinator startups.",
+        "Primary responsibilities include:\n• Company leadership\n• Technology and product direction\n• Engineering\n• Business strategy\n• Overall operations",
       sameAs: [
         "https://www.linkedin.com/in/rakibul-islam-8372852bb/",
         "https://github.com/rakibtkg",
@@ -180,21 +179,10 @@ export const organizationStructuredData = {
     },
     {
       "@type": "Person",
-      name: "Md. Habibur Rahman",
-      jobTitle: "Co-Founder & CTO",
+      name: "Dhruba",
+      jobTitle: "Co-Founder & CMO · Director",
       description:
-        "Distributed systems engineer. Designed infrastructure handling 10M+ daily requests.",
-      sameAs: [
-        "https://www.linkedin.com/in/habib007/",
-        "https://github.com/himaloy007",
-      ],
-    },
-    {
-      "@type": "Person",
-      name: "Dhruba Paul",
-      jobTitle: "Co-Founder & CFO",
-      description:
-        "UI perfectionist obsessed with micro-interactions and performance. Contributor to open-source React tooling.",
+        "Primary responsibilities include:\n• Marketing\n• Brand strategy\n• Growth\n• Business development\n• Product and company operations",
       sameAs: [
         "https://www.linkedin.com/in/dhruba-paul-69342b363/",
         "https://github.com/DHRUBA-NIRO",
@@ -202,18 +190,31 @@ export const organizationStructuredData = {
     },
     {
       "@type": "Person",
-      name: "Iftekhar Ahmed Shuvo",
-      jobTitle: "Co-Founder & CMO",
+      name: "Shuvo",
+      jobTitle: "Co-Founder & CFO · Director",
       description:
-        "Bridging product thinking and visual craft. Formerly at Figma's design team.",
+        "Primary responsibilities include:\n• Finance\n• Financial planning\n• Business operations\n• Administration\n• Product development",
       sameAs: [
         "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/",
         "https://github.com/SHUVOika",
       ],
     },
+    {
+      "@type": "Person",
+      name: "Habib",
+      jobTitle: "Co-Founder & COO · Director",
+      description:
+        "Primary responsibilities include:\n• Operations\n• Project coordination\n• Process management\n• Delivery\n• Product development",
+      sameAs: [
+        "https://www.linkedin.com/in/habib007/",
+        "https://github.com/himaloy007",
+      ],
+    },
   ],
   sameAs: [
-    "https://www.linkedin.com/company/codephilic",
+    "https://code-philic.com",
+    "https://www.linkedin.com/company/codephilic-limited/",
+    "https://www.facebook.com/share/1UyoDxc6iB/",
     "https://github.com/codephilic",
   ],
 };
@@ -223,7 +224,7 @@ export const servicesStructuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "CodePhilic",
-  url: "https://code-philic.com",
+  url: "https://codephilic.com",
   hasOfferingDescription: [
     {
       "@type": "OfferingDescription",
@@ -344,10 +345,10 @@ export const projectsStructuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "TourPhilia Tourism Website",
+    name: "TourizBook Tourism Website",
     description:
       "Comprehensive tourism website promoting local attractions and travel experiences",
-    url: "https://tourphilia.code-philic.com/",
+    url: "https://tourphilia.codephilic.com/",
     creator: {
       "@type": "Organization",
       name: "CodePhilic",
@@ -364,31 +365,31 @@ export const breadcrumbStructuredData = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://code-philic.com",
+      item: "https://codephilic.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Services",
-      item: "https://code-philic.com#services",
+      item: "https://codephilic.com#services",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Projects",
-      item: "https://code-philic.com#work",
+      item: "https://codephilic.com#work",
     },
     {
       "@type": "ListItem",
       position: 4,
       name: "Team",
-      item: "https://code-philic.com#team",
+      item: "https://codephilic.com#team",
     },
     {
       "@type": "ListItem",
       position: 5,
       name: "Contact",
-      item: "https://code-philic.com#contact",
+      item: "https://codephilic.com#contact",
     },
   ],
 };
@@ -396,40 +397,44 @@ export const breadcrumbStructuredData = {
 // Team Members Data
 export const teamMembers = [
   {
-    name: "Md.Rakibul Islam",
-    role: "Leading Founder & CEO",
-    bio: "Full-stack architect with a passion for building scalable systems. Previously led engineering at two Y-Combinator startups.",
-    image: "https://code-philic.com/team/rakibx.jpg",
+    name: "Md. Rakibul Islam",
+    role: "Leading Founder & CEO · Managing Director · Director",
+    bio: "Primary responsibilities include:\n• Company leadership\n• Technology and product direction\n• Engineering\n• Business strategy\n• Overall operations",
+    image: "https://codephilic.com/team/rakibx.jpg",
     linkedin: "https://www.linkedin.com/in/rakibul-islam-8372852bb/",
     github: "https://github.com/rakibtkg",
-    email: "rakibul@code-philic.com",
+    email: "rakibul@codephilic.com",
+    phone: "+8801812049163",
   },
   {
-    name: "Md.Habibur Rahman",
-    role: "Co-Founder & CTO",
-    bio: "Distributed systems engineer. Designed infrastructure handling 10M+ daily requests. Systems thinker, coffee enthusiast.",
-    image: "https://code-philic.com/team/himaloyx.jpg",
-    linkedin: "https://www.linkedin.com/in/habib007/",
-    github: "https://github.com/himaloy007",
-    email: "habib@code-philic.com",
-  },
-  {
-    name: "Dhruba Paul",
-    role: "Co-Founder & CFO",
-    bio: "UI perfectionist obsessed with micro-interactions and performance. Contributor to open-source React tooling.",
-    image: "https://code-philic.com/team/dhrubax.jpg",
+    name: "Dhruba",
+    role: "Co-Founder & CMO · Director",
+    bio: "Primary responsibilities include:\n• Marketing\n• Brand strategy\n• Growth\n• Business development\n• Product and company operations",
+    image: "https://codephilic.com/team/dhrubax.jpg",
     linkedin: "https://www.linkedin.com/in/dhruba-paul-69342b363/",
     github: "https://github.com/DHRUBA-NIRO",
-    email: "dhruba@code-philic.com",
+    email: "dhruba@codephilic.com",
+    phone: "+8801765848893",
   },
   {
-    name: "Iftekhar Ahmed Shuvo",
-    role: "Co-Founder & CMO",
-    bio: "Bridging product thinking and visual craft. Formerly at Figma's design team. Ships designs that developers love to build.",
-    image: "https://code-philic.com/team/shuvox.jpg",
+    name: "Shuvo",
+    role: "Co-Founder & CFO · Director",
+    bio: "Primary responsibilities include:\n• Finance\n• Financial planning\n• Business operations\n• Administration\n• Product development",
+    image: "https://codephilic.com/team/shuvox.jpg",
     linkedin: "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/",
     github: "https://github.com/SHUVOika",
-    email: "shuvo@code-philic.com",
+    email: "shuvo@codephilic.com",
+    phone: "+8801777990263",
+  },
+  {
+    name: "Habib",
+    role: "Co-Founder & COO · Director",
+    bio: "Primary responsibilities include:\n• Operations\n• Project coordination\n• Process management\n• Delivery\n• Product development",
+    image: "https://codephilic.com/team/himaloyx.jpg",
+    linkedin: "https://www.linkedin.com/in/habib007/",
+    github: "https://github.com/himaloy007",
+    email: "habib@codephilic.com",
+    phone: "+880172889798",
   },
 ];
 
@@ -438,8 +443,8 @@ export const teamStructuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "CodePhilic",
-  url: "https://code-philic.com",
-  logo: "https://code-philic.com/CodePhilic.jpg",
+  url: "https://codephilic.com",
+  logo: "https://codephilic.com/CodePhilic.jpg",
   description: "Premium software development agency",
   founders: teamMembers.map((member) => ({
     "@type": "Person",
@@ -449,6 +454,7 @@ export const teamStructuredData = {
     image: member.image,
     sameAs: [member.linkedin, member.github].filter(Boolean),
     email: member.email,
+    telephone: member.phone,
   })),
 };
 
@@ -460,14 +466,15 @@ export const individualTeamStructuredData = teamMembers.map((member) => ({
   jobTitle: member.role,
   description: member.bio,
   image: member.image,
-  url: "https://code-philic.com#team",
+  url: "https://codephilic.com#team",
   affiliation: {
     "@type": "Organization",
     name: "CodePhilic",
-    url: "https://code-philic.com",
+    url: "https://codephilic.com",
   },
   sameAs: [member.linkedin, member.github].filter(Boolean),
   email: member.email,
+  telephone: member.phone,
   knowsAbout: [
     "Software Development",
     "Web Development",
@@ -504,7 +511,7 @@ export const faqStructuredData = {
       name: "How can I contact CodePhilic?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can reach CodePhilic via email at support@code-philic.com, phone at +880123456789, or through our contact page on our website at https://code-philic.com#contact",
+        text: "You can reach CodePhilic via email at contact@codephilic.com, by phone at +8801812049163, +880172889798, +8801765848893, +8801777990263, or through our contact page on our website at https://codephilic.com#contact",
       },
     },
   ],
@@ -515,33 +522,33 @@ export const webApplicationStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: "CodePhilic Portfolio",
-  url: "https://code-philic.com",
+  url: "https://codephilic.com",
   applicationCategory: "WebApplication",
   description:
-    "CodePhilic - Premium Software Development Agency Portfolio showcasing our expertise in web and mobile applications",
+    "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
   creator: {
     "@type": "Organization",
     name: "CodePhilic",
-    url: "https://code-philic.com",
+    url: "https://codephilic.com",
   },
   offers: [
     {
       "@type": "Offer",
       name: "Web Development Services",
       description: "Custom web applications using modern technologies",
-      url: "https://code-philic.com#services",
+      url: "https://codephilic.com#services",
     },
     {
       "@type": "Offer",
       name: "Mobile Development Services",
       description: "Native and cross-platform mobile applications",
-      url: "https://code-philic.com#services",
+      url: "https://codephilic.com#services",
     },
     {
       "@type": "Offer",
       name: "Full-Stack Development",
       description: "End-to-end application development services",
-      url: "https://code-philic.com#services",
+      url: "https://codephilic.com#services",
     },
   ],
 };
@@ -549,13 +556,18 @@ export const webApplicationStructuredData = {
 // AI-Ready Company Information Export
 export const companyInfo = {
   name: "CodePhilic",
-  tagline: "Premium Software Development & Web Solutions",
+  tagline: "We Architect Imagination",
   description:
-    "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
-  website: "https://code-philic.com",
-  logo: "https://code-philic.com/CodePhilic.jpg",
-  email: "support@code-philic.com",
-  phone: "+880123456789",
+    "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
+  website: "https://codephilic.com",
+  logo: "https://codephilic.com/CodePhilic.jpg",
+  email: "contact@codephilic.com",
+  phone: [
+    "+8801812049163",
+    "+880172889798",
+    "+8801765848893",
+    "+8801777990263"
+  ],
   location: {
     street: "Santosh",
     city: "Tangail",
@@ -563,9 +575,14 @@ export const companyInfo = {
     country: "Bangladesh",
     countryCode: "BD",
   },
-  founders: ["Rakibul Islam"],
-  established: 2023,
-  industry: "Software Development",
+  founders: [
+    "Md. Rakibul Islam",
+    "Dhruba",
+    "Shuvo",
+    "Habib"
+  ],
+  established: 2026,
+  industry: "Custom Software Development, AI Solutions & IT Consulting",
   specialties: [
     "Web Development",
     "Mobile App Development",
@@ -596,9 +613,9 @@ export const companyInfo = {
     "Kubernetes",
   ],
   socialLinks: {
-    linkedin: "https://www.linkedin.com/company/codephilic",
+    linkedin: "https://www.linkedin.com/company/codephilic-limited/",
     twitter: "https://twitter.com/codephilic",
-    facebook: "https://www.facebook.com/codephilic",
+    facebook: "https://www.facebook.com/share/1UyoDxc6iB/",
     github: "https://github.com/codephilic",
     youtube: "https://www.youtube.com/codephilic",
   },
@@ -621,7 +638,7 @@ export const companyInfo = {
 export const completeHeadHTML = `<!-- Primary Meta Tags -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<meta name="description" content="CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.">
+<meta name="description" content="CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.">
 <meta name="keywords" content="software development, web development, mobile development, Next.js, React, Flutter, full-stack development, digital transformation, SaaS development">
 <meta name="author" content="Rakibul Islam, CodePhilic">
 <meta name="creator" content="CodePhilic">
@@ -635,14 +652,14 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
 <meta name="color-scheme" content="dark light">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://code-philic.com">
+<link rel="canonical" href="https://codephilic.com">
 
 <!-- Open Graph Tags (Facebook, LinkedIn, etc.) -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://code-philic.com">
-<meta property="og:title" content="CodePhilic | Premium Software Development & Web Solutions">
-<meta property="og:description" content="CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.">
-<meta property="og:image" content="https://code-philic.com/assets/images/og-image.jpg">
+<meta property="og:url" content="https://codephilic.com">
+<meta property="og:title" content="CodePhilic | We Architect Imagination">
+<meta property="og:description" content="CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.">
+<meta property="og:image" content="https://codephilic.com/assets/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
@@ -651,10 +668,10 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
 
 <!-- Twitter Card Tags -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://code-philic.com">
-<meta name="twitter:title" content="CodePhilic | Premium Software Development">
-<meta name="twitter:description" content="CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.">
-<meta name="twitter:image" content="https://code-philic.com/assets/images/twitter-image.jpg">
+<meta name="twitter:url" content="https://codephilic.com">
+<meta name="twitter:title" content="CodePhilic | We Architect Imagination">
+<meta name="twitter:description" content="CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.">
+<meta name="twitter:image" content="https://codephilic.com/assets/images/twitter-image.jpg">
 <meta name="twitter:creator" content="@codephilic">
 <meta name="twitter:site" content="@codephilic">
 
@@ -668,15 +685,30 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "CodePhilic",
-  "url": "https://code-philic.com",
-  "logo": "https://code-philic.com/CodePhilic.jpg",
-  "description": "CodePhilic delivers scalable, secure, and innovative software solutions. Expert software development agency crafting digital excellence for businesses worldwide.",
+  "url": "https://codephilic.com",
+  "logo": "https://codephilic.com/CodePhilic.jpg",
+  "description": "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
   "foundingDate": "2023",
   "founder": [
     {
       "@type": "Person",
-      "name": "Rakibul Islam",
-      "jobTitle": "Founder & CEO"
+      "name": "Md. Rakibul Islam",
+      "jobTitle": "Leading Founder & CEO · Managing Director · Director"
+    },
+    {
+      "@type": "Person",
+      "name": "Dhruba",
+      "jobTitle": "Co-Founder & CMO · Director"
+    },
+    {
+      "@type": "Person",
+      "name": "Shuvo",
+      "jobTitle": "Co-Founder & CFO · Director"
+    },
+    {
+      "@type": "Person",
+      "name": "Habib",
+      "jobTitle": "Co-Founder & COO · Director"
     }
   ],
   "address": {
@@ -691,16 +723,22 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
     {
       "@type": "ContactPoint",
       "contactType": "Business Development",
-      "telephone": "+880123456789",
-      "email": "support@code-philic.com",
+      "telephone": [
+        "+8801812049163",
+        "+880172889798",
+        "+8801765848893",
+        "+8801777990263"
+      ],
+      "email": "contact@codephilic.com",
       "areaServed": "World",
       "availableLanguage": ["en", "bn"]
     }
   ],
   "sameAs": [
-    "https://www.linkedin.com/company/codephilic",
+    "https://code-philic.com",
+    "https://www.linkedin.com/company/codephilic-limited/",
     "https://twitter.com/codephilic",
-    "https://www.facebook.com/codephilic",
+    "https://www.facebook.com/share/1UyoDxc6iB/",
     "https://github.com/codephilic"
   ]
 }
@@ -732,7 +770,7 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
       "name": "How can I contact CodePhilic?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can reach CodePhilic via email at support@code-philic.com, phone at +880123456789, or through our contact page on our website at https://code-philic.com#contact"
+        "text": "You can reach CodePhilic via email at contact@codephilic.com, by phone at +8801812049163, +880172889798, +8801765848893, +8801777990263, or through our contact page on our website at https://codephilic.com#contact"
       }
     }
   ]
@@ -740,4 +778,4 @@ export const completeHeadHTML = `<!-- Primary Meta Tags -->
 </script>
 
 <!-- Title Tag (Critical for SEO) -->
-<title>CodePhilic | Premium Software Development & Web Solutions</title>`;
+<title>CodePhilic | We Architect Imagination</title>`;

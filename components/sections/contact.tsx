@@ -9,7 +9,7 @@ export function Contact() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   // Message form state
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", inquiryEmail: "contact@codephilic.com", subject: "", message: "" });
   const [formSent, setFormSent] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
 
@@ -109,7 +109,7 @@ export function Contact() {
                 <p className="text-lg font-semibold font-heading text-foreground">Message sent!</p>
                 <p className="text-sm text-foreground/50 font-sans">We&apos;ll be in touch within 24 hours.</p>
                 <button
-                  onClick={() => { setFormSent(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
+                  onClick={() => { setFormSent(false); setForm({ name: "", email: "", inquiryEmail: "contact@codephilic.com", subject: "", message: "" }); }}
                   className="text-sm text-[#3B82F6] hover:underline font-medium mt-2"
                 >
                   Send another message
@@ -148,19 +148,44 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-medium font-heading text-foreground/50 uppercase tracking-wide">
-                    Subject
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="What's this about?"
-                    value={form.subject}
-                    onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
-                    className={`${inputBase} ${inputFocusClass}`}
-                    style={inputStyle}
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-medium font-heading text-foreground/50 uppercase tracking-wide">
+                      Department
+                    </label>
+                    <div className="relative">
+                      <select
+                        value={form.inquiryEmail}
+                        onChange={e => setForm(f => ({ ...f, inquiryEmail: e.target.value }))}
+                        className={`${inputBase} ${inputFocusClass} appearance-none cursor-pointer w-full`}
+                        style={{ ...inputStyle, paddingRight: "2.5rem" }}
+                      >
+                        <option value="contact@codephilic.com" className="bg-white dark:bg-[#09090b] text-foreground">General Contact</option>
+                        <option value="support@codephilic.com" className="bg-white dark:bg-[#09090b] text-foreground">Technical Support</option>
+                        <option value="founders@codephilic.com" className="bg-white dark:bg-[#09090b] text-foreground">Partnership / Business</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-foreground/50">
+                        <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-medium font-heading text-foreground/50 uppercase tracking-wide">
+                      Subject
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="What's this about?"
+                      value={form.subject}
+                      onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
+                      className={`${inputBase} ${inputFocusClass}`}
+                      style={inputStyle}
+                    />
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
@@ -219,13 +244,32 @@ export function Contact() {
               }}
             >
               <h3 className="text-base font-bold font-heading text-foreground">Prefer email?</h3>
-              <a
-                href="mailto:hello@codephilic.com"
-                className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] hover:underline"
-              >
-                <Mail className="size-4" />
-                hello@codephilic.com
-              </a>
+              <div className="flex flex-col gap-2.5">
+                <a
+                  href="mailto:contact@codephilic.com"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] hover:underline"
+                >
+                  <Mail className="size-4 shrink-0" />
+                  <span className="truncate">contact@codephilic.com</span>
+                  <span className="text-foreground/40 text-xs ml-auto shrink-0 hidden sm:inline-block">General</span>
+                </a>
+                <a
+                  href="mailto:support@codephilic.com"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] hover:underline"
+                >
+                  <Mail className="size-4 shrink-0" />
+                  <span className="truncate">support@codephilic.com</span>
+                  <span className="text-foreground/40 text-xs ml-auto shrink-0 hidden sm:inline-block">Support</span>
+                </a>
+                <a
+                  href="mailto:founders@codephilic.com"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] hover:underline"
+                >
+                  <Mail className="size-4 shrink-0" />
+                  <span className="truncate">founders@codephilic.com</span>
+                  <span className="text-foreground/40 text-xs ml-auto shrink-0 hidden sm:inline-block">Business</span>
+                </a>
+              </div>
               <div className="flex flex-col gap-3 pt-2" style={{ borderTop: "1px solid var(--glass-border)" }}>
                 {[
                   ["Response time", "Within 24 hours"],

@@ -88,8 +88,7 @@ export function Services() {
             Engineering <span className="text-[#3B82F6]">Excellence</span>
           </h2>
           <p className="text-foreground/60 text-lg sm:text-xl font-sans leading-relaxed">
-            We don&apos;t just write code; we architect solutions. Our core
-            disciplines cover the entire modern software stack.
+            We combine product thinking with strong engineering to build reliable, scalable and practical technology. From product architecture and design systems to APIs, cloud infrastructure and AI, our engineering capabilities span the modern software stack.
           </p>
         </div>
 

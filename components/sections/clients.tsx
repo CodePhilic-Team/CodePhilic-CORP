@@ -33,9 +33,9 @@ const clients = [
     description: "Official website for MBSTU transport schedules and news",
   },
   {
-    name: "TourPhilia",
+    name: "TourizBook",
     industry: "Tourism",
-    initials: "TP",
+    initials: "TB",
     accent: "#F43F5E",
     description: "Comprehensive tourism website for local attractions",
   },
@@ -62,32 +62,6 @@ const clients = [
   // },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "CodePhilic built our alumni platform from ground up. The system seamlessly connects thousands of CPS alumni and has become the backbone of our community engagement. Outstanding execution.",
-    author: "",
-    role: "President, CPS Alumni Association",
-    accent: "#3B82F6",
-    initials: "P",
-  },
-  {
-    quote:
-      "Managing our transport fleet was chaos until CodePhilic delivered their GPS tracking and scheduling system. Real-time visibility, instant notifications, and zero downtime. Game-changer for our operations.",
-    author: "",
-    role: "Transport Director, MBSTU",
-    accent: "#8B5CF6",
-    initials: "TD",
-  },
-  {
-    quote:
-      "The Wheels app helped me track every transport schedule at MBSTU. The interface is intuitive, notifications are spot-on, and it just works. Never missed a ride since I started using it.",
-    author: "",
-    role: "Student, MBSTU",
-    accent: "#10B981",
-    initials: "ST",
-  },
-];
 
 const containerVariants: Variants = {
   hidden: {},
@@ -106,12 +80,6 @@ const itemVariants: Variants = {
 export function Clients() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  const testimonialsRef = useRef<HTMLDivElement>(null);
-  const testimonialsInView = useInView(testimonialsRef, {
-    once: true,
-    margin: "-80px",
-  });
 
   return (
     <section id="clients" className="py-24 md:py-36 relative overflow-hidden">
@@ -206,7 +174,6 @@ export function Clients() {
         className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10"
         ref={ref}
       >
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -214,10 +181,10 @@ export function Clients() {
           className="text-center flex flex-col gap-4 mb-20 max-w-3xl mx-auto"
         >
           <span className="text-[#3B82F6] text-sm font-semibold uppercase tracking-widest font-heading">
-            Trusted By
+            Portfolio
           </span>
           <h2 className="font-heading tracking-tighter text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-            Visionaries Who{" "}
+            Our Work &{" "}
             <span
               className="inline-block"
               style={{
@@ -228,13 +195,11 @@ export function Clients() {
                 backgroundClip: "text",
               }}
             >
-              Chose Us
+              Solutions
             </span>
           </h2>
           <p className="text-foreground/55 text-lg sm:text-xl font-sans leading-relaxed">
-            From early-stage startups to growth-stage companies — these are the
-            teams that handed us their most critical product challenges.
-            Here&apos;s what we built together.
+            From institutional platforms and digital products to custom software systems, we build technology that solves real-world problems across education, transportation, tourism and digital operations.
           </p>
         </motion.div>
 
@@ -303,74 +268,26 @@ export function Clients() {
           ))}
         </motion.div>
 
-        {/* Divider label */}
+        {/* Built for Real-World Needs */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex items-center gap-4 mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-4xl mx-auto text-center flex flex-col gap-5 mt-16 p-10 rounded-3xl bg-white/30 dark:bg-white/4 border border-white/55 dark:border-white/10"
+          style={{
+            backdropFilter: "blur(28px) saturate(170%)",
+            WebkitBackdropFilter: "blur(28px) saturate(170%)",
+            boxShadow:
+              "0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.2)",
+          }}
         >
-          <div className="flex-1 h-px bg-foreground/10" />
-          <span className="text-xs font-heading font-semibold uppercase tracking-[0.2em] text-foreground/35 whitespace-nowrap">
-            What our clients say
-          </span>
-          <div className="flex-1 h-px bg-foreground/10" />
-        </motion.div>
-
-        {/* Testimonials */}
-        <motion.div
-          ref={testimonialsRef}
-          variants={containerVariants}
-          initial="hidden"
-          animate={testimonialsInView ? "show" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          {testimonials.map((t) => (
-            <motion.div
-              key={t.initials}
-              variants={itemVariants}
-              className="relative rounded-2xl p-7 flex flex-col gap-6 overflow-hidden bg-white/30 dark:bg-white/4 border border-white/55 dark:border-white/10"
-              style={{
-                backdropFilter: "blur(28px) saturate(170%)",
-                WebkitBackdropFilter: "blur(28px) saturate(170%)",
-                boxShadow:
-                  "0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.2)",
-              }}
-            >
-              {/* Quote mark */}
-              <span
-                className="absolute top-4 right-6 text-6xl font-serif leading-none select-none opacity-10"
-                style={{ color: t.accent }}
-              >
-                &ldquo;
-              </span>
-
-              <p className="text-foreground/75 font-sans text-[0.95rem] leading-relaxed relative z-10">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-
-              <div className="flex items-center gap-3 mt-auto">
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold font-heading shrink-0"
-                  style={{
-                    background: `${t.accent}22`,
-                    color: t.accent,
-                    border: `1px solid ${t.accent}44`,
-                  }}
-                >
-                  {t.initials}
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-sm font-semibold font-heading text-foreground">
-                    {t.author}
-                  </span>
-                  <span className="text-xs text-foreground/50 font-sans">
-                    {t.role}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+            Built for Real-World Needs
+          </h3>
+          <p className="text-foreground/75 font-sans text-lg leading-relaxed">
+            Our systems are designed around practical operational challenges — from transportation and institutional management to alumni engagement and digital platforms. We focus on building technology that is useful, reliable and ready for real-world deployment.
+          </p>
         </motion.div>
       </div>
     </section>

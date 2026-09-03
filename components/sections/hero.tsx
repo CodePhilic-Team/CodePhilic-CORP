@@ -122,7 +122,7 @@ export function Hero() {
           variants={{ show: { transition: { staggerChildren: 0.12 } } }}
           className="space-y-8"
         >
-          {/* Badge */}
+          {/* Badge & Company Name */}
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 16 },
@@ -132,9 +132,14 @@ export function Hero() {
                 transition: { duration: 0.6, ease: "easeOut" },
               },
             }}
-            className="inline-flex items-center rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1 text-xs font-medium tracking-widest uppercase text-[#3B82F6]"
+            className="flex flex-col items-center gap-4"
           >
-            Premium Software Agency
+            <span className="text-xl sm:text-2xl font-bold font-heading tracking-wide text-foreground">
+              CodePhilic Limited
+            </span>
+            <div className="inline-flex items-center rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1 text-xs font-medium tracking-widest uppercase text-[#3B82F6]">
+              Technology Company Building SaaS & AI Products
+            </div>
           </motion.div>
 
           {/* H1 with DecryptedText — overflow:hidden prevents layout shift */}
@@ -147,8 +152,8 @@ export function Hero() {
             }}
             className="font-sf font-semibold tracking-[-0.04em] leading-[1.05] flex flex-col items-center justify-center gap-1 sm:gap-4"
           >
-            <span className="block text-6xl md:text-8xl lg:text-[7.5rem]">
-              CodePhilic
+            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground/80 tracking-tight">
+              We Architect Imagination
             </span>
             <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
               <GradientText
@@ -157,7 +162,7 @@ export function Hero() {
                 showBorder={false}
                 className="inline-block px-2 text-balance"
               >
-                We Architect Imagination
+                Building Software Products for the Next Generation
               </GradientText>
             </span>
           </motion.h1>
@@ -174,9 +179,7 @@ export function Hero() {
             }}
             className="max-w-3xl mx-auto text-base md:text-xl text-foreground/60 leading-relaxed font-sans text-balance"
           >
-            Human-authored code. Flawless execution. We build high-performance
-            web and mobile applications for visionaries who refuse to compromise
-            on quality.
+            CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.
           </motion.p>
 
           {/* CTAs */}
@@ -193,7 +196,7 @@ export function Hero() {
           >
             <AnimatedButton
               onClick={() => {
-                const element = document.getElementById("contact");
+                const element = document.getElementById("work");
                 if (element) {
                   element.scrollIntoView({
                     behavior: "smooth",
@@ -203,13 +206,13 @@ export function Hero() {
               }}
               className="group inline-flex items-center justify-center h-12 px-8 rounded-full bg-[#3B82F6] text-white text-sm font-medium transition-colors hover:bg-[#2563eb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/60"
             >
-              Start your project
+              Explore Products
               <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform" />
             </AnimatedButton>
 
             <AnimatedButton
               onClick={() => {
-                const element = document.getElementById("work");
+                const element = document.getElementById("contact");
                 if (element) {
                   element.scrollIntoView({
                     behavior: "smooth",
@@ -220,7 +223,7 @@ export function Hero() {
               className="inline-flex items-center justify-center h-12 px-8 rounded-full text-foreground text-sm font-medium backdrop-blur-md transition-colors hover:bg-foreground/10"
               style={{ border: "1px solid var(--border)" }}
             >
-              View our work
+              Work With Us
             </AnimatedButton>
           </motion.div>
         </motion.div>

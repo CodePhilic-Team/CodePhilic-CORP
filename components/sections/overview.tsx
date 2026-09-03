@@ -4,24 +4,24 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: "50+", label: "Projects Delivered", description: "Across web, mobile and cloud" },
-  { value: "30+", label: "Happy Clients", description: "From startups to enterprises" },
-  { value: "3+", label: "Years of Excellence", description: "Crafting digital products" },
-  { value: "99%", label: "Client Satisfaction", description: "We don't ship until it's right" },
+  { value: "7+", label: "Software Projects", description: "Web, mobile and cloud systems delivered" },
+  { value: "4+", label: "Organizations", description: "Organizations and institutions served" },
+  { value: "4", label: "Owned Products", description: "CodePhilic-owned and operated" },
+  { value: "2", label: "AI Products", description: "Currently under development" },
 ];
 
 const highlights = [
   {
     title: "Who We Are",
-    body: "CodePhilic is a premium software development agency built by engineers who care deeply about craft. We architect performant, scalable, and beautiful digital products for modern businesses.",
+    body: "CodePhilic Limited is a Bangladesh-registered technology company building its own software products, scalable SaaS platforms and AI solutions, while developing custom digital systems for organizations, institutions and businesses.",
   },
   {
     title: "What We Do",
-    body: "From zero-to-one MVPs to full-scale enterprise platforms — we handle end-to-end product engineering including architecture, design systems, APIs, and cloud infrastructure.",
+    body: "We build technology from idea to deployment — from zero-to-one MVPs and product development to scalable web and mobile platforms, APIs, cloud infrastructure and AI-powered systems.",
   },
   {
     title: "Why Us",
-    body: "We treat every project as our own. Transparent timelines, clean code, and a relentless focus on quality set us apart from the rest. Your product is our obsession.",
+    body: "We combine product thinking with strong engineering to build technology that is reliable, scalable and practical. We focus on clean architecture, thoughtful design, transparent development and long-term value — whether we're building our own products or solving complex problems for clients and institutions.",
   },
 ];
 

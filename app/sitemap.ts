@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { headers } from "next/headers";
 
 export const revalidate = 604800;
 
@@ -8,17 +9,16 @@ export const revalidate = 604800;
  * This file automatically generates a sitemap.xml from your pages.
  * Place this file at: app/sitemap.ts
  *
- * It will be accessible at: https://code-philic.com/sitemap.xml
- *
- * The framework automatically handles:
- * - XML formatting
- * - Last modification dates
- * - Sitemap validation
- * - Gzip compression
+ * It dynamically supports multiple domains (e.g., codephilic.com, www.codephilic.com, codephilic.com)
+ * by reading the incoming host header.
  */
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://code-philic.com";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const headersList = await headers();
+  const domain = headersList.get("host") || "www.codephilic.com";
+  const protocol = domain.includes("localhost") ? "http" : "https";
+  const baseUrl = `${protocol}://${domain}`;
+  
   const currentDate = new Date().toISOString().split("T")[0];
 
   // ========== PRIMARY PAGES ==========
@@ -351,7 +351,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
  *    - Gzip compress the response
  *
  * 3. The sitemap will be accessible at:
- *    https://code-philic.com/sitemap.xml
+ *    https://codephilic.com/sitemap.xml
  *
  * 4. To add dynamic blog posts, fetch from database:
  *    ```
@@ -373,9 +373,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
  *    ```typescript
  *    export default function sitemap(): MetadataRoute.Sitemap {
  *      return [
- *        { url: 'https://code-philic.com/sitemap_services.xml' },
- *        { url: 'https://code-philic.com/sitemap_blog.xml' },
- *        { url: 'https://code-philic.com/sitemap_portfolio.xml' },
+ *        { url: 'https://codephilic.com/sitemap_services.xml' },
+ *        { url: 'https://codephilic.com/sitemap_blog.xml' },
+ *        { url: 'https://codephilic.com/sitemap_portfolio.xml' },
  *      ];
  *    }
  *    ```

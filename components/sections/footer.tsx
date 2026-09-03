@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Twitter, Linkedin, Facebook } from "lucide-react";
 import DecryptedText from "@/components/DecryptedText";
 // import dynamic from "next/dynamic";
 
@@ -13,6 +13,8 @@ const ROW1 = [
   { name: "TYPESCRIPT",   logo: "/icons8-typescript-48.png" },
   { name: "TAILWIND CSS", logo: null },
   { name: "NODE.JS",      logo: "/node.png" },
+  { name: "FLUTTER",      logo: null },
+  { name: "ANDROID",      logo: null },
 ];
 
 const ROW2 = [
@@ -21,6 +23,7 @@ const ROW2 = [
   { name: "DJANGO",      logo: null },
   { name: "POSTGRESQL",  logo: "/icons8-postgresql-50.png" },
   { name: "MONGODB",     logo: "/icons8-mongodb-24.png" },
+  { name: "IOS",         logo: null },
 ];
 
 function MarqueeRow({ items, reverse = false }: { items: { name: string; logo: string | null }[]; reverse?: boolean }) {
@@ -78,19 +81,42 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-1 sm:col-span-2">
             <a href="/" className="flex items-center gap-2 mb-4">
-              <div
-                className="size-8 rounded-lg flex items-center justify-center font-bold text-xl leading-none text-white"
-                style={{ background: "#3B82F6", filter: "drop-shadow(0 0 8px rgba(59,130,246,0.5))" }}
-              >
-                C
-              </div>
+              <Image
+                src="/CodePhilic.jpg"
+                alt="CodePhilic Logo"
+                width={32}
+                height={32}
+                className="rounded-lg shadow-sm object-cover"
+              />
               <span className="font-heading font-semibold text-xl tracking-tight text-slate-900 dark:text-white">
-                CodePhilic
+                CodePhilic Limited
               </span>
             </a>
-            <p className="text-slate-500 dark:text-[#94A3B8] max-w-xs text-sm leading-relaxed">
-              A premium software development agency architecting digital excellence.
+            <p className="text-slate-500 dark:text-[#94A3B8] max-w-xs text-sm leading-relaxed mb-4">
+              CodePhilic is a Bangladesh-based technology company building scalable SaaS and AI products while developing custom digital systems for organizations, institutions and businesses.
             </p>
+            <div className="flex flex-col gap-3">
+              <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                Contact: <a href="mailto:contact@codephilic.com" className="text-[#3B82F6] hover:underline">contact@codephilic.com</a>
+              </p>
+              <div className="text-sm text-slate-500 dark:text-[#94A3B8] flex flex-col gap-2 mt-1">
+                <span className="font-medium text-slate-700 dark:text-slate-300">Phone:</span>
+                <div className="flex flex-col lg:flex-row lg:flex-wrap gap-1.5 lg:gap-4">
+                  <a href="tel:01812049163" className="hover:text-[#3B82F6] transition-colors whitespace-nowrap">
+                    01812049163 (Rakibul)
+                  </a>
+                  <a href="tel:0172889798" className="hover:text-[#3B82F6] transition-colors whitespace-nowrap">
+                    0172889798 (Habib)
+                  </a>
+                  <a href="tel:01765848893" className="hover:text-[#3B82F6] transition-colors whitespace-nowrap">
+                    01765848893 (Dhruba)
+                  </a>
+                  <a href="tel:01777990263" className="hover:text-[#3B82F6] transition-colors whitespace-nowrap">
+                    01777990263 (Shuvo)
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -110,19 +136,15 @@ export function Footer() {
               Social
             </h4>
             <ul className="space-y-3 text-sm text-slate-500 dark:text-[#94A3B8]">
+
               <li>
-                <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors inline-flex items-center gap-1">
-                  Twitter <ArrowUpRight className="size-3" />
+                <a href="https://www.linkedin.com/company/codephilic-limited/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors inline-flex items-center gap-1.5">
+                  <Linkedin className="size-3.5" /> LinkedIn <ArrowUpRight className="size-3 opacity-50" />
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors inline-flex items-center gap-1">
-                  LinkedIn <ArrowUpRight className="size-3" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors inline-flex items-center gap-1">
-                  GitHub <ArrowUpRight className="size-3" />
+                <a href="https://www.facebook.com/share/1UyoDxc6iB/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors inline-flex items-center gap-1.5">
+                  <Facebook className="size-3.5" /> Facebook <ArrowUpRight className="size-3 opacity-50" />
                 </a>
               </li>
             </ul>
@@ -132,7 +154,7 @@ export function Footer() {
         <div
           className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 dark:text-[#94A3B8]/50 border-t border-slate-200 dark:border-white/[0.08]"
         >
-          <p>© {new Date().getFullYear()} CodePhilic Corp. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} CodePhilic Limited. All rights reserved.</p>
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <a href="#" className="hover:text-slate-600 dark:hover:text-[#94A3B8] transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-600 dark:hover:text-[#94A3B8] transition-colors">Terms of Service</a>
