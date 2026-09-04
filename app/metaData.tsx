@@ -13,7 +13,6 @@ export const metadata: Metadata = {
     canonical: "https://codephilic.com",
     languages: {
       "en-US": "https://codephilic.com",
-      "en-GB": "https://code-philic.com",
       en: "https://codephilic.com",
     },
   },
@@ -21,10 +20,11 @@ export const metadata: Metadata = {
   description:
     "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
 
-  // Keywords for SEO - Focused primary and secondary keywords
+  // Keywords for SEO - Authentic core offerings and technology capabilities
   keywords: [
     // Primary Keywords (Core Offerings)
     "custom software development agency",
+    "Bangladesh software company",
     "web application development",
     "enterprise mobile apps",
     "AI integration services",
@@ -37,7 +37,8 @@ export const metadata: Metadata = {
     "Python and Java AI software engineering",
     "cloud application digital transformation",
     "hire expert software architecture team",
-    "YC-experienced software developers",
+    "custom SaaS development Bangladesh",
+    "IoT and GPS tracking system development",
 
     // Supporting Keywords
     "software development",
@@ -46,37 +47,37 @@ export const metadata: Metadata = {
     "mobile app development",
     "fullstack development",
     "React development",
-    "React JS",
     "Next.js development",
     "Node.js backend",
     "Python development",
     "AI software",
     "CodePhilic",
-    "software engineering",
+    "CodePhilic Limited",
+    "software engineering Tangail Dhaka Bangladesh",
     "enterprise software",
     "digital transformation",
-    "web applications",
     "system architecture",
     "scalable applications",
     "secure software solutions",
     "software development services",
   ],
 
-  // Open Graph metadata for social sharing
+  // Open Graph metadata for social sharing & search engines
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://codephilic.com",
-    siteName: "CodePhilic",
+    siteName: "CodePhilic Limited",
     title: "CodePhilic | We Architect Imagination",
     description:
       "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
     images: [
       {
-        url: "https://www.codephilic.com/CodePhilic.jpg",
+        url: "https://codephilic.com/og-image.jpg",
+        secureUrl: "https://codephilic.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "CodePhilic - Custom Software & AI Development Agency",
+        alt: "CodePhilic Limited - Custom Software & AI Development Company",
         type: "image/jpeg",
       },
     ],
@@ -88,15 +89,32 @@ export const metadata: Metadata = {
     title: "CodePhilic | We Architect Imagination",
     description:
       "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
-    images: ["https://www.codephilic.com/CodePhilic.jpg"],
+    images: [
+      {
+        url: "https://codephilic.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "CodePhilic Limited - We Architect Imagination",
+      },
+    ],
     creator: "@codephilic",
     site: "@codephilic",
   },
 
+  // Verification & Other Metadata
+  verification: {
+    other: {
+      "msvalidate.01": "A121669086E98BFFA9212E3622A5DC5D",
+    },
+  },
+  other: {
+    copyright: "© 2026 CodePhilic Limited. All rights reserved.",
+  },
+
   // Additional SEO metadata
-  authors: [{ name: "Rakibul Islam", url: "https://codephilic.com" }],
-  creator: "CodePhilic",
-  publisher: "CodePhilic",
+  authors: [{ name: "CodePhilic Limited", url: "https://codephilic.com" }],
+  creator: "CodePhilic Limited",
+  publisher: "CodePhilic Limited",
   robots: {
     index: true,
     follow: true,
@@ -108,12 +126,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-video-preview": -1,
     },
-  },
-
-  // Verification codes
-  verification: {
-    google: "your-google-site-verification-code",
-    yandex: "your-yandex-verification-code",
   },
 
   // Application metadata
@@ -132,8 +144,21 @@ export const metadata: Metadata = {
 
   // Icons
   icons: {
-    icon: { url: "/CodePhilic.jpg", type: "image/jpeg" },
+    icon: { url: "/favicon.ico?v=2", sizes: "32x32", type: "image/x-icon" },
+    apple: "/apple-touch-icon.png?v=2",
     other: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/favicon-32x32.png?v=2",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        url: "/favicon-16x16.png?v=2",
+      },
       {
         rel: "mask-icon",
         url: "/CodePhilic.jpg",
@@ -143,27 +168,50 @@ export const metadata: Metadata = {
   },
 };
 
-// Structured Data for Organization - Enhanced with Founder Information
+// Structured Data for Organization (Entity Representation)
 export const organizationStructuredData = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "CodePhilic",
+  "@type": ["Organization", "ProfessionalService"],
+  "@id": "https://codephilic.com/#organization",
+  name: "CodePhilic Limited",
+  alternateName: ["CodePhilic", "CodePhilic Ltd"],
   url: "https://codephilic.com",
   logo: "https://codephilic.com/CodePhilic.jpg",
-  image: "https://codephilic.com/og-image.jpg",
+  image: "https://codephilic.com/CodePhilic.jpg",
   description:
-    "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
+    "CodePhilic Limited is a Bangladesh-based technology company building scalable SaaS and AI products while developing custom digital systems for organizations, institutions and businesses.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Santosh",
+    addressLocality: "Tangail",
+    addressRegion: "Dhaka Division",
+    postalCode: "1902",
+    addressCountry: "BD",
+  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      telephone: "+8801812049163",
+      email: "contact@codephilic.com",
+      areaServed: ["BD", "US", "GB", "Worldwide"],
+      availableLanguage: ["English", "Bengali"],
+    },
+  ],
   knowsAbout: [
-    "Software Development",
-    "Web Applications",
-    "Mobile Apps",
-    "AI Integration",
-    "Full-Stack Development",
-    "React JS",
+    "Custom Software Development",
+    "SaaS Platform Engineering",
+    "Artificial Intelligence Solutions",
+    "Web Application Development",
+    "Mobile Application Development",
+    "IoT & GPS Tracking Systems",
     "Next.js",
+    "React",
+    "TypeScript",
     "Node.js",
     "Python",
     "System Architecture",
+    "Cloud Infrastructure",
   ],
   founder: [
     {
@@ -171,7 +219,7 @@ export const organizationStructuredData = {
       name: "Md. Rakibul Islam",
       jobTitle: "Leading Founder & CEO · Managing Director · Director",
       description:
-        "Primary responsibilities include:\n• Company leadership\n• Technology and product direction\n• Engineering\n• Business strategy\n• Overall operations",
+        "Leading Founder, Chief Executive Officer (CEO), Managing Director & Director at CodePhilic Limited. Also oversees technology architecture as CTO and corporate strategy as CSO.",
       sameAs: [
         "https://www.linkedin.com/in/rakibul-islam-8372852bb/",
         "https://github.com/rakibtkg",
@@ -179,10 +227,11 @@ export const organizationStructuredData = {
     },
     {
       "@type": "Person",
-      name: "Dhruba",
+      name: "Druba Paul",
+      alternateName: "Dhruba Paul",
       jobTitle: "Co-Founder & CMO · Director",
       description:
-        "Primary responsibilities include:\n• Marketing\n• Brand strategy\n• Growth\n• Business development\n• Product and company operations",
+        "Co-Founder, Chief Marketing Officer (CMO) & Director at CodePhilic Limited. Drives marketing, brand operations, product roadmap (CPO), and revenue strategy (CRO).",
       sameAs: [
         "https://www.linkedin.com/in/dhruba-paul-69342b363/",
         "https://github.com/DHRUBA-NIRO",
@@ -190,10 +239,10 @@ export const organizationStructuredData = {
     },
     {
       "@type": "Person",
-      name: "Shuvo",
+      name: "Iftekhar Alam Shuvo",
       jobTitle: "Co-Founder & CFO · Director",
       description:
-        "Primary responsibilities include:\n• Finance\n• Financial planning\n• Business operations\n• Administration\n• Product development",
+        "Co-Founder, Chief Financial Officer (CFO) & Director at CodePhilic Limited. Oversees financial planning, corporate compliance, and advisory corporate strategy (CSO).",
       sameAs: [
         "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/",
         "https://github.com/SHUVOika",
@@ -201,10 +250,10 @@ export const organizationStructuredData = {
     },
     {
       "@type": "Person",
-      name: "Habib",
+      name: "Md. Habibur Rahman",
       jobTitle: "Co-Founder & COO · Director",
       description:
-        "Primary responsibilities include:\n• Operations\n• Project coordination\n• Process management\n• Delivery\n• Product development",
+        "Co-Founder, Chief Operating Officer (COO) & Director at CodePhilic Limited. Directs company operations, business development, client partnerships (CBO), and technical advisory (Advisory CTO).",
       sameAs: [
         "https://www.linkedin.com/in/habib007/",
         "https://github.com/himaloy007",
@@ -212,570 +261,444 @@ export const organizationStructuredData = {
     },
   ],
   sameAs: [
-    "https://code-philic.com",
     "https://www.linkedin.com/company/codephilic-limited/",
     "https://www.facebook.com/share/1UyoDxc6iB/",
     "https://github.com/codephilic",
   ],
 };
 
-// Structured Data for Services
+// Structured Data for WebSite
+export const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://codephilic.com/#website",
+  url: "https://codephilic.com",
+  name: "CodePhilic Limited",
+  alternateName: "CodePhilic",
+  description:
+    "Official website of CodePhilic Limited - Bangladesh-based software development company specializing in SaaS, AI, and custom digital systems.",
+  publisher: {
+    "@id": "https://codephilic.com/#organization",
+  },
+  inLanguage: "en-US",
+};
+
+// Structured Data for Services (Valid Schema.org OfferCatalog)
 export const servicesStructuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "CodePhilic",
-  url: "https://codephilic.com",
-  hasOfferingDescription: [
-    {
-      "@type": "OfferingDescription",
-      name: "Web Development",
-      description:
-        "Modern web applications using Next.js, React, JavaScript, TypeScript, and Node.js backend",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "Mobile Development",
-      description:
-        "Native and cross-platform mobile apps using Flutter, React Native, iOS, and Android",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "Full-Stack Solutions",
-      description:
-        "Complete end-to-end development from frontend UI/UX design to backend, databases, and cloud deployment",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "AI & Machine Learning",
-      description:
-        "AI-powered software solutions, ChatGPT integration, LLM APIs, natural language processing, and generative AI",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "SaaS Development",
-      description:
-        "Scalable Software-as-a-Service platforms with microservices architecture and cloud infrastructure",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "Enterprise Software",
-      description:
-        "Custom enterprise solutions, system design, software architecture, and digital transformation",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "DevOps & Cloud Solutions",
-      description:
-        "Docker, Kubernetes, AWS, Azure, Google Cloud, CI/CD pipelines, and cloud infrastructure management",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "Backend Development",
-      description:
-        "Node.js, Python, Java, C#, C++, PHP backend systems, API development, REST, GraphQL, and database design",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "Progressive Web Apps",
-      description:
-        "PWA development, single-page applications (SPA), server-side rendering, and static site generation",
-    },
-    {
-      "@type": "OfferingDescription",
-      name: "Tech Consulting",
-      description:
-        "Software consulting, architecture design, Agile methodology, best practices, and technology strategy",
-    },
-  ],
+  "@id": "https://codephilic.com/#services",
+  name: "CodePhilic Limited Services",
+  url: "https://codephilic.com/#services",
+  provider: {
+    "@id": "https://codephilic.com/#organization",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Software Engineering & Digital Solutions",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Web Architecture & Generic Products",
+          description:
+            "High-performance web applications built with modern frameworks. Scalable, accessible, and ultra-fast digital experiences using Next.js, React, and TypeScript.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Mobile Ecosystems",
+          description:
+            "Native-feeling iOS and Android applications with engaging transitions, offline-first capabilities, and responsive form factors using Flutter.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "IoT Solutions",
+          description:
+            "End-to-end IoT platforms, device integration, and real-time data analytics for smart environments and connected devices.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "GPS Tracking Systems",
+          description:
+            "Custom GPS tracker solutions for fleet management, asset tracking, and personal safety with live location tracking and route analytics.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI-Based Web & App Solutions",
+          description:
+            "AI-powered websites and mobile apps featuring chatbots, recommendation engines, LLM integrations, and intelligent automation.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "SaaS & LMS Platforms",
+          description:
+            "Custom SaaS products and Learning Management Systems (LMS) for education, business, and productivity—scalable, secure, and feature-rich.",
+        },
+      },
+    ],
+  },
 };
 
-// Structured Data for Projects
+// Structured Data for Visible Products & Software Applications
 export const projectsStructuredData = [
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "MBSTU WHEELs Mobile APP",
+    name: "TourizBook",
     description:
-      "Official MBSTU Wheels mobile app for real-time GPS tracking of university transport with live location and route history",
-    applicationCategory: "MobileApplication",
-    operatingSystem: ["Android", "iOS"],
-    url: "https://play.google.com/store/search?q=mbstu+wheels&c=apps",
+      "A tourism-focused digital platform developed and owned by CodePhilic, designed to provide a modern experience for discovering destinations, attractions and travel-related services.",
+    applicationCategory: "TravelApplication",
+    operatingSystem: "Web",
+    url: "https://tourizbook.com/",
     creator: {
-      "@type": "Organization",
-      name: "CodePhilic",
+      "@id": "https://codephilic.com/#organization",
     },
   },
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "MBSTU WHEELS WEB APP",
+    name: "Shahid Osman Hadi Hall Automation System (SOHH)",
     description:
-      "Web dashboard for MBSTU Wheels with live bus tracking, route analytics, and admin controls",
+      "A comprehensive hall management and dining automation system developed by CodePhilic for Shahid Osman Hadi Hall at Mawlana Bhashani Science and Technology University (MBSTU).",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: "https://sohh.mbstu.ac.bd/",
+    creator: {
+      "@id": "https://codephilic.com/#organization",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "MBSTU Wheels Mobile App",
+    description:
+      "Official MBSTU Wheels mobile app for real-time GPS tracking of university transport with live location and route history.",
+    applicationCategory: "MobileApplication",
+    operatingSystem: ["Android", "iOS"],
+    url: "https://play.google.com/store/search?q=mbstu+wheels&c=apps&hl=bn",
+    creator: {
+      "@id": "https://codephilic.com/#organization",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "MBSTU Wheels Web Platform",
+    description:
+      "Web-based transportation platform supporting live vehicle tracking, routes, and transportation operations for MBSTU.",
     applicationCategory: "WebApplication",
-    url: "https://transport.mbstu.ac.bd/MBSTU-Wheels",
+    operatingSystem: "Web",
+    url: "https://transport.mbstu.ac.bd/MBSTU-Wheels/SignIn",
     creator: {
-      "@type": "Organization",
-      name: "CodePhilic",
+      "@id": "https://codephilic.com/#organization",
     },
   },
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "MBSTU Transport Website",
+    "@type": "WebApplication",
+    name: "CPSAA Alumni Platform",
     description:
-      "Official website for MBSTU transport with schedules, routes, and transport news",
-    url: "https://transport.mbstu.ac.bd/",
+      "Digital alumni platform for the Department of Computer Science and Engineering at MBSTU, supporting alumni information, communication and community engagement.",
+    applicationCategory: "SocialNetworkingApplication",
+    operatingSystem: "Web",
+    url: "https://www.cpsaa.org/",
     creator: {
-      "@type": "Organization",
-      name: "CodePhilic",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "CPS DEPT ALUMNI WEBSITE",
-    description:
-      "Alumni portal for the Department of CPS with member directory, events, and news",
-    url: "https://cpsaa.org/",
-    creator: {
-      "@type": "Organization",
-      name: "CodePhilic",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "TourizBook Tourism Website",
-    description:
-      "Comprehensive tourism website promoting local attractions and travel experiences",
-    url: "https://tourphilia.codephilic.com/",
-    creator: {
-      "@type": "Organization",
-      name: "CodePhilic",
+      "@id": "https://codephilic.com/#organization",
     },
   },
 ];
 
-// Structured Data for BreadcrumbList
-export const breadcrumbStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "https://codephilic.com",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Services",
-      item: "https://codephilic.com#services",
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: "Projects",
-      item: "https://codephilic.com#work",
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      name: "Team",
-      item: "https://codephilic.com#team",
-    },
-    {
-      "@type": "ListItem",
-      position: 5,
-      name: "Contact",
-      item: "https://codephilic.com#contact",
-    },
-  ],
-};
-
-// Team Members Data
-export const teamMembers = [
+// Structured Data for Individual Team Members & Leadership
+export const individualTeamStructuredData = [
   {
-    name: "Md. Rakibul Islam",
-    role: "Leading Founder & CEO · Managing Director · Director",
-    bio: "Primary responsibilities include:\n• Company leadership\n• Technology and product direction\n• Engineering\n• Business strategy\n• Overall operations",
-    image: "https://codephilic.com/team/rakibx.jpg",
-    linkedin: "https://www.linkedin.com/in/rakibul-islam-8372852bb/",
-    github: "https://github.com/rakibtkg",
-    email: "rakibul@codephilic.com",
-    phone: "+8801812049163",
-  },
-  {
-    name: "Dhruba",
-    role: "Co-Founder & CMO · Director",
-    bio: "Primary responsibilities include:\n• Marketing\n• Brand strategy\n• Growth\n• Business development\n• Product and company operations",
-    image: "https://codephilic.com/team/dhrubax.jpg",
-    linkedin: "https://www.linkedin.com/in/dhruba-paul-69342b363/",
-    github: "https://github.com/DHRUBA-NIRO",
-    email: "dhruba@codephilic.com",
-    phone: "+8801765848893",
-  },
-  {
-    name: "Shuvo",
-    role: "Co-Founder & CFO · Director",
-    bio: "Primary responsibilities include:\n• Finance\n• Financial planning\n• Business operations\n• Administration\n• Product development",
-    image: "https://codephilic.com/team/shuvox.jpg",
-    linkedin: "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/",
-    github: "https://github.com/SHUVOika",
-    email: "shuvo@codephilic.com",
-    phone: "+8801777990263",
-  },
-  {
-    name: "Habib",
-    role: "Co-Founder & COO · Director",
-    bio: "Primary responsibilities include:\n• Operations\n• Project coordination\n• Process management\n• Delivery\n• Product development",
-    image: "https://codephilic.com/team/himaloyx.jpg",
-    linkedin: "https://www.linkedin.com/in/habib007/",
-    github: "https://github.com/himaloy007",
-    email: "habib@codephilic.com",
-    phone: "+880172889798",
-  },
-];
-
-// Structured Data for Team Members
-export const teamStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "CodePhilic",
-  url: "https://codephilic.com",
-  logo: "https://codephilic.com/CodePhilic.jpg",
-  description: "Premium software development agency",
-  founders: teamMembers.map((member) => ({
+    "@context": "https://schema.org",
     "@type": "Person",
-    name: member.name,
-    jobTitle: member.role,
-    description: member.bio,
-    image: member.image,
-    sameAs: [member.linkedin, member.github].filter(Boolean),
-    email: member.email,
-    telephone: member.phone,
-  })),
-};
-
-// Structured Data for Individual Team Members
-export const individualTeamStructuredData = teamMembers.map((member) => ({
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: member.name,
-  jobTitle: member.role,
-  description: member.bio,
-  image: member.image,
-  url: "https://codephilic.com#team",
-  affiliation: {
-    "@type": "Organization",
-    name: "CodePhilic",
-    url: "https://codephilic.com",
+    name: "Md. Rakibul Islam",
+    jobTitle: "Leading Founder & CEO · Managing Director · Director",
+    description:
+      "Leading Founder, Chief Executive Officer (CEO), Managing Director & Director at CodePhilic Limited. Also oversees technology architecture as CTO and corporate strategy as CSO.",
+    image: "https://codephilic.com/team/rakibx.jpg",
+    url: "https://codephilic.com/#team",
+    worksFor: {
+      "@id": "https://codephilic.com/#organization",
+    },
+    sameAs: [
+      "https://www.linkedin.com/in/rakibul-islam-8372852bb/",
+      "https://github.com/rakibtkg",
+    ],
+    knowsAbout: [
+      "Software Engineering",
+      "System Architecture",
+      "Executive Leadership",
+      "Product Direction",
+      "Full-Stack Web Development",
+      "Cloud & AI Systems",
+      "Corporate Strategy",
+    ],
   },
-  sameAs: [member.linkedin, member.github].filter(Boolean),
-  email: member.email,
-  telephone: member.phone,
-  knowsAbout: [
-    "Software Development",
-    "Web Development",
-    "Mobile Development",
-    "Full-Stack Engineering",
-    "System Architecture",
-    "UI/UX Design",
-  ],
-}));
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Druba Paul",
+    alternateName: "Dhruba Paul",
+    jobTitle: "Co-Founder & CMO · Director",
+    description:
+      "Co-Founder, Chief Marketing Officer (CMO) & Director at CodePhilic Limited. Drives marketing, brand operations, product roadmap (CPO), and revenue strategy (CRO).",
+    image: "https://codephilic.com/team/dhrubax.jpg",
+    url: "https://codephilic.com/#team",
+    worksFor: {
+      "@id": "https://codephilic.com/#organization",
+    },
+    sameAs: [
+      "https://www.linkedin.com/in/dhruba-paul-69342b363/",
+      "https://github.com/DHRUBA-NIRO",
+    ],
+    knowsAbout: [
+      "Marketing Strategy",
+      "Revenue Growth",
+      "Brand Operations",
+      "Product Management",
+      "Business Development",
+      "Market Expansion",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Iftekhar Alam Shuvo",
+    jobTitle: "Co-Founder & CFO · Director",
+    description:
+      "Co-Founder, Chief Financial Officer (CFO) & Director at CodePhilic Limited. Oversees financial planning, corporate compliance, and advisory corporate strategy (CSO).",
+    image: "https://codephilic.com/team/shuvox.jpg",
+    url: "https://codephilic.com/#team",
+    worksFor: {
+      "@id": "https://codephilic.com/#organization",
+    },
+    sameAs: [
+      "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/",
+      "https://github.com/SHUVOika",
+    ],
+    knowsAbout: [
+      "Financial Management & Planning",
+      "Corporate Compliance",
+      "Strategic Growth",
+      "Business Administration",
+      "Resource Allocation",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Md. Habibur Rahman",
+    jobTitle: "Co-Founder & COO · Director",
+    description:
+      "Co-Founder, Chief Operating Officer (COO) & Director at CodePhilic Limited. Directs company operations, business development, client partnerships (CBO), and technical advisory (Advisory CTO).",
+    image: "https://codephilic.com/team/himaloyx.jpg",
+    url: "https://codephilic.com/#team",
+    worksFor: {
+      "@id": "https://codephilic.com/#organization",
+    },
+    sameAs: [
+      "https://www.linkedin.com/in/habib007/",
+      "https://github.com/himaloy007",
+    ],
+    knowsAbout: [
+      "Operations Management",
+      "Business Development & Partnerships",
+      "Software Delivery & Coordination",
+      "Technical Advisory",
+      "Full-Stack Engineering",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Dr. Md. Sazzad Hossain",
+    jobTitle: "Advisor",
+    description:
+      "Professor, Department of Computer Science and Engineering (CSE), Mawlana Bhashani Science and Technology University (MBSTU). Advising CodePhilic on advanced technology, strategic development, and academic-industry alignment.",
+    image: "https://codephilic.com/team/sazzad_1778071366_2186ca1d.jpeg",
+    url: "https://codephilic.com/#team",
+    affiliation: {
+      "@type": "EducationalOrganization",
+      name: "Mawlana Bhashani Science and Technology University (MBSTU)",
+      url: "https://cse.mbstu.ac.bd/",
+    },
+    sameAs: [
+      "https://cse.mbstu.ac.bd/teacher/dr-md-sazzad-hossain",
+    ],
+    knowsAbout: [
+      "Computer Science and Engineering",
+      "Technology Strategy",
+      "Academic-Industry Collaboration",
+    ],
+  },
+];
 
-// FAQPage Structured Data for AI Assistants
+// FAQPage Structured Data for AI Assistants and Search Engines
 export const faqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
     {
       "@type": "Question",
-      name: "What services does CodePhilic offer?",
+      name: "What is CodePhilic Limited?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "CodePhilic offers comprehensive software development services including web development, mobile app development, full-stack solutions, SaaS development, and digital transformation consulting. We specialize in Next.js, React, Flutter, and custom enterprise solutions.",
+        text: "CodePhilic Limited is a Bangladesh-registered technology company building its own software products, scalable SaaS platforms and AI solutions, while developing custom digital systems for organizations, institutions and businesses.",
       },
     },
     {
       "@type": "Question",
-      name: "What is CodePhilic's expertise?",
+      name: "Who are the founders and executive leaders of CodePhilic Limited?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "CodePhilic specializes in building scalable, secure, and innovative software solutions. Our team has expertise in full-stack development, cloud architecture, UI/UX design, and enterprise software systems.",
+        text: "CodePhilic Limited is led by its board of directors and founders: Md. Rakibul Islam (Leading Founder & CEO, Managing Director, Director), Druba Paul (Co-Founder & CMO, Director), Iftekhar Alam Shuvo (Co-Founder & CFO, Director), and Md. Habibur Rahman (Co-Founder & COO, Director). The company is advised by Dr. Md. Sazzad Hossain, Professor of Computer Science and Engineering at Mawlana Bhashani Science and Technology University (MBSTU).",
       },
     },
     {
       "@type": "Question",
-      name: "How can I contact CodePhilic?",
+      name: "What services does CodePhilic provide?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can reach CodePhilic via email at contact@codephilic.com, by phone at +8801812049163, +880172889798, +8801765848893, +8801777990263, or through our contact page on our website at https://codephilic.com#contact",
+        text: "CodePhilic provides Web Architecture & Generic Products, Mobile Ecosystems (iOS & Android via Flutter), IoT Solutions, GPS Tracking Systems, AI-Based Web & App Solutions, and SaaS & LMS Platforms.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Where is CodePhilic located and operating?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "CodePhilic Limited is headquartered in Santosh, Tangail, Bangladesh, serving institutional, corporate, and global startup clients across Bangladesh, the US, the UK, and internationally.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What products and software platforms has CodePhilic built?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "CodePhilic's portfolio includes TourizBook (a tourism platform owned by CodePhilic), SOHH (Shahid Osman Hadi Hall automation system deployed at MBSTU), MBSTU Wheels Mobile and Web platforms for real-time university transit tracking, and the CPSAA Alumni Platform.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How can I contact CodePhilic Limited?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can reach CodePhilic via email at contact@codephilic.com, support@codephilic.com, or founders@codephilic.com. You can also contact the leadership team directly through the official website at https://codephilic.com/#contact.",
       },
     },
   ],
 };
 
-// WebApplication Schema for AI Understanding
-export const webApplicationStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "CodePhilic Portfolio",
-  url: "https://codephilic.com",
-  applicationCategory: "WebApplication",
-  description:
-    "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
-  creator: {
-    "@type": "Organization",
-    name: "CodePhilic",
-    url: "https://codephilic.com",
-  },
-  offers: [
-    {
-      "@type": "Offer",
-      name: "Web Development Services",
-      description: "Custom web applications using modern technologies",
-      url: "https://codephilic.com#services",
-    },
-    {
-      "@type": "Offer",
-      name: "Mobile Development Services",
-      description: "Native and cross-platform mobile applications",
-      url: "https://codephilic.com#services",
-    },
-    {
-      "@type": "Offer",
-      name: "Full-Stack Development",
-      description: "End-to-end application development services",
-      url: "https://codephilic.com#services",
-    },
-  ],
-};
-
-// AI-Ready Company Information Export
+// Clean Company Info Export
 export const companyInfo = {
-  name: "CodePhilic",
+  name: "CodePhilic Limited",
   tagline: "We Architect Imagination",
   description:
     "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
   website: "https://codephilic.com",
   logo: "https://codephilic.com/CodePhilic.jpg",
   email: "contact@codephilic.com",
-  phone: [
-    "+8801812049163",
-    "+880172889798",
-    "+8801765848893",
-    "+8801777990263"
-  ],
+  supportEmail: "support@codephilic.com",
+  foundersEmail: "founders@codephilic.com",
   location: {
     street: "Santosh",
     city: "Tangail",
-    region: "Tangail",
+    region: "Dhaka Division",
     country: "Bangladesh",
     countryCode: "BD",
+    postalCode: "1902",
   },
   founders: [
     "Md. Rakibul Islam",
-    "Dhruba",
-    "Shuvo",
-    "Habib"
+    "Druba Paul",
+    "Iftekhar Alam Shuvo",
+    "Md. Habibur Rahman",
   ],
-  established: 2026,
-  industry: "Custom Software Development, AI Solutions & IT Consulting",
+  leadership: [
+    {
+      name: "Md. Rakibul Islam",
+      role: "Leading Founder & CEO · Managing Director · Director",
+      executiveRoles: [
+        "Leading Founder & CEO (Chief Executive Officer)",
+        "Managing Director & Director",
+        "CTO (Chief Technology Officer)",
+        "CSO (Chief Strategy Officer)",
+      ],
+    },
+    {
+      name: "Druba Paul",
+      role: "Co-Founder & CMO · Director",
+      executiveRoles: [
+        "Co-Founder & CMO (Chief Marketing Officer)",
+        "Director",
+        "CRO (Chief Revenue Officer)",
+        "CPO (Chief Product Officer)",
+      ],
+    },
+    {
+      name: "Iftekhar Alam Shuvo",
+      role: "Co-Founder & CFO · Director",
+      executiveRoles: [
+        "Co-Founder & CFO (Chief Financial Officer)",
+        "Director",
+        "Compliance & Finance Lead",
+        "Advisory CSO (Strategy and Growth Lead)",
+      ],
+    },
+    {
+      name: "Md. Habibur Rahman",
+      role: "Co-Founder & COO · Director",
+      executiveRoles: [
+        "Co-Founder & COO (Chief Operating Officer)",
+        "Director",
+        "CBO (Chief Business Officer)",
+        "Advisory CTO",
+      ],
+    },
+  ],
+  advisor: "Dr. Md. Sazzad Hossain",
+  industry: "Custom Software Development, SaaS Platforms & AI Solutions",
   specialties: [
-    "Web Development",
-    "Mobile App Development",
-    "Full-Stack Solutions",
-    "SaaS Development",
-    "Digital Transformation",
-    "Cloud Solutions",
-    "UI/UX Design",
-    "AI Integration",
-    "ChatGPT Integration",
+    "Web Architecture & Generic Products",
+    "Mobile Ecosystems",
+    "IoT Solutions",
+    "GPS Tracking Systems",
+    "AI-Based Web & App Solutions",
+    "SaaS & LMS Platforms",
   ],
   technologies: [
     "Next.js",
     "React",
-    "Flutter",
-    "Node.js",
     "TypeScript",
+    "Node.js",
     "Express",
+    "Flutter",
+    "Python",
     "PostgreSQL",
     "MongoDB",
-    "AWS",
-    "Azure",
-    "OpenAI API",
-    "ChatGPT",
-    "Claude",
-    "Gemini",
     "Docker",
-    "Kubernetes",
   ],
   socialLinks: {
     linkedin: "https://www.linkedin.com/company/codephilic-limited/",
-    twitter: "https://twitter.com/codephilic",
     facebook: "https://www.facebook.com/share/1UyoDxc6iB/",
     github: "https://github.com/codephilic",
-    youtube: "https://www.youtube.com/codephilic",
   },
-  servicesAreas: ["Bangladesh", "USA", "UK", "Global"],
-  aiAssistantSupport: [
-    "ChatGPT",
-    "GPT-4",
-    "Claude",
-    "Gemini",
-    "Google Bard",
-    "Microsoft Copilot",
-    "Perplexity AI",
-    "Apple Siri",
-    "OpenAI Assistant",
-    "Meta Llama",
-  ],
 };
-
-// Complete HTML Head Code Block (as reference)
-export const completeHeadHTML = `<!-- Primary Meta Tags -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<meta name="description" content="CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.">
-<meta name="keywords" content="software development, web development, mobile development, Next.js, React, Flutter, full-stack development, digital transformation, SaaS development">
-<meta name="author" content="Rakibul Islam, CodePhilic">
-<meta name="creator" content="CodePhilic">
-<meta name="publisher" content="CodePhilic">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="google-site-verification" content="your-google-site-verification-code">
-<meta name="revisit-after" content="7 days">
-<meta name="copyright" content="© 2024 CodePhilic. All rights reserved.">
-<meta name="theme-color" content="#000000">
-<meta name="color-scheme" content="dark light">
-
-<!-- Canonical URL -->
-<link rel="canonical" href="https://codephilic.com">
-
-<!-- Open Graph Tags (Facebook, LinkedIn, etc.) -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://codephilic.com">
-<meta property="og:title" content="CodePhilic | We Architect Imagination">
-<meta property="og:description" content="CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.">
-<meta property="og:image" content="https://codephilic.com/assets/images/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:site_name" content="CodePhilic">
-<meta property="og:locale" content="en_US">
-
-<!-- Twitter Card Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://codephilic.com">
-<meta name="twitter:title" content="CodePhilic | We Architect Imagination">
-<meta name="twitter:description" content="CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.">
-<meta name="twitter:image" content="https://codephilic.com/assets/images/twitter-image.jpg">
-<meta name="twitter:creator" content="@codephilic">
-<meta name="twitter:site" content="@codephilic">
-
-<!-- Preconnect -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<!-- JSON-LD Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "CodePhilic",
-  "url": "https://codephilic.com",
-  "logo": "https://codephilic.com/CodePhilic.jpg",
-  "description": "CodePhilic builds scalable SaaS and AI products while helping organizations transform their operations through custom digital systems.",
-  "foundingDate": "2023",
-  "founder": [
-    {
-      "@type": "Person",
-      "name": "Md. Rakibul Islam",
-      "jobTitle": "Leading Founder & CEO · Managing Director · Director"
-    },
-    {
-      "@type": "Person",
-      "name": "Dhruba",
-      "jobTitle": "Co-Founder & CMO · Director"
-    },
-    {
-      "@type": "Person",
-      "name": "Shuvo",
-      "jobTitle": "Co-Founder & CFO · Director"
-    },
-    {
-      "@type": "Person",
-      "name": "Habib",
-      "jobTitle": "Co-Founder & COO · Director"
-    }
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Santosh",
-    "addressLocality": "Tangail",
-    "addressRegion": "Tangail",
-    "postalCode": "",
-    "addressCountry": "BD"
-  },
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "contactType": "Business Development",
-      "telephone": [
-        "+8801812049163",
-        "+880172889798",
-        "+8801765848893",
-        "+8801777990263"
-      ],
-      "email": "contact@codephilic.com",
-      "areaServed": "World",
-      "availableLanguage": ["en", "bn"]
-    }
-  ],
-  "sameAs": [
-    "https://code-philic.com",
-    "https://www.linkedin.com/company/codephilic-limited/",
-    "https://twitter.com/codephilic",
-    "https://www.facebook.com/share/1UyoDxc6iB/",
-    "https://github.com/codephilic"
-  ]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What services does CodePhilic offer?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CodePhilic offers comprehensive software development services including web development, mobile app development, full-stack solutions, SaaS development, and digital transformation consulting. We specialize in Next.js, React, Flutter, and custom enterprise solutions."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is CodePhilic's expertise?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CodePhilic specializes in building scalable, secure, and innovative software solutions. Our team has expertise in full-stack development, cloud architecture, UI/UX design, and enterprise software systems."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I contact CodePhilic?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can reach CodePhilic via email at contact@codephilic.com, by phone at +8801812049163, +880172889798, +8801765848893, +8801777990263, or through our contact page on our website at https://codephilic.com#contact"
-      }
-    }
-  ]
-}
-</script>
-
-<!-- Title Tag (Critical for SEO) -->
-<title>CodePhilic | We Architect Imagination</title>`;

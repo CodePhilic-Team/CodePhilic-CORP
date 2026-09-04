@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Twitter, Linkedin, Facebook } from "lucide-react";
+import { ArrowUpRight, Linkedin, Facebook } from "lucide-react";
 import DecryptedText from "@/components/DecryptedText";
 // import dynamic from "next/dynamic";
 
@@ -80,7 +81,7 @@ export function Footer() {
       <div className="container max-w-7xl mx-auto px-4 md:px-6 py-12 flex flex-col gap-8 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-1 sm:col-span-2">
-            <a href="/" className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
                 src="/CodePhilic.jpg"
                 alt="CodePhilic Logo"
@@ -91,7 +92,7 @@ export function Footer() {
               <span className="font-heading font-semibold text-xl tracking-tight text-slate-900 dark:text-white">
                 CodePhilic Limited
               </span>
-            </a>
+            </Link>
             <p className="text-slate-500 dark:text-[#94A3B8] max-w-xs text-sm leading-relaxed mb-4">
               CodePhilic is a Bangladesh-based technology company building scalable SaaS and AI products while developing custom digital systems for organizations, institutions and businesses.
             </p>

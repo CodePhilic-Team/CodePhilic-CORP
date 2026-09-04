@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -83,10 +84,13 @@ export function Navbar() {
                 : {}
             }
           >
-            <img
+            <Image
               src="/CodePhilic.jpg"
               alt="CodePhilic Logo"
-              className="h-9 w-auto"
+              width={36}
+              height={36}
+              priority
+              className="h-9 w-auto rounded"
             />
             {/* <span className="font-heading font-semibold text-lg tracking-tight text-foreground">
               CodePhilic

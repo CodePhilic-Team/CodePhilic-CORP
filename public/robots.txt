@@ -1,6 +1,6 @@
 # ==========================================
 # ROBOTS.TXT FOR CODEPHILIC
-# Website: https://code-philic.com
+# Website: https://codephilic.com
 # Generated: April 9, 2026
 # ==========================================
 
@@ -34,7 +34,6 @@ Disallow: /staging/
 Disallow: /preview/
 Disallow: /search/
 Disallow: /*.json$
-Disallow: /*.xml$
 Disallow: /*?*sort=
 Disallow: /*?*filter=
 Disallow: /*?*page=2
@@ -120,6 +119,9 @@ Crawl-delay: 1
 
 # ========== OPENAI/CHATGPT CRAWLERS ==========
 # Allow AI assistants for knowledge graphs and AI training
+
+User-agent: OAI-SearchBot
+Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
@@ -275,6 +277,18 @@ Allow: /
 User-agent: WhatsApp
 Allow: /
 
+User-agent: Discordbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: SkypeUriPreview
+Allow: /
+
 User-agent: Slurp
 Allow: /
 
@@ -328,13 +342,11 @@ Allow: /api/public
 
 # ========== SITEMAP LOCATION ==========
 # Critical for search engine discovery
-Sitemap: https://code-philic.com/sitemap.xml
-Sitemap: https://code-philic.com/sitemap-blog.xml
-Sitemap: https://code-philic.com/sitemap-portfolio.xml
+Sitemap: https://codephilic.com/sitemap.xml
 
 # ========== HOST PREFERENCE ==========
 # Prefer HTTPS over HTTP
-Host: https://code-philic.com
+Host: https://codephilic.com
 
 # ========== COMMENTS & NOTES ==========
 # Last Updated: April 9, 2026
@@ -357,4 +369,4 @@ Host: https://code-philic.com
 # Testing:
 # - Google Search Console: https://search.google.com/search-console/
 # - Bing Webmaster: https://www.bing.com/webmastertools/
-# - Test robots.txt: https://code-philic.com/robots.txt
+# - Test robots.txt: https://codephilic.com/robots.txt

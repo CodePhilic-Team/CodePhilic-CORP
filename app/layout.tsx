@@ -4,14 +4,11 @@ import {
   metadata,
   viewport,
   organizationStructuredData,
+  websiteStructuredData,
   servicesStructuredData,
   projectsStructuredData,
-  breadcrumbStructuredData,
-  teamStructuredData,
   individualTeamStructuredData,
   faqStructuredData,
-  webApplicationStructuredData,
-  teamMembers,
 } from "./metaData";
 
 export { viewport };
@@ -25,42 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Favicon - Standard .ico for all search engines and browsers */}
-        <link
-          rel="icon"
-          href="/favicon.ico?v=2"
-          type="image/x-icon"
-          sizes="32x32"
-        />
-        <link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon" />
-
-        {/* Favicon - PNG formats for modern browsers */}
-        <link
-          rel="icon"
-          href="/favicon-32x32.png?v=2"
-          type="image/png"
-          sizes="32x32"
-        />
-        <link
-          rel="icon"
-          href="/favicon-16x16.png?v=2"
-          type="image/png"
-          sizes="16x16"
-        />
-
-        {/* Apple Touch Icon - for iOS home screen */}
-        <link
-          rel="apple-touch-icon"
-          href="/apple-touch-icon.png?v=2"
-          sizes="180x180"
-        />
-
-        {/* Bing Search Engine Verification */}
-        <meta name="msvalidate.01" content="A121669086E98BFFA9212E3622A5DC5D" />
-
-        {/* Browser & Device Specific Meta Tags */}
-        <meta name="theme-color" content="#3B82F6" />
-
         {/* Structured Data - Organization Schema */}
         <script
           type="application/ld+json"
@@ -70,7 +31,16 @@ export default function RootLayout({
           suppressHydrationWarning
         />
 
-        {/* Structured Data - Services Schema */}
+        {/* Structured Data - WebSite Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteStructuredData),
+          }}
+          suppressHydrationWarning
+        />
+
+        {/* Structured Data - Services Schema (OfferCatalog) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -79,7 +49,7 @@ export default function RootLayout({
           suppressHydrationWarning
         />
 
-        {/* Structured Data - Projects Schema */}
+        {/* Structured Data - Software Applications & Projects Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -91,25 +61,7 @@ export default function RootLayout({
           suppressHydrationWarning
         />
 
-        {/* Structured Data - Breadcrumb Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbStructuredData),
-          }}
-          suppressHydrationWarning
-        />
-
-        {/* Structured Data - Professional Service Organization (Optimized for AI/Gemini) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationStructuredData),
-          }}
-          suppressHydrationWarning
-        />
-
-        {/* Structured Data - Individual Team Members */}
+        {/* Structured Data - Team Members & Leadership (Person) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -121,7 +73,7 @@ export default function RootLayout({
           suppressHydrationWarning
         />
 
-        {/* Structured Data - FAQ Page (AI-Ready) */}
+        {/* Structured Data - FAQ Page (Search & AI-Ready) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -130,26 +82,6 @@ export default function RootLayout({
           suppressHydrationWarning
         />
 
-        {/* Structured Data - Web Application */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(webApplicationStructuredData),
-          }}
-          suppressHydrationWarning
-        />
-
-        {/* Additional SEO Meta Tags */}
-        <meta
-          name="google-site-verification"
-          content="your-verification-code"
-        />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="author" content="CodePhilic" />
-        <meta
-          name="copyright"
-          content="© 2024 CodePhilic. All rights reserved."
-        />
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

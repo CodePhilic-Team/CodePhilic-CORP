@@ -30,7 +30,8 @@ export function Overview() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="about" className="py-24 md:py-32 relative overflow-hidden scroll-mt-24">
+      <div id="overview" className="absolute -top-24 pointer-events-none" />
       {/* Subtle grid lines bg */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.025] dark:opacity-[0.04]"

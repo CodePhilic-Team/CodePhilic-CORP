@@ -53,6 +53,8 @@
     outline-color: rgba(59, 130, 246, 0.5);
   }
   html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
     scrollbar-width: thin;
     scrollbar-color: #27272a transparent;
   }

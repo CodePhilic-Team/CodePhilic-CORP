@@ -8,7 +8,10 @@ type TeamMember = {
   name: string;
   image: string;
   role: string;
-  bio: string;
+  primaryRole?: string;
+  secondaryRole?: string;
+  executiveRoles?: string[];
+  bio?: string;
   initials: string;
   accent: string;
   social: {
@@ -26,7 +29,13 @@ const team: TeamMember[] = [
     name: "Md. Rakibul Islam",
     image: "/team/rakibx.jpg",
     role: "Leading Founder & CEO · Managing Director · Director",
-    bio: "Primary responsibilities include:\n• Company leadership\n• Technology and product direction\n• Engineering\n• Business strategy\n• Overall operations",
+    primaryRole: "Leading Founder & CEO",
+    secondaryRole: "Managing Director · Director",
+    executiveRoles: [
+      "Leading Founder & CEO (Chief Executive Officer)",
+      "Managing Director & Director",
+      "CTO (Chief Technology Officer) · CSO (Chief Strategy Officer)",
+    ],
     initials: "RI",
     accent: "#3B82F6",
     social: {
@@ -36,10 +45,16 @@ const team: TeamMember[] = [
     },
   },
   {
-    name: "Dhruba",
+    name: "Druba Paul",
     image: "/team/dhrubax.jpg",
     role: "Co-Founder & CMO · Director",
-    bio: "Primary responsibilities include:\n• Marketing\n• Brand strategy\n• Growth\n• Business development\n• Product and company operations",
+    primaryRole: "Co-Founder & CMO",
+    secondaryRole: "Director",
+    executiveRoles: [
+      "Co-Founder & CMO (Chief Marketing Officer)",
+      "Director",
+      "CRO (Chief Revenue Officer) · CPO (Chief Product Officer)",
+    ],
     initials: "DP",
     accent: "#10B981",
     social: {
@@ -49,11 +64,17 @@ const team: TeamMember[] = [
     },
   },
   {
-    name: "Shuvo",
+    name: "Iftekhar Alam Shuvo",
     image: "/team/shuvox.jpg",
     role: "Co-Founder & CFO · Director",
-    bio: "Primary responsibilities include:\n• Finance\n• Financial planning\n• Business operations\n• Administration\n• Product development",
-    initials: "S",
+    primaryRole: "Co-Founder & CFO",
+    secondaryRole: "Director",
+    executiveRoles: [
+      "Co-Founder & CFO (Chief Financial Officer)",
+      "Director",
+      "Compliance & Finance Lead · Advisory CSO",
+    ],
+    initials: "IS",
     accent: "#F59E0B",
     social: {
       linkedin: "https://www.linkedin.com/in/iftekhar-alam-shuvo-4742842bb/",
@@ -62,11 +83,17 @@ const team: TeamMember[] = [
     },
   },
   {
-    name: "Habib",
+    name: "Md. Habibur Rahman",
     image: "/team/himaloyx.jpg",
     role: "Co-Founder & COO · Director",
-    bio: "Primary responsibilities include:\n• Operations\n• Project coordination\n• Process management\n• Delivery\n• Product development",
-    initials: "H",
+    primaryRole: "Co-Founder & COO",
+    secondaryRole: "Director",
+    executiveRoles: [
+      "Co-Founder & COO (Chief Operating Officer)",
+      "Director",
+      "CBO (Chief Business Officer) · Advisory CTO",
+    ],
+    initials: "HR",
     accent: "#8B5CF6",
     social: {
       linkedin: "https://www.linkedin.com/in/habib007/",
@@ -80,7 +107,9 @@ const advisors: TeamMember[] = [
   {
     name: "Dr. Md. Sazzad Hossain",
     image: "/team/sazzad_1778071366_2186ca1d.jpeg",
-    role: "Advisor",
+    role: "Academic & Strategic Advisor",
+    primaryRole: "Advisor",
+    secondaryRole: "MBSTU Faculty",
     bio: "Professor, Department of Computer Science and Engineering (CSE), Mawlana Bhashani Science and Technology University (MBSTU).\n\nAdvising CodePhilic on advanced technology, strategic development, and academic-industry alignment.",
     initials: "SH",
     accent: "#6366F1",
@@ -95,7 +124,7 @@ export function Team() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="team" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="team" className="py-24 md:py-32 relative overflow-hidden scroll-mt-24">
       {/* Radial bg glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -141,7 +170,7 @@ export function Team() {
                 delay: 0.1 + i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="group relative  overflow-hidden flex flex-col"
+              className="group relative overflow-hidden flex flex-col rounded-xl"
               style={{
                 background: "var(--glass-bg)",
                 backdropFilter: "blur(20px)",
@@ -157,7 +186,7 @@ export function Team() {
                 }}
               />
 
-              <div className="p-7 flex flex-col gap-5 flex-1">
+              <div className="p-6 sm:p-7 flex flex-col gap-4 flex-1">
                 {/* Avatar */}
                 <div
                   className="size-16 rounded-full overflow-hidden ring-2 ring-offset-2 ring-offset-transparent flex items-center justify-center shrink-0"
@@ -178,94 +207,89 @@ export function Team() {
                   )}
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-base font-bold font-heading text-foreground">
+                {/* Name & Role Header */}
+                <div className="flex flex-col gap-1.5">
+                  <h3 className="text-lg font-bold font-heading text-foreground tracking-tight">
                     {member.name}
                   </h3>
-                  <span
-                    className="text-xs font-semibold font-heading uppercase tracking-wider"
-                    style={{ color: member.accent }}
-                  >
-                    {member.role}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span
+                      className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold font-heading tracking-wide border"
+                      style={{
+                        color: member.accent,
+                        backgroundColor: `${member.accent}14`,
+                        borderColor: `${member.accent}33`,
+                      }}
+                    >
+                      {member.primaryRole || member.role}
+                    </span>
+                    {member.secondaryRole && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium text-foreground/75 bg-foreground/5 border border-foreground/10">
+                        {member.secondaryRole}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <p className="text-foreground/55 text-sm leading-relaxed font-sans flex-1 whitespace-pre-line">
-                  {member.bio}
-                </p>
+                {/* Executive & Statutory Roles */}
+                {member.executiveRoles && member.executiveRoles.length > 0 ? (
+                  <div className="flex flex-col gap-2 pt-2 border-t border-border/40 flex-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-foreground/45 font-heading">
+                      Executive &amp; Statutory Roles
+                    </span>
+                    <ul className="space-y-1.5">
+                      {member.executiveRoles.map((roleText, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs text-foreground/75 leading-relaxed font-sans">
+                          <span
+                            className="size-1.5 rounded-full mt-1.5 shrink-0"
+                            style={{ backgroundColor: member.accent }}
+                          />
+                          <span>{roleText}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <p className="text-foreground/55 text-sm leading-relaxed font-sans flex-1 whitespace-pre-line">
+                    {member.bio}
+                  </p>
+                )}
 
-                {/* Socials */}
-                <div className="flex items-center gap-3 pt-1">
-                  {member.social.fb && (
-                    <a
-                      href={member.social.fb}
-                      className="group/tooltip relative text-foreground/30 hover:text-foreground transition-colors flex items-center justify-center"
-                      aria-label="Facebook"
-                    >
-                      <FaFacebook className="size-4" />
-                      <span className="absolute -top-9 left-1/2 -translate-x-1/2 scale-50 opacity-0 group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100 transition-all duration-200 px-2 py-1 bg-foreground/90 backdrop-blur text-background text-[10px] font-bold tracking-widest uppercase rounded pointer-events-none origin-bottom whitespace-nowrap shadow-xl">
-                        Facebook
-                      </span>
-                    </a>
-                  )}
-                  {member.social.twitter && (
-                    <a
-                      href={member.social.twitter}
-                      className="group/tooltip relative text-foreground/30 hover:text-foreground transition-colors flex items-center justify-center"
-                      aria-label="Twitter"
-                    >
-                      <FaTwitter className="size-4" />
-                      <span className="absolute -top-9 left-1/2 -translate-x-1/2 scale-50 opacity-0 group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100 transition-all duration-200 px-2 py-1 bg-foreground/90 backdrop-blur text-background text-[10px] font-bold tracking-widest uppercase rounded pointer-events-none origin-bottom whitespace-nowrap shadow-xl">
-                        Twitter
-                      </span>
-                    </a>
-                  )}
+                {/* Socials / Links - Single Row */}
+                <div className="grid grid-cols-3 gap-1.5 pt-3 border-t border-border/40 mt-auto">
                   {member.social.linkedin && (
                     <a
                       href={member.social.linkedin}
-                      className="group/tooltip relative text-foreground/30 hover:text-foreground transition-colors flex items-center justify-center"
-                      aria-label="LinkedIn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1 py-1.5 px-1 rounded-md text-[11px] font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 border border-foreground/10 transition-colors whitespace-nowrap"
+                      aria-label={`${member.name} LinkedIn`}
                     >
-                      <FaLinkedin className="size-4" />
-                      <span className="absolute -top-9 left-1/2 -translate-x-1/2 scale-50 opacity-0 group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100 transition-all duration-200 px-2 py-1 bg-foreground/90 backdrop-blur text-background text-[10px] font-bold tracking-widest uppercase rounded pointer-events-none origin-bottom whitespace-nowrap shadow-xl">
-                        LinkedIn
-                      </span>
+                      <FaLinkedin className="size-3 text-[#0A66C2] shrink-0" />
+                      <span>LinkedIn</span>
                     </a>
                   )}
                   {member.social.github && (
                     <a
                       href={member.social.github}
-                      className="group/tooltip relative text-foreground/30 hover:text-foreground transition-colors flex items-center justify-center"
-                      aria-label="GitHub"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1 py-1.5 px-1 rounded-md text-[11px] font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 border border-foreground/10 transition-colors whitespace-nowrap"
+                      aria-label={`${member.name} GitHub`}
                     >
-                      <FaGithub className="size-4" />
-                      <span className="absolute -top-9 left-1/2 -translate-x-1/2 scale-50 opacity-0 group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100 transition-all duration-200 px-2 py-1 bg-foreground/90 backdrop-blur text-background text-[10px] font-bold tracking-widest uppercase rounded pointer-events-none origin-bottom whitespace-nowrap shadow-xl">
-                        GitHub
-                      </span>
+                      <FaGithub className="size-3 shrink-0" />
+                      <span>GitHub</span>
                     </a>
                   )}
                   {member.social.email && (
                     <a
                       href={`mailto:${member.social.email}`}
-                      className="group/tooltip relative text-foreground/30 hover:text-foreground transition-colors flex items-center justify-center"
-                      aria-label="Email"
+                      className="flex items-center justify-center gap-1 py-1.5 px-1 rounded-md text-[11px] font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 border border-foreground/10 transition-colors whitespace-nowrap"
+                      aria-label={`${member.name} Email`}
+                      title={member.social.email}
                     >
-                      <FaEnvelope className="size-4" />
-                      <span className="absolute -top-9 left-1/2 -translate-x-1/2 scale-50 opacity-0 group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100 transition-all duration-200 px-2 py-1 bg-foreground/90 backdrop-blur text-background text-[10px] font-bold tracking-widest uppercase rounded pointer-events-none origin-bottom whitespace-nowrap shadow-xl">
-                        Email
-                      </span>
-                    </a>
-                  )}
-                  {member.social.website && (
-                    <a
-                      href={member.social.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-semibold hover:underline"
-                      style={{ color: member.accent }}
-                      aria-label="Website"
-                    >
-                      View Faculty Profile
+                      <FaEnvelope className="size-2.5 text-foreground/60 shrink-0" />
+                      <span>Email</span>
                     </a>
                   )}
                 </div>
@@ -299,7 +323,7 @@ export function Team() {
                 delay: 0.1 + i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="group relative overflow-hidden flex flex-col"
+              className="group relative overflow-hidden flex flex-col rounded-xl"
               style={{
                 background: "var(--glass-bg)",
                 backdropFilter: "blur(20px)",
@@ -315,7 +339,7 @@ export function Team() {
                 }}
               />
 
-              <div className="p-7 flex flex-col gap-5 flex-1">
+              <div className="p-6 sm:p-7 flex flex-col gap-4 flex-1">
                 {/* Avatar */}
                 <div
                   className="size-16 rounded-full overflow-hidden ring-2 ring-offset-2 ring-offset-transparent flex items-center justify-center shrink-0"
@@ -336,79 +360,46 @@ export function Team() {
                   )}
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-base font-bold font-heading text-foreground">
+                {/* Name & Role Header */}
+                <div className="flex flex-col gap-1.5">
+                  <h3 className="text-lg font-bold font-heading text-foreground tracking-tight">
                     {member.name}
                   </h3>
-                  <span
-                    className="text-xs font-semibold font-heading uppercase tracking-wider"
-                    style={{ color: member.accent }}
-                  >
-                    {member.role}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span
+                      className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold font-heading tracking-wide border"
+                      style={{
+                        color: member.accent,
+                        backgroundColor: `${member.accent}14`,
+                        borderColor: `${member.accent}33`,
+                      }}
+                    >
+                      {member.primaryRole || member.role}
+                    </span>
+                    {member.secondaryRole && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium text-foreground/75 bg-foreground/5 border border-foreground/10">
+                        {member.secondaryRole}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <p className="text-foreground/55 text-sm leading-relaxed font-sans flex-1 whitespace-pre-line">
+                <p className="text-foreground/60 text-xs sm:text-sm leading-relaxed font-sans flex-1 whitespace-pre-line">
                   {member.bio}
                 </p>
 
-                {/* Socials */}
-                <div className="flex items-center gap-3 pt-1">
-                  {member.social.fb && (
-                    <a
-                      href={member.social.fb}
-                      className="text-foreground/30 hover:text-foreground transition-colors"
-                      aria-label="Facebook"
-                    >
-                      <FaFacebook className="size-4" />
-                    </a>
-                  )}
-                  {member.social.twitter && (
-                    <a
-                      href={member.social.twitter}
-                      className="text-foreground/30 hover:text-foreground transition-colors"
-                      aria-label="Twitter"
-                    >
-                      <FaTwitter className="size-4" />
-                    </a>
-                  )}
-                  {member.social.linkedin && (
-                    <a
-                      href={member.social.linkedin}
-                      className="text-foreground/30 hover:text-foreground transition-colors"
-                      aria-label="LinkedIn"
-                    >
-                      <FaLinkedin className="size-4" />
-                    </a>
-                  )}
-                  {member.social.github && (
-                    <a
-                      href={member.social.github}
-                      className="text-foreground/30 hover:text-foreground transition-colors"
-                      aria-label="GitHub"
-                    >
-                      <FaGithub className="size-4" />
-                    </a>
-                  )}
-                  {member.social.email && (
-                    <a
-                      href={`mailto:${member.social.email}`}
-                      className="text-foreground/30 hover:text-foreground transition-colors"
-                      aria-label="Email"
-                    >
-                      <FaEnvelope className="size-4" />
-                    </a>
-                  )}
+                {/* Socials / Website */}
+                <div className="flex items-center flex-wrap gap-2 pt-3 border-t border-border/40 mt-auto">
                   {member.social.website && (
                     <a
                       href={member.social.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-semibold hover:underline"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium hover:underline transition-colors border border-foreground/10 bg-foreground/5"
                       style={{ color: member.accent }}
-                      aria-label="Website"
+                      aria-label="MBSTU Faculty Profile"
                     >
-                      MBSTU Faculty Profile
+                      MBSTU Faculty Profile &rarr;
                     </a>
                   )}
                 </div>

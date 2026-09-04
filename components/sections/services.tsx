@@ -72,7 +72,7 @@ export function Services() {
   };
 
   return (
-    <section id="services" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="services" className="py-24 md:py-32 relative overflow-hidden scroll-mt-24">
       <div className="absolute inset-0 z-0 opacity-100 pointer-events-none">
         <DotGrid
           dotSize={12}

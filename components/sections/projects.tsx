@@ -224,7 +224,8 @@ export function Projects() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="work" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="work" className="py-24 md:py-32 relative overflow-hidden scroll-mt-24">
+      <div id="projects" className="absolute -top-24 pointer-events-none" />
       <div
         className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10"
         ref={ref}

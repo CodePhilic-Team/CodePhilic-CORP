@@ -89,7 +89,7 @@ export function Clients() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="clients" className="py-24 md:py-36 relative overflow-hidden">
+    <section id="clients" className="py-24 md:py-36 relative overflow-hidden scroll-mt-24">
       {/* Animated floating orb background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Blue orb — top-left drift */}

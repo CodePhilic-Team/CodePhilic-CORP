@@ -42,7 +42,7 @@ export function Contact() {
   const inputFocusClass = "focus:ring-2 focus:ring-[#3B82F6]/40 focus:border-[#3B82F6]/60";
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 relative overflow-hidden scroll-mt-24">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -273,7 +273,7 @@ export function Contact() {
               <div className="flex flex-col gap-3 pt-2" style={{ borderTop: "1px solid var(--glass-border)" }}>
                 {[
                   ["Response time", "Within 24 hours"],
-                  ["Availability", "Mon – Fri, 9am – 6pm IST"],
+                  ["Availability", "Mon – Fri, 9am – 6pm BST"],
                   ["Project intake", "Open for Q2 2026"],
                 ].map(([label, value]) => (
                   <div key={label} className="flex items-center justify-between text-sm">

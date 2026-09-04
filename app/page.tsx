@@ -9,6 +9,7 @@ import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { SpatialBackground } from "@/components/SpatialBackground";
 import { BackToTop } from "@/components/BackToTop";
+import { HashScrollHandler } from "@/components/HashScrollHandler";
 
 export const revalidate = 604800;
 
@@ -16,6 +17,7 @@ export default function Home() {
   return (
     <>
       <SpatialBackground />
+      <HashScrollHandler />
       <main className="flex min-h-screen flex-col selection:bg-[#3B82F6]/30">
         <Navbar />
         <Hero />

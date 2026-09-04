@@ -33,6 +33,50 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/about",
+        destination: "/#about",
+        permanent: false,
+      },
+      {
+        source: "/overview",
+        destination: "/#about",
+        permanent: false,
+      },
+      {
+        source: "/services",
+        destination: "/#services",
+        permanent: false,
+      },
+      {
+        source: "/work",
+        destination: "/#work",
+        permanent: false,
+      },
+      {
+        source: "/projects",
+        destination: "/#projects",
+        permanent: false,
+      },
+      {
+        source: "/clients",
+        destination: "/#clients",
+        permanent: false,
+      },
+      {
+        source: "/team",
+        destination: "/#team",
+        permanent: false,
+      },
+      {
+        source: "/contact",
+        destination: "/#contact",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
