@@ -129,6 +129,7 @@ export function Footer() {
               <li><a href="#services" className="hover:text-slate-900 dark:hover:text-white transition-colors">Services</a></li>
               <li><a href="#work" className="hover:text-slate-900 dark:hover:text-white transition-colors">Our Work</a></li>
               <li><a href="#contact" className="hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a></li>
+              <li><Link href="/invoice-generator" className="hover:text-slate-900 dark:hover:text-white transition-colors">Invoice Generator</Link></li>
             </ul>
           </div>
 
