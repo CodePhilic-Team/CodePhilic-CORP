@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Send, Mail, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Send, Mail, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
 
 export function Contact() {
   const ref = useRef<HTMLDivElement>(null);
@@ -12,19 +12,37 @@ export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", inquiryEmail: "contact@codephilic.com", subject: "", message: "" });
   const [formSent, setFormSent] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   // Newsletter state
   const [newsletter, setNewsletter] = useState("");
   const [newsletterSent, setNewsletterSent] = useState(false);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormLoading(true);
-    // Simulate async submit
-    setTimeout(() => {
-      setFormLoading(false);
+    setFormError(null);
+
+    try {
+      const res = await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message. Please try again.");
+      }
+
       setFormSent(true);
-    }, 1200);
+    } catch (err: any) {
+      console.error("Submission failed:", err);
+      setFormError(err.message || "An unexpected error occurred. Please try again.");
+    } finally {
+      setFormLoading(false);
+    }
   };
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -109,7 +127,7 @@ export function Contact() {
                 <p className="text-lg font-semibold font-heading text-foreground">Message sent!</p>
                 <p className="text-sm text-foreground/50 font-sans">We&apos;ll be in touch within 24 hours.</p>
                 <button
-                  onClick={() => { setFormSent(false); setForm({ name: "", email: "", inquiryEmail: "contact@codephilic.com", subject: "", message: "" }); }}
+                  onClick={() => { setFormSent(false); setFormError(null); setForm({ name: "", email: "", inquiryEmail: "contact@codephilic.com", subject: "", message: "" }); }}
                   className="text-sm text-[#3B82F6] hover:underline font-medium mt-2"
                 >
                   Send another message
@@ -202,6 +220,30 @@ export function Contact() {
                     style={{ ...inputStyle, paddingTop: "14px" }}
                   />
                 </div>
+
+                {formError && (
+
+
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/25 text-red-500 dark:text-red-400 text-sm flex items-start gap-3">
+
+
+                    <AlertCircle className="size-5 shrink-0 mt-0.5" />
+
+
+                    <div className="flex-1 leading-relaxed text-xs sm:text-sm">
+
+
+                      {formError}
+
+
+                    </div>
+
+
+                  </div>
+
+
+                )}
+
 
                 <button
                   type="submit"

@@ -7,9 +7,11 @@ import {
   Copy,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   Sparkles,
   FileText,
   Receipt,
+  Calendar,
 } from 'lucide-react';
 import { InvoiceData, InvoiceItem, SUPPORTED_CURRENCIES, InvoiceStatus } from '@/types/invoice';
 import { DEFAULT_SIGNATORY_NAMES, DEFAULT_SIGNATORY_TITLES } from '@/utils/invoiceDefaults';
@@ -17,6 +19,205 @@ import { DEFAULT_SIGNATORY_NAMES, DEFAULT_SIGNATORY_TITLES } from '@/utils/invoi
 interface InvoiceEditorProps {
   invoice: InvoiceData;
   setInvoice: React.Dispatch<React.SetStateAction<InvoiceData>>;
+}
+
+// Converts any date string (ISO / YYYY-MM-DD / DD/MM/YYYY) into DD/MM/YYYY
+function toDMY(dateStr?: string): string {
+  if (!dateStr) return '';
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return dateStr;
+  if (/^\d{4}-\d{2}-\d{2}/.test(dateStr)) {
+    const [y, m, d] = dateStr.split('T')[0].split('-');
+    return `${d}/${m}/${y}`;
+  }
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  return `${day}/${month}/${d.getFullYear()}`;
+}
+
+interface DatePickerDMYProps {
+  label: string;
+  value: string;
+  onChange: (dmy: string) => void;
+}
+
+function DatePickerDMY({ label, value, onChange }: DatePickerDMYProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const displayValue = toDMY(value);
+
+  const parseCurrentDate = () => {
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(displayValue)) {
+      const [d, m, y] = displayValue.split('/').map(Number);
+      return new Date(y, m - 1, d);
+    }
+    if (/^\d{4}-\d{2}-\d{2}/.test(value)) {
+      const [y, m, d] = value.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+    return new Date();
+  };
+
+  const [viewDate, setViewDate] = useState(() => parseCurrentDate());
+
+  React.useEffect(() => {
+    setViewDate(parseCurrentDate());
+  }, [value]);
+
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+
+  const prevMonth = () => {
+    setViewDate(new Date(year, month - 1, 1));
+  };
+
+  const nextMonth = () => {
+    setViewDate(new Date(year, month + 1, 1));
+  };
+
+  const firstDayOfWeek = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const handleSelectDay = (day: number) => {
+    const dStr = String(day).padStart(2, '0');
+    const mStr = String(month + 1).padStart(2, '0');
+    onChange(`${dStr}/${mStr}/${year}`);
+    setIsOpen(false);
+  };
+
+  const currentDateObj = parseCurrentDate();
+  const selectedDay = currentDateObj.getDate();
+  const selectedMonth = currentDateObj.getMonth();
+  const selectedYear = currentDateObj.getFullYear();
+
+  return (
+    <div className="relative" ref={containerRef}>
+      <label className="text-xs font-medium text-slate-700 block mb-1">{label}</label>
+      <div className="relative flex items-center">
+        <input
+          type="text"
+          placeholder="DD/MM/YYYY"
+          value={displayValue}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full pl-3 pr-9 py-1.5 rounded-lg border border-slate-300 font-mono text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-400"
+        />
+        <button
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="absolute right-2 p-1 text-slate-400 hover:text-blue-600 transition-colors"
+          title="Open calendar (date/month/year)"
+        >
+          <Calendar className="w-4 h-4" />
+        </button>
+      </div>
+
+      {isOpen && (
+        <div className="absolute left-0 mt-1 z-50 w-64 bg-white border border-slate-200 rounded-xl shadow-xl p-3">
+          <div className="flex items-center justify-between mb-2">
+            <button
+              type="button"
+              onClick={prevMonth}
+              className="p-1 rounded-md text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              title="Previous Month"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <span className="text-xs font-bold text-slate-800">
+              {monthNames[month]} {year}
+            </span>
+            <button
+              type="button"
+              onClick={nextMonth}
+              className="p-1 rounded-md text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              title="Next Month"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-7 gap-1 text-center mb-1">
+            {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((w) => (
+              <span key={w} className="text-[10px] font-semibold text-slate-400">
+                {w}
+              </span>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-7 gap-1 text-center">
+            {Array.from({ length: firstDayOfWeek }).map((_, i) => (
+              <div key={`empty-${i}`} className="h-7 w-7" />
+            ))}
+            {Array.from({ length: daysInMonth }).map((_, i) => {
+              const day = i + 1;
+              const isSelected =
+                day === selectedDay &&
+                month === selectedMonth &&
+                year === selectedYear;
+              const isToday =
+                day === new Date().getDate() &&
+                month === new Date().getMonth() &&
+                year === new Date().getFullYear();
+
+              return (
+                <button
+                  key={day}
+                  type="button"
+                  onClick={() => handleSelectDay(day)}
+                  className={`h-7 w-7 rounded-md text-xs font-medium flex items-center justify-center transition-all ${
+                    isSelected
+                      ? 'bg-blue-600 text-white font-bold shadow-xs'
+                      : isToday
+                      ? 'bg-blue-50 text-blue-700 font-bold border border-blue-200'
+                      : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+                >
+                  {day}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+            <button
+              type="button"
+              onClick={() => {
+                const today = new Date();
+                const dStr = String(today.getDate()).padStart(2, '0');
+                const mStr = String(today.getMonth() + 1).padStart(2, '0');
+                onChange(`${dStr}/${mStr}/${today.getFullYear()}`);
+                setIsOpen(false);
+              }}
+              className="text-blue-600 hover:underline font-medium"
+            >
+              Today
+            </button>
+            <span className="text-[10px] text-slate-400 font-mono">DD/MM/YYYY</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProps) {
@@ -136,9 +337,18 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
   };
 
   const setQuickDueDate = (days: number) => {
-    const issue = new Date(meta.issueDate || new Date());
+    let issue: Date;
+    const issueStr = toDMY(meta.issueDate);
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(issueStr)) {
+      const [d, m, y] = issueStr.split('/').map(Number);
+      issue = new Date(y, m - 1, d);
+    } else {
+      issue = new Date();
+    }
     issue.setDate(issue.getDate() + days);
-    updateMeta('dueDate', issue.toISOString().split('T')[0]);
+    const dStr = String(issue.getDate()).padStart(2, '0');
+    const mStr = String(issue.getMonth() + 1).padStart(2, '0');
+    updateMeta('dueDate', `${dStr}/${mStr}/${issue.getFullYear()}`);
     updateMeta('paymentTerms', days === 0 ? 'Due upon Receipt' : `Net ${days} Days`);
   };
 
@@ -353,22 +563,18 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
               </div>
 
               <div>
-                <label className="text-xs font-medium text-slate-700 block mb-1">Issue Date</label>
-                <input
-                  type="date"
+                <DatePickerDMY
+                  label={meta.documentType === 'PAYMENT_RECEIPT' ? 'Receipt Date' : 'Issue Date'}
                   value={meta.issueDate}
-                  onChange={(e) => updateMeta('issueDate', e.target.value)}
-                  className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(dmy) => updateMeta('issueDate', dmy)}
                 />
               </div>
 
               <div>
-                <label className="text-xs font-medium text-slate-700 block mb-1">Due Date</label>
-                <input
-                  type="date"
+                <DatePickerDMY
+                  label="Due Date"
                   value={meta.dueDate}
-                  onChange={(e) => updateMeta('dueDate', e.target.value)}
-                  className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(dmy) => updateMeta('dueDate', dmy)}
                 />
               </div>
 

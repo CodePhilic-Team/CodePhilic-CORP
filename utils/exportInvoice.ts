@@ -207,6 +207,20 @@ export function downloadJson(data: InvoiceData, filename: string): void {
   URL.revokeObjectURL(url);
 }
 
+function toDMY(dateStr?: string): string {
+  if (!dateStr) return '';
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return dateStr;
+  if (/^\d{4}-\d{2}-\d{2}/.test(dateStr)) {
+    const [y, m, d] = dateStr.split('T')[0].split('-');
+    return `${d}/${m}/${y}`;
+  }
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  return `${day}/${month}/${d.getFullYear()}`;
+}
+
 export function exportCsv(data: InvoiceData, filename: string): void {
   const headers = ['Item #', 'Title', 'Description', 'Quantity/Hours', 'Rate', 'Total'];
   const rows = data.items.map((item, index) => [
@@ -223,8 +237,8 @@ export function exportCsv(data: InvoiceData, filename: string): void {
 
   const csvContent = [
     `"Invoice Number","${data.meta.invoiceNumber}"`,
-    `"Issue Date","${data.meta.issueDate}"`,
-    `"Due Date","${data.meta.dueDate}"`,
+    `"Issue Date","${toDMY(data.meta.issueDate)}"`,
+    `"Due Date","${toDMY(data.meta.dueDate)}"`,
     `"Client","${data.client.companyName}"`,
     `"Currency","${data.meta.currency}"`,
     '',
@@ -260,7 +274,7 @@ export async function copyShareText(data: InvoiceData): Promise<boolean> {
 CODEPHILIC LIMITED - INVOICE ${data.meta.invoiceNumber}
 ----------------------------------------
 To: ${data.client.companyName} (${data.client.contactPerson || 'Accounts'})
-Date: ${data.meta.issueDate} | Due: ${data.meta.dueDate}
+Date: ${toDMY(data.meta.issueDate)} | Due: ${toDMY(data.meta.dueDate)}
 Status: ${data.meta.status}
 Total Amount: ${data.meta.currencySymbol}${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${data.meta.currency}
 

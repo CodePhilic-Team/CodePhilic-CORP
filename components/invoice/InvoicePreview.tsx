@@ -18,6 +18,21 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
 
   const { company, client, items, meta, payment } = invoice;
 
+  // Helper to format date strictly in date/month/year (DD/MM/YYYY)
+  const formatDateDMY = (dateStr: string | undefined): string => {
+    if (!dateStr) return '';
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return dateStr;
+    if (/^\d{4}-\d{2}-\d{2}/.test(dateStr)) {
+      const [y, m, d] = dateStr.split('T')[0].split('-');
+      return `${d}/${m}/${y}`;
+    }
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    return `${day}/${month}/${d.getFullYear()}`;
+  };
+
   // Helper to calculate total for an item (supports direct whole amount or quantity * rate)
   const getItemTotal = (item: InvoiceItem): number => {
     if (item.amount !== undefined && item.amount !== null && !isNaN(item.amount) && item.amount > 0) {
@@ -164,7 +179,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                     <span>{company.address || 'Arif Nagar, Santosh, Tangail.'}</span>
                     {company.cityCountry && <span>, {company.cityCountry}</span>}
                     <br />
-                    <span>{company.email} &bull; {company.phone}</span>
+                    <span>{company.email}</span>
                   </div>
                 </div>
 
@@ -193,12 +208,12 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                   <div className="flex flex-wrap sm:justify-end gap-x-3.5 gap-y-1 text-[11px] text-slate-500 pt-1">
                     <div>
                       <span className="text-slate-400">{isReceipt ? 'Receipt Date: ' : 'Date: '}</span>
-                      <span className="font-medium text-slate-700">{meta.issueDate}</span>
+                      <span className="font-medium text-slate-700">{formatDateDMY(meta.issueDate)}</span>
                     </div>
                     {!isReceipt && (
                       <div>
                         <span className="text-slate-400">Due: </span>
-                        <span className="font-medium text-slate-700">{meta.dueDate}</span>
+                        <span className="font-medium text-slate-700">{formatDateDMY(meta.dueDate)}</span>
                       </div>
                     )}
                   </div>

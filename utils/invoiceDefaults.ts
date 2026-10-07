@@ -97,8 +97,8 @@ export const DEFAULT_INVOICE: InvoiceData = {
   ],
   meta: {
     invoiceNumber: 'CP-INV-2026-0042',
-    issueDate: new Date().toISOString().split('T')[0],
-    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    issueDate: `${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`,
+    dueDate: `${String(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getDate()).padStart(2, '0')}/${String(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getMonth() + 1).padStart(2, '0')}/${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getFullYear()}`,
     paymentTerms: 'Net 30 Days',
     currency: 'USD',
     currencySymbol: '$',
