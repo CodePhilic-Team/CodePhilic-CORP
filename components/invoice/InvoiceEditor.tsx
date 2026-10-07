@@ -8,6 +8,8 @@ import {
   ChevronDown,
   ChevronRight,
   Sparkles,
+  FileText,
+  Receipt,
 } from 'lucide-react';
 import { InvoiceData, InvoiceItem, SUPPORTED_CURRENCIES, InvoiceStatus } from '@/types/invoice';
 import { DEFAULT_SIGNATORY_NAMES, DEFAULT_SIGNATORY_TITLES } from '@/utils/invoiceDefaults';
@@ -66,7 +68,28 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
   const handleItemChange = (index: number, field: keyof InvoiceItem, value: any) => {
     setInvoice((prev) => {
       const newItems = [...prev.items];
-      newItems[index] = { ...newItems[index], [field]: value };
+      const item = { ...newItems[index] };
+
+      if (field === 'quantity') {
+        const qty = value === '' ? 0 : parseFloat(value) || 0;
+        item.quantity = qty;
+        if (item.rate !== undefined && item.rate !== null && item.rate > 0) {
+          item.amount = qty * item.rate;
+        }
+      } else if (field === 'rate') {
+        const rate = value === '' || value === undefined ? undefined : parseFloat(value);
+        item.rate = rate === undefined || isNaN(rate) ? undefined : rate;
+        if (item.rate !== undefined && item.rate > 0) {
+          item.amount = (Number(item.quantity) || 1) * item.rate;
+        }
+      } else if (field === 'amount') {
+        const amt = value === '' || value === undefined ? undefined : parseFloat(value);
+        item.amount = amt === undefined || isNaN(amt) ? undefined : amt;
+      } else {
+        (item as any)[field] = value;
+      }
+
+      newItems[index] = item;
       return { ...prev, items: newItems };
     });
   };
@@ -77,6 +100,7 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
       title: preset?.title || 'Software Engineering Service',
       description: preset?.description || '',
       quantity: preset?.quantity || 1,
+      unit: preset?.unit || (meta.unitType?.includes('Hrs') ? 'Hrs' : meta.unitType?.includes('Months') ? 'Months' : 'Qty'),
       rate: preset?.rate || 1000,
       taxable: preset?.taxable !== undefined ? preset?.taxable : true,
     };
@@ -132,28 +156,121 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
     }
   };
 
-  const generateNextInvoiceNo = () => {
-    const year = new Date().getFullYear();
+  const generateNextInvoiceNo = (targetType?: 'INVOICE' | 'PAYMENT_RECEIPT') => {
+    const type = targetType || meta.documentType;
+    const prefix = type === 'PAYMENT_RECEIPT' ? 'CP-RCP' : 'CP-INV';
+    const year = 2026;
     const randomSeq = Math.floor(1000 + Math.random() * 9000);
-    updateMeta('invoiceNumber', `CP-INV-${year}-${randomSeq}`);
+    updateMeta('invoiceNumber', `${prefix}-${year}-${randomSeq}`);
   };
 
   const quickTechServices = [
-    { title: 'Frontend Web App Engineering', desc: 'Component architecture, responsive interface, state integration.', qty: 1, rate: 4500 },
-    { title: 'Cloud Infrastructure & DevOps SLA', desc: 'Kubernetes configuration, CI/CD pipeline automation.', qty: 40, rate: 95 },
-    { title: 'API Integration & Microservices', desc: 'Backend microservices, webhook orchestration, documentation.', qty: 1, rate: 3200 },
+    { title: 'Frontend Web App Engineering', desc: 'Component architecture, responsive interface, state integration.', qty: 200, unit: 'Hrs', rate: 45 },
+    { title: 'Cloud Infrastructure & DevOps SLA', desc: 'Kubernetes configuration, CI/CD pipeline automation.', qty: 6, unit: 'Months', rate: 1200 },
+    { title: 'API Integration & Microservices', desc: 'Backend microservices, webhook orchestration, documentation.', qty: 80, unit: 'Hrs', rate: 50 },
   ];
 
   return (
-    <div className="flex flex-col h-full bg-white text-slate-800 overflow-y-auto">
-      <div className="p-5 sm:p-6 space-y-6">
+    <div className="flex flex-col h-full bg-white text-slate-800 overflow-hidden">
+      {/* Top of Edit Corner: Document Type & Signature Mode Switchers */}
+      <div className="shrink-0 bg-slate-50/95 border-b border-slate-200 px-4 sm:px-6 py-2.5 space-y-2 shadow-2xs">
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+            Document Mode
+          </span>
+
+          {/* Switching Option at Top of Edit Corner */}
+          <div className="inline-flex p-0.5 bg-slate-200/80 rounded-lg text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => {
+                updateMeta('documentType', 'INVOICE');
+                if (meta.invoiceNumber.startsWith('CP-RCP-')) {
+                  updateMeta('invoiceNumber', meta.invoiceNumber.replace(/^CP-RCP-/, 'CP-INV-'));
+                } else if (!meta.invoiceNumber.startsWith('CP-INV-')) {
+                  const randomSeq = Math.floor(1000 + Math.random() * 9000);
+                  updateMeta('invoiceNumber', `CP-INV-2026-${randomSeq}`);
+                }
+              }}
+              className={`px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5 ${
+                meta.documentType !== 'PAYMENT_RECEIPT'
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Invoice</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                updateMeta('documentType', 'PAYMENT_RECEIPT');
+                if (meta.status !== 'PAID') {
+                  updateMeta('status', 'PAID');
+                }
+                if (meta.invoiceNumber.startsWith('CP-INV-')) {
+                  updateMeta('invoiceNumber', meta.invoiceNumber.replace(/^CP-INV-/, 'CP-RCP-'));
+                } else if (!meta.invoiceNumber.startsWith('CP-RCP-')) {
+                  const randomSeq = Math.floor(1000 + Math.random() * 9000);
+                  updateMeta('invoiceNumber', `CP-RCP-2026-${randomSeq}`);
+                }
+              }}
+              className={`px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5 ${
+                meta.documentType === 'PAYMENT_RECEIPT'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Receipt className="w-3.5 h-3.5" />
+              <span>Payment Receipt</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Signature Mode Switcher: Online Generated vs Manual Sign */}
+        <div className="flex items-center justify-between gap-3 pt-1 border-t border-slate-200/60">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+            Signature Mode
+          </span>
+          <div className="inline-flex p-0.5 bg-slate-200/80 rounded-lg text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => updateMeta('generationMode', 'online')}
+              className={`px-3 py-1 rounded-md transition-all flex items-center gap-1.5 ${
+                meta.generationMode !== 'manual'
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+              title="Prints digital generation note. No physical signature required."
+            >
+              <span className="text-xs">💻</span>
+              <span>Online Generated</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => updateMeta('generationMode', 'manual')}
+              className={`px-3 py-1 rounded-md transition-all flex items-center gap-1.5 ${
+                meta.generationMode === 'manual'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+              title="Leaves signature block blank for manual physical signing."
+            >
+              <span className="text-xs">✍️</span>
+              <span>Manual Sign</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
         {/* Section 1: Invoice Details */}
         <div className="border border-slate-200 rounded-xl p-4 bg-white shadow-xs">
           <div
             onClick={() => toggleSection('details')}
             className="flex items-center justify-between cursor-pointer select-none font-semibold text-slate-900 text-sm pb-1"
           >
-            <span>Invoice Details</span>
+            <span>{meta.documentType === 'PAYMENT_RECEIPT' ? 'Receipt Details' : 'Invoice Details'}</span>
             <div className="text-slate-400">
               {sectionsOpen.details ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </div>
@@ -161,11 +278,14 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
 
           {sectionsOpen.details && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-3">
+
               <div>
                 <div className="flex justify-between items-center mb-1">
-                  <label className="text-xs font-medium text-slate-700">Invoice Number</label>
+                  <label className="text-xs font-medium text-slate-700">
+                    {meta.documentType === 'PAYMENT_RECEIPT' ? 'Receipt Number' : 'Invoice Number'}
+                  </label>
                   <button
-                    onClick={generateNextInvoiceNo}
+                    onClick={() => generateNextInvoiceNo()}
                     className="text-[11px] text-blue-600 hover:underline"
                   >
                     Auto Generate
@@ -429,13 +549,33 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
               </div>
             </div>
 
-            <button
-              onClick={() => addItem()}
-              className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              Add Item
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Unit Dropdown for Invoice */}
+              <div className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-md border border-slate-200">
+                <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Unit:</span>
+                <select
+                  value={meta.unitType || 'Qty'}
+                  onChange={(e) => updateMeta('unitType', e.target.value)}
+                  className="bg-transparent text-xs font-semibold text-slate-800 focus:outline-none cursor-pointer"
+                  title="Select unit type for line items (Qty / Hrs / Months)"
+                >
+                  <option value="Qty">Qty</option>
+                  <option value="Hrs">Hrs</option>
+                  <option value="Months">Months</option>
+                  <option value="Qty/Hrs">Qty/Hrs</option>
+                  <option value="Qty/Months">Qty/Months</option>
+                  <option value="Months/Hrs">Hrs/Months</option>
+                </select>
+              </div>
+
+              <button
+                onClick={() => addItem()}
+                className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Add Item
+              </button>
+            </div>
           </div>
 
           {sectionsOpen.items && (
@@ -458,7 +598,9 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
               </div>
 
               {items.map((item, index) => {
-                const total = (Number(item.quantity) || 0) * (Number(item.rate) || 0);
+                const total = item.amount !== undefined && item.amount !== null && !isNaN(item.amount) && item.amount > 0
+                  ? Number(item.amount)
+                  : (Number(item.quantity) || 0) * (Number(item.rate) || 0);
                 return (
                   <div
                     key={item.id}
@@ -496,48 +638,84 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
                       />
                     </div>
 
-                    <div>
-                      <textarea
-                        rows={2}
-                        value={item.description}
-                        onChange={(e) => handleItemChange(index, 'description', e.target.value)}
-                        placeholder="Description of deliverables..."
-                        className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-2.5 items-center">
-                      <div>
-                        <label className="text-[10px] text-slate-500 block mb-0.5">Quantity / Hrs</label>
-                        <input
-                          type="number"
-                          min="0"
-                          step="any"
-                          value={item.quantity}
-                          onChange={(e) => handleItemChange(index, 'quantity', parseFloat(e.target.value) || 0)}
-                          className="w-full px-2.5 py-1 rounded-md border border-slate-300 font-mono text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {/* Description & Unit side by side */}
+                    <div className="flex items-start gap-2.5">
+                      <div className="flex-1">
+                        <textarea
+                          rows={2}
+                          value={item.description}
+                          onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                          placeholder="Description of deliverables..."
+                          className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
+                      <div className="w-28 shrink-0">
+                        <label className="text-[10px] font-semibold text-slate-600 block mb-1">
+                          Unit
+                        </label>
+                        <select
+                          value={item.unit || (meta.unitType?.includes('Hrs') ? 'Hrs' : meta.unitType?.includes('Months') ? 'Months' : 'Qty')}
+                          onChange={(e) => handleItemChange(index, 'unit', e.target.value)}
+                          className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer shadow-xs"
+                          title="Select unit for this item (Hrs / Months / Qty)"
+                        >
+                          <option value="Hrs">Hrs</option>
+                          <option value="Months">Months</option>
+                          <option value="Qty">Qty</option>
+                        </select>
+                      </div>
+                    </div>
 
+                    <div className="grid grid-cols-3 gap-2.5 items-end">
                       <div>
                         <label className="text-[10px] text-slate-500 block mb-0.5">
-                          Rate ({meta.currencySymbol})
+                          Quantity ({item.unit || 'Qty'})
                         </label>
                         <input
                           type="number"
                           min="0"
                           step="any"
-                          value={item.rate}
-                          onChange={(e) => handleItemChange(index, 'rate', parseFloat(e.target.value) || 0)}
+                          value={item.quantity}
+                          onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
                           className="w-full px-2.5 py-1 rounded-md border border-slate-300 font-mono text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
 
-                      <div className="text-right">
-                        <span className="text-[10px] text-slate-500 block mb-0.5">Total</span>
-                        <span className="font-mono text-xs font-semibold text-slate-900">
-                          {meta.currencySymbol}{total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                        </span>
+                      <div>
+                        <div className="flex items-center justify-between mb-0.5">
+                          <label className="text-[10px] text-slate-500 block">
+                            Rate ({meta.currencySymbol})
+                          </label>
+                          <span className="text-[9px] text-slate-400 font-normal">Optional</span>
+                        </div>
+                        <input
+                          type="number"
+                          min="0"
+                          step="any"
+                          value={item.rate !== undefined && item.rate !== null && item.rate > 0 ? item.rate : ''}
+                          onChange={(e) => handleItemChange(index, 'rate', e.target.value)}
+                          placeholder="—"
+                          className="w-full px-2.5 py-1 rounded-md border border-slate-300 font-mono text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-300"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-[10px] font-semibold text-slate-700 block mb-0.5">
+                          Total / Whole ({meta.currencySymbol})
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          step="any"
+                          value={
+                            item.amount !== undefined && item.amount !== null && !isNaN(item.amount)
+                              ? item.amount
+                              : (item.quantity && item.rate ? Number((item.quantity * item.rate).toFixed(2)) : '')
+                          }
+                          onChange={(e) => handleItemChange(index, 'amount', e.target.value)}
+                          placeholder="0.00"
+                          className="w-full px-2.5 py-1 rounded-md border border-slate-300 font-mono text-xs font-bold text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                       </div>
                     </div>
                   </div>
@@ -686,115 +864,56 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
                 </div>
               </div>
 
-              {/* Bank Details Inputs */}
+              {/* Bank Details Inputs (Minimal: Bank Name, Account Name, Account Number) */}
               {(meta.paymentMethodType === 'bank' || !meta.paymentMethodType) && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
-                  <div className="sm:col-span-2">
+                <div className="space-y-3 pt-1">
+                  <div>
                     <label className="text-xs font-medium text-slate-700 block mb-1">Bank Name</label>
                     <input
                       type="text"
                       value={payment.bankName}
                       onChange={(e) => updatePayment('bankName', e.target.value)}
+                      placeholder="e.g. City Bank PLC"
                       className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
-                  <div>
-                    <label className="text-xs font-medium text-slate-700 block mb-1">Account Name</label>
-                    <input
-                      type="text"
-                      value={payment.accountName}
-                      onChange={(e) => updatePayment('accountName', e.target.value)}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-medium text-slate-700 block mb-1">Account Name</label>
+                      <input
+                        type="text"
+                        value={payment.accountName}
+                        onChange={(e) => updatePayment('accountName', e.target.value)}
+                        placeholder="e.g. CODEPHILIC LIMITED"
+                        className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
 
-                  <div>
-                    <label className="text-xs font-medium text-slate-700 block mb-1">Account / IBAN</label>
-                    <input
-                      type="text"
-                      value={payment.accountNumber}
-                      onChange={(e) => updatePayment('accountNumber', e.target.value)}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 font-mono text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-medium text-slate-700 block mb-1">SWIFT / BIC</label>
-                    <input
-                      type="text"
-                      value={payment.swiftBic}
-                      onChange={(e) => updatePayment('swiftBic', e.target.value)}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 font-mono text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-medium text-slate-700 block mb-1">Routing / Branch Code</label>
-                    <input
-                      type="text"
-                      value={payment.routingNumber}
-                      onChange={(e) => updatePayment('routingNumber', e.target.value)}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 font-mono text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    <div>
+                      <label className="text-xs font-medium text-slate-700 block mb-1">Account Number</label>
+                      <input
+                        type="text"
+                        value={payment.accountNumber}
+                        onChange={(e) => updatePayment('accountNumber', e.target.value)}
+                        placeholder="e.g. 1503789211001"
+                        className="w-full px-3 py-1.5 rounded-lg border border-slate-300 font-mono text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
                   </div>
                 </div>
               )}
 
               {/* Cash Handover Inputs */}
               {meta.paymentMethodType === 'cash' && (
-                <div className="space-y-3 p-3 rounded-lg border border-emerald-200 bg-emerald-50/40">
-                  <div className="text-xs font-semibold text-emerald-900 flex items-center gap-1.5">
-                    <span>??</span>
-                    <span>Cash Handover Settings</span>
+                <div className="p-3.5 rounded-lg border border-emerald-200 bg-emerald-50/50 text-xs">
+                  <div className="font-semibold text-emerald-900 flex items-center gap-2 mb-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span>Payment Method: Cash Handover</span>
                   </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <label className="text-xs font-medium text-slate-700">Cash Handover Receiver</label>
-                      <span className="text-[10px] text-slate-400">Select or Type</span>
-                    </div>
-                    <select
-                      value={
-                        DEFAULT_SIGNATORY_NAMES.includes(payment.cashReceiver || '')
-                          ? payment.cashReceiver
-                          : 'custom'
-                      }
-                      onChange={(e) => {
-                        if (e.target.value !== 'custom') {
-                          updatePayment('cashReceiver', e.target.value);
-                        }
-                      }}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-1.5"
-                    >
-                      {DEFAULT_SIGNATORY_NAMES.map((name) => (
-                        <option key={name} value={name}>
-                          {name}
-                        </option>
-                      ))}
-                      <option value="Authorized CodePhilic Representative">Authorized CodePhilic Representative</option>
-                      <option value="custom">Other / Custom Receiver...</option>
-                    </select>
-                    {(!DEFAULT_SIGNATORY_NAMES.includes(payment.cashReceiver || '') && payment.cashReceiver !== 'Authorized CodePhilic Representative') && (
-                      <input
-                        type="text"
-                        placeholder="Enter custom receiver name"
-                        value={payment.cashReceiver || ''}
-                        onChange={(e) => updatePayment('cashReceiver', e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-medium text-slate-700 block mb-1">Handover Instructions / Receipt Note</label>
-                    <textarea
-                      rows={2}
-                      value={payment.cashInstructions || ''}
-                      onChange={(e) => updatePayment('cashInstructions', e.target.value)}
-                      placeholder="e.g. Cash handed over in person upon project handover / milestone delivery."
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
+                  <p className="text-slate-600 text-[11px] leading-relaxed">
+                    On the document preview & print, this displays cleanly as <strong className="text-slate-800">Method: Cash</strong> without cluttering the page.
+                  </p>
                 </div>
               )}
 
@@ -831,7 +950,7 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
             onClick={() => toggleSection('terms')}
             className="flex items-center justify-between cursor-pointer select-none font-semibold text-slate-900 text-sm pb-1"
           >
-            <span>Notes & Signatory</span>
+            <span>Authorized by</span>
             <div className="text-slate-400">
               {sectionsOpen.terms ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </div>
@@ -849,87 +968,82 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
                 />
               </div>
 
-              <div>
-                <label className="text-xs font-medium text-slate-700 block mb-1">Terms & Conditions</label>
-                <textarea
-                  rows={3}
-                  value={meta.terms}
-                  onChange={(e) => updateMeta('terms', e.target.value)}
-                  className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 text-[11px]"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-xs font-medium text-slate-700">Signatory Name</label>
-                    <span className="text-[10px] text-slate-400">Dropdown</span>
+                    <label className="text-xs font-medium text-slate-700">Name</label>
+                    <span className="text-[10px] text-slate-400">Custom / Select</span>
                   </div>
-                  <select
-                    value={
-                      DEFAULT_SIGNATORY_NAMES.includes(meta.signatoryName)
-                        ? meta.signatoryName
-                        : 'custom'
-                    }
-                    onChange={(e) => {
-                      if (e.target.value !== 'custom') {
-                        updateMeta('signatoryName', e.target.value);
+                  <div className="space-y-1.5">
+                    <select
+                      value={
+                        DEFAULT_SIGNATORY_NAMES.includes(meta.signatoryName)
+                          ? meta.signatoryName
+                          : 'custom'
                       }
-                    }}
-                    className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-1.5"
-                  >
-                    {DEFAULT_SIGNATORY_NAMES.map((name) => (
-                      <option key={name} value={name}>
-                        {name}
-                      </option>
-                    ))}
-                    <option value="custom">Other / Custom Name...</option>
-                  </select>
-                  {(!DEFAULT_SIGNATORY_NAMES.includes(meta.signatoryName) || meta.signatoryName === '') && (
+                      onChange={(e) => {
+                        if (e.target.value !== 'custom') {
+                          updateMeta('signatoryName', e.target.value);
+                        }
+                      }}
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      {DEFAULT_SIGNATORY_NAMES.map((name) => (
+                        <option key={name} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                      <option value="custom">Custom Name...</option>
+                    </select>
                     <input
                       type="text"
-                      placeholder="Enter custom signatory name"
+                      placeholder="Type name"
                       value={meta.signatoryName}
                       onChange={(e) => updateMeta('signatoryName', e.target.value)}
                       className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-                  )}
+                  </div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-xs font-medium text-slate-700">Signatory Title</label>
-                    <span className="text-[10px] text-slate-400">Dropdown</span>
+                    <label className="text-xs font-medium text-slate-700">Designation</label>
+                    <span className="text-[10px] text-slate-400">Custom / Select</span>
                   </div>
-                  <select
-                    value={
-                      DEFAULT_SIGNATORY_TITLES.includes(meta.signatoryRole)
-                        ? meta.signatoryRole
-                        : 'custom'
-                    }
-                    onChange={(e) => {
-                      if (e.target.value !== 'custom') {
-                        updateMeta('signatoryRole', e.target.value);
+                  <div className="space-y-1.5">
+                    <select
+                      value={
+                        !meta.signatoryRole
+                          ? 'none'
+                          : DEFAULT_SIGNATORY_TITLES.includes(meta.signatoryRole)
+                          ? meta.signatoryRole
+                          : 'custom'
                       }
-                    }}
-                    className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-1.5"
-                  >
-                    {DEFAULT_SIGNATORY_TITLES.map((title) => (
-                      <option key={title} value={title}>
-                        {title}
-                      </option>
-                    ))}
-                    <option value="custom">Other / Custom Title...</option>
-                  </select>
-                  {(!DEFAULT_SIGNATORY_TITLES.includes(meta.signatoryRole) || meta.signatoryRole === '') && (
+                      onChange={(e) => {
+                        if (e.target.value === 'none') {
+                          updateMeta('signatoryRole', '');
+                        } else if (e.target.value !== 'custom') {
+                          updateMeta('signatoryRole', e.target.value);
+                        }
+                      }}
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="none">None (No Designation)</option>
+                      {DEFAULT_SIGNATORY_TITLES.map((title) => (
+                        <option key={title} value={title}>
+                          {title}
+                        </option>
+                      ))}
+                      <option value="custom">Custom Designation...</option>
+                    </select>
                     <input
                       type="text"
-                      placeholder="Enter custom title"
-                      value={meta.signatoryRole}
+                      placeholder="Type custom designation (optional)"
+                      value={meta.signatoryRole || ''}
                       onChange={(e) => updateMeta('signatoryRole', e.target.value)}
                       className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-                  )}
+                  </div>
                 </div>
               </div>
             </div>

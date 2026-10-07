@@ -24,7 +24,7 @@ async function createInvoiceCanvas(elementId: string): Promise<HTMLCanvasElement
   sandbox.style.position = 'fixed';
   sandbox.style.top = '0';
   sandbox.style.left = '0';
-  sandbox.style.width = '800px';
+  sandbox.style.width = '794px'; // Strict A4 width at 96 DPI (210mm)
   sandbox.style.backgroundColor = '#ffffff';
   sandbox.style.color = '#0f172a';
   sandbox.style.zIndex = '-99999';
@@ -37,14 +37,18 @@ async function createInvoiceCanvas(elementId: string): Promise<HTMLCanvasElement
   clone.id = 'invoice-clone-for-export';
   clone.style.transform = 'none';
   clone.style.margin = '0';
-  clone.style.padding = '36px 40px';
-  clone.style.width = '800px';
-  clone.style.maxWidth = '800px';
+  clone.style.padding = '60px 53px 53px 53px'; // Standard A4 print margins (16mm top, 14mm sides)
+  clone.style.width = '794px';
+  clone.style.maxWidth = '794px';
+  clone.style.minHeight = '1123px'; // Strict A4 height at 96 DPI (297mm)
+  clone.style.boxSizing = 'border-box';
   clone.style.boxShadow = 'none';
   clone.style.border = 'none';
   clone.style.borderRadius = '0';
   clone.style.backgroundColor = '#ffffff';
-  clone.style.display = 'block';
+  clone.style.display = 'flex';
+  clone.style.flexDirection = 'column';
+  clone.style.justifyContent = 'space-between';
   clone.style.visibility = 'visible';
   clone.style.color = '#0f172a';
 
@@ -72,7 +76,8 @@ async function createInvoiceCanvas(elementId: string): Promise<HTMLCanvasElement
     // Brief frame wait for layout paint
     await new Promise((r) => setTimeout(r, 80));
 
-    // 4. Capture with html2canvas
+    // 4. Capture with html2canvas (strict A4 resolution)
+    const exportHeight = Math.max(1123, clone.offsetHeight);
     const rawCanvas = await html2canvas(clone, {
       scale: 2,
       useCORS: true,
@@ -80,9 +85,9 @@ async function createInvoiceCanvas(elementId: string): Promise<HTMLCanvasElement
       backgroundColor: '#ffffff', // Explicit solid white
       scrollX: 0,
       scrollY: 0,
-      width: 800,
-      height: clone.offsetHeight,
-      windowWidth: 800,
+      width: 794,
+      height: exportHeight,
+      windowWidth: 794,
       logging: false,
     });
 
@@ -128,32 +133,30 @@ export async function downloadPdf(elementId: string, filename: string): Promise<
 
     const pageWidth = 210;
     const pageHeight = 297;
-    const margin = 6;
-    const contentWidth = pageWidth - margin * 2;
-    const contentHeight = (canvas.height * contentWidth) / canvas.width;
+    const contentHeight = (canvas.height * pageWidth) / canvas.width;
 
     // Fill page background with pure white
     pdf.setFillColor(255, 255, 255);
     pdf.rect(0, 0, pageWidth, pageHeight, 'F');
 
-    if (contentHeight <= pageHeight - margin * 2) {
-      // Single page document
-      pdf.addImage(imgData, 'JPEG', margin, margin, contentWidth, contentHeight, undefined, 'FAST');
+    if (contentHeight <= pageHeight + 4) {
+      // Single page strict A4 (fits 100% on standard 210mm x 297mm sheet)
+      pdf.addImage(imgData, 'JPEG', 0, 0, pageWidth, Math.min(pageHeight, contentHeight), undefined, 'FAST');
     } else {
       // Multi-page document
       let heightLeft = contentHeight;
-      let position = margin;
-      const printableHeight = pageHeight - margin * 2;
+      let position = 0;
+      const printableHeight = pageHeight;
 
-      pdf.addImage(imgData, 'JPEG', margin, position, contentWidth, contentHeight, undefined, 'FAST');
+      pdf.addImage(imgData, 'JPEG', 0, position, pageWidth, contentHeight, undefined, 'FAST');
       heightLeft -= printableHeight;
 
       while (heightLeft > 5) {
-        position = margin - (contentHeight - heightLeft);
+        position = -(contentHeight - heightLeft);
         pdf.addPage();
         pdf.setFillColor(255, 255, 255);
         pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-        pdf.addImage(imgData, 'JPEG', margin, position, contentWidth, contentHeight, undefined, 'FAST');
+        pdf.addImage(imgData, 'JPEG', 0, position, pageWidth, contentHeight, undefined, 'FAST');
         heightLeft -= printableHeight;
       }
     }
@@ -211,8 +214,11 @@ export function exportCsv(data: InvoiceData, filename: string): void {
     `"${item.title.replace(/"/g, '""')}"`,
     `"${item.description.replace(/"/g, '""')}"`,
     item.quantity,
-    item.rate,
-    (item.quantity * item.rate).toFixed(2),
+    item.rate !== undefined && item.rate !== null && item.rate > 0 ? item.rate : '—',
+    (item.amount !== undefined && item.amount !== null && !isNaN(item.amount) && item.amount > 0
+      ? Number(item.amount)
+      : item.quantity * (item.rate || 0)
+    ).toFixed(2),
   ]);
 
   const csvContent = [
@@ -238,7 +244,10 @@ export function exportCsv(data: InvoiceData, filename: string): void {
 }
 
 export async function copyShareText(data: InvoiceData): Promise<boolean> {
-  const subtotal = data.items.reduce((acc, item) => acc + item.quantity * item.rate, 0);
+  const subtotal = data.items.reduce(
+    (acc, item) => acc + (item.amount !== undefined && item.amount !== null && !isNaN(item.amount) && item.amount > 0 ? Number(item.amount) : item.quantity * (item.rate || 0)),
+    0
+  );
   const discountAmount =
     data.meta.discountType === 'percentage'
       ? (subtotal * data.meta.discountValue) / 100
@@ -256,7 +265,11 @@ Status: ${data.meta.status}
 Total Amount: ${data.meta.currencySymbol}${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${data.meta.currency}
 
 Items:
-${data.items.map((it, idx) => `${idx + 1}. ${it.title} - ${it.quantity} x ${data.meta.currencySymbol}${it.rate} = ${data.meta.currencySymbol}${(it.quantity * it.rate).toLocaleString()}`).join('\n')}
+${data.items.map((it, idx) => {
+  const itemTotal = it.amount !== undefined && it.amount !== null && !isNaN(it.amount) && it.amount > 0 ? Number(it.amount) : it.quantity * (it.rate || 0);
+  const rateStr = it.rate !== undefined && it.rate !== null && it.rate > 0 ? ` @ ${data.meta.currencySymbol}${it.rate}` : '';
+  return `${idx + 1}. ${it.title} (${it.quantity}${it.unit ? ' ' + it.unit : ''}${rateStr}) = ${data.meta.currencySymbol}${itemTotal.toLocaleString()}`;
+}).join('\n')}
 
 Bank Details:
 Bank: ${data.payment.bankName}

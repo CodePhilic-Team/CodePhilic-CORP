@@ -1,3 +1,7 @@
+export type DocumentType = 'INVOICE' | 'PAYMENT_RECEIPT';
+export type GenerationMode = 'online' | 'manual';
+export type UnitType = 'Qty' | 'Hrs' | 'Months' | 'Qty / Hrs';
+
 export type InvoiceStatus = 'PAID' | 'PENDING' | 'OVERDUE' | 'DRAFT' | 'PARTIALLY_PAID';
 
 export type InvoiceTheme = 'signature' | 'cyber-dark' | 'minimal';
@@ -7,7 +11,9 @@ export interface InvoiceItem {
   title: string;
   description: string;
   quantity: number;
-  rate: number;
+  unit?: UnitType | string;
+  rate?: number;
+  amount?: number;
   taxable?: boolean;
 }
 
@@ -65,13 +71,16 @@ export interface InvoiceMeta {
   signatoryRole: string;
   discountType: 'percentage' | 'fixed';
   discountValue: number;
-  taxRate: number;
+  taxRate: number; // percentage
   shippingFee: number;
   amountPaid: number;
   paidSealStyle?: 'circular' | 'stamp' | 'badge';
   paidSealColor?: 'emerald' | 'red' | 'blue';
   showQrCode?: boolean;
   paymentMethodType?: 'bank' | 'cash' | 'none';
+  documentType?: DocumentType;
+  generationMode?: GenerationMode;
+  unitType?: UnitType;
 }
 
 export interface InvoiceData {
@@ -93,13 +102,13 @@ export interface CurrencyConfig {
 
 export const SUPPORTED_CURRENCIES: CurrencyConfig[] = [
   { code: 'USD', symbol: '$', label: 'USD - US Dollar ($)' },
-  { code: 'EUR', symbol: '\u20ac', label: 'EUR - Euro (\u20ac)' },
-  { code: 'GBP', symbol: '\u00a3', label: 'GBP - British Pound (\u00a3)' },
-  { code: 'BDT', symbol: '\u09f3', label: 'BDT - Bangladeshi Taka (\u09f3)' },
-  { code: 'INR', symbol: '\u20b9', label: 'INR - Indian Rupee (\u20b9)' },
+  { code: 'EUR', symbol: '€', label: 'EUR - Euro (€)' },
+  { code: 'GBP', symbol: '£', label: 'GBP - British Pound (£)' },
+  { code: 'BDT', symbol: '৳', label: 'BDT - Bangladeshi Taka (৳)' },
+  { code: 'INR', symbol: '₹', label: 'INR - Indian Rupee (₹)' },
   { code: 'CAD', symbol: 'CA$', label: 'CAD - Canadian Dollar (CA$)' },
   { code: 'AUD', symbol: 'AU$', label: 'AUD - Australian Dollar (AU$)' },
   { code: 'SGD', symbol: 'SG$', label: 'SGD - Singapore Dollar (SG$)' },
   { code: 'AED', symbol: 'AED', label: 'AED - UAE Dirham (AED)' },
-  { code: 'JPY', symbol: '\u00a5', label: 'JPY - Japanese Yen (\u00a5)' },
+  { code: 'JPY', symbol: '¥', label: 'JPY - Japanese Yen (¥)' },
 ];

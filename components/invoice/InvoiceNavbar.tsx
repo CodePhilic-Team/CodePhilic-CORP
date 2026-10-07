@@ -174,7 +174,7 @@ export default function Navbar({
                 CodePhilic
               </span>
               <span className="text-xs text-slate-400 font-normal hidden sm:inline">
-                / Invoice Generator
+                / {invoice.meta.documentType === 'PAYMENT_RECEIPT' ? 'Payment Receipt' : 'Invoice Generator'}
               </span>
             </div>
           </Link>
