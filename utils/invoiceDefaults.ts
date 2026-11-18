@@ -109,6 +109,7 @@ export const DEFAULT_INVOICE: InvoiceData = {
     signatoryName: 'Md. Rakibul Islam',
     signatoryRole: 'CEO',
     showQrCode: true,
+    showGeneratedNote: true,
     paymentMethodType: 'bank',
     documentType: 'INVOICE',
     generationMode: 'online',

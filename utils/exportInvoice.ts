@@ -236,9 +236,9 @@ export function exportCsv(data: InvoiceData, filename: string): void {
   ]);
 
   const csvContent = [
-    `"Invoice Number","${data.meta.invoiceNumber}"`,
-    `"Issue Date","${toDMY(data.meta.issueDate)}"`,
-    `"Due Date","${toDMY(data.meta.dueDate)}"`,
+    `"${data.meta.documentType === 'FINANCIAL_ESTIMATE' ? 'Estimate' : 'Invoice'} Number","${data.meta.invoiceNumber}"`,
+    `"${data.meta.documentType === 'FINANCIAL_ESTIMATE' ? 'Submission Date' : 'Issue Date'}","${toDMY(data.meta.issueDate)}"`,
+    ...(data.meta.documentType === 'FINANCIAL_ESTIMATE' ? [] : [`"Due Date","${toDMY(data.meta.dueDate)}"`]),
     `"Client","${data.client.companyName}"`,
     `"Currency","${data.meta.currency}"`,
     '',
@@ -271,10 +271,10 @@ export async function copyShareText(data: InvoiceData): Promise<boolean> {
   const grandTotal = taxable + taxAmount + (data.meta.shippingFee || 0);
 
   const text = `
-CODEPHILIC LIMITED - INVOICE ${data.meta.invoiceNumber}
+CODEPHILIC LIMITED - ${data.meta.documentType === 'FINANCIAL_ESTIMATE' ? 'FINANCIAL ESTIMATE' : 'INVOICE'} ${data.meta.invoiceNumber}
 ----------------------------------------
 To: ${data.client.companyName} (${data.client.contactPerson || 'Accounts'})
-Date: ${toDMY(data.meta.issueDate)} | Due: ${toDMY(data.meta.dueDate)}
+${data.meta.documentType === 'FINANCIAL_ESTIMATE' ? `Submission Date: ${toDMY(data.meta.issueDate)}` : `Date: ${toDMY(data.meta.issueDate)} | Due: ${toDMY(data.meta.dueDate)}`}
 Status: ${data.meta.status}
 Total Amount: ${data.meta.currencySymbol}${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${data.meta.currency}
 

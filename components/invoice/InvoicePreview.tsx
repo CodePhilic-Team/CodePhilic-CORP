@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { InvoiceData, InvoiceItem } from '@/types/invoice';
@@ -17,6 +17,42 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
   const [zoomLevel, setZoomLevel] = useState<number>(100);
 
   const { company, client, items, meta, payment } = invoice;
+
+  // Watermark: pre-fade the logo into a PNG data URL so the transparency is baked into the
+  // pixels. This survives html2canvas (PDF/PNG export) and browser print-to-PDF alike.
+  const watermarkSource = company.logoUrl || '/cpLOGO.png';
+  const [watermarkSrc, setWatermarkSrc] = useState<string>('');
+
+  useEffect(() => {
+    let cancelled = false;
+    const img = new window.Image();
+    img.onload = () => {
+      if (cancelled) return;
+      try {
+        const size = 900;
+        const ratio = img.naturalWidth / img.naturalHeight || 1;
+        const canvas = document.createElement('canvas');
+        canvas.width = ratio >= 1 ? size : Math.round(size * ratio);
+        canvas.height = ratio >= 1 ? Math.round(size / ratio) : size;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.globalAlpha = 0.1;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        setWatermarkSrc(canvas.toDataURL('image/png'));
+      } catch {
+        // Tainted canvas (cross-origin logo): fall back to the raw logo; CSS opacity is applied below.
+        setWatermarkSrc(watermarkSource);
+      }
+    };
+    img.onerror = () => {
+      if (!cancelled) setWatermarkSrc('');
+    };
+    img.crossOrigin = 'anonymous';
+    img.src = watermarkSource;
+    return () => {
+      cancelled = true;
+    };
+  }, [watermarkSource]);
 
   // Helper to format date strictly in date/month/year (DD/MM/YYYY)
   const formatDateDMY = (dateStr: string | undefined): string => {
@@ -82,6 +118,8 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
   };
 
   const isReceipt = meta.documentType === 'PAYMENT_RECEIPT';
+  const isEstimate = meta.documentType === 'FINANCIAL_ESTIMATE';
+  const documentLabel = isReceipt ? 'Payment Receipt' : isEstimate ? 'Financial Estimate' : 'Invoice';
 
   return (
     <div className="flex-1 flex flex-col bg-slate-100 overflow-hidden relative">
@@ -95,7 +133,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
             A4 (210 × 297 mm)
           </span>
           <span className="text-[11px] text-slate-500 font-medium px-2 py-0.5 rounded bg-slate-100">
-            {isReceipt ? 'Payment Receipt' : 'Invoice'}
+            {documentLabel}
           </span>
         </div>
 
@@ -149,10 +187,31 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
               minHeight: '297mm',
               boxSizing: 'border-box',
             }}
-            className="w-[210mm] max-w-full min-h-[297mm] bg-white rounded-lg sm:rounded-xl border border-slate-200/90 shadow-md p-[16mm_14mm_14mm_14mm] text-slate-800 text-xs font-sans leading-normal flex flex-col justify-between print:!w-[210mm] print:!min-h-[297mm] print:!max-w-[210mm] print:!border-none print:!shadow-none print:!p-[16mm_14mm_14mm_14mm] print:!rounded-none"
+            className="relative overflow-hidden w-[210mm] max-w-full min-h-[297mm] bg-white rounded-lg sm:rounded-xl border border-slate-200/90 shadow-md p-[16mm_14mm_14mm_14mm] text-slate-800 text-xs font-sans leading-normal flex flex-col justify-between print:!w-[210mm] print:!min-h-[297mm] print:!max-w-[210mm] print:!border-none print:!shadow-none print:!p-[16mm_14mm_14mm_14mm] print:!rounded-none"
           >
+            {/* Company Logo Watermark (all document modes) */}
+            <div
+              aria-hidden="true"
+              className="invoice-watermark absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+              style={{ zIndex: 0 }}
+            >
+              {watermarkSrc && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={watermarkSrc}
+                  alt=""
+                  style={{
+                    width: '120mm',
+                    height: 'auto',
+                    display: 'block',
+                    opacity: watermarkSrc.startsWith('data:') ? 1 : 0.1,
+                  }}
+                />
+              )}
+            </div>
+
             {/* Top / Main Content Area */}
-            <div className="flex-1 flex flex-col justify-start">
+            <div className="relative z-10 flex-1 flex flex-col justify-start">
               {/* Header: Brand & Document Meta */}
               <div className="flex flex-col sm:flex-row justify-between items-start gap-5 pb-5 border-b border-slate-200">
                 {/* Left: CodePhilic Company Header (Enlarged Title & Logo) */}
@@ -180,6 +239,18 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                     {company.cityCountry && <span>, {company.cityCountry}</span>}
                     <br />
                     <span>{company.email}</span>
+                    {company.regNo && (
+                      <>
+                        <br />
+                        <span>{company.regNo}</span>
+                      </>
+                    )}
+                    {company.vatNo && (
+                      <>
+                        <br />
+                        <span>VAT/BIN: {company.vatNo}</span>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -187,7 +258,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                 <div className="flex flex-col sm:items-end text-left sm:text-right space-y-1">
                   {/* 1st Line: Document Title Only */}
                   <div className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-950 uppercase leading-tight">
-                    {isReceipt ? 'PAYMENT RECEIPT' : 'INVOICE'}
+                    {documentLabel.toUpperCase()}
                   </div>
 
                   {/* 2nd Line: ID / Number and Status Badge (Clean & Separate, No Overlap) */}
@@ -195,7 +266,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                     <span className="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                       #{meta.invoiceNumber}
                     </span>
-                    {meta.status !== 'PAID' && (
+                    {meta.status !== 'PAID' && !isEstimate && (
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider border ${getStatusBadge()}`}
                       >
@@ -207,10 +278,12 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                   {/* 3rd Line: Dates */}
                   <div className="flex flex-wrap sm:justify-end gap-x-3.5 gap-y-1 text-[11px] text-slate-500 pt-1">
                     <div>
-                      <span className="text-slate-400">{isReceipt ? 'Receipt Date: ' : 'Date: '}</span>
+                      <span className="text-slate-400">
+                        {isReceipt ? 'Receipt Date: ' : isEstimate ? 'Submission Date: ' : 'Date: '}
+                      </span>
                       <span className="font-medium text-slate-700">{formatDateDMY(meta.issueDate)}</span>
                     </div>
-                    {!isReceipt && (
+                    {!isReceipt && !isEstimate && (
                       <div>
                         <span className="text-slate-400">Due: </span>
                         <span className="font-medium text-slate-700">{formatDateDMY(meta.dueDate)}</span>
@@ -223,7 +296,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
               {/* Billed To / Client Section */}
               <div className="py-4 border-b border-slate-200">
                 <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                  {isReceipt ? 'Received From' : 'Billed To'}
+                  {isReceipt ? 'Received From' : isEstimate ? 'Prepared For' : 'Billed To'}
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs">
                   <div>
@@ -338,7 +411,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                     )}
 
                     {/* Dedicated Blank Free Space for Paid Seal (NO OVERLAP!) */}
-                    {meta.status === 'PAID' && (
+                    {meta.status === 'PAID' && !isEstimate && (
                       <div className="pt-1.5 pb-0.5 flex items-center gap-3">
                         <PaidSeal
                           status="PAID"
@@ -394,11 +467,11 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                   )}
 
                   <div className="flex justify-between pt-1.5 pb-1 border-t-2 border-slate-300 text-sm font-bold text-slate-900">
-                    <span>Grand Total:</span>
+                    <span>{isEstimate ? 'Estimated Total:' : 'Grand Total:'}</span>
                     <span className="font-mono text-base">{formatCurrency(grandTotal)}</span>
                   </div>
 
-                  {amountPaid > 0 && (
+                  {amountPaid > 0 && !isEstimate && (
                     <>
                       <div className="flex justify-between py-0.5 text-emerald-700">
                         <span>Amount Paid:</span>
@@ -421,7 +494,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                         bgColor="#ffffff"
                       />
                       <div className="text-[10px] text-slate-500 leading-tight">
-                        Scan to verify or remit payment online.
+                        {isEstimate ? 'Scan to verify this estimate online.' : 'Scan to verify or remit payment online.'}
                       </div>
                     </div>
                   )}
@@ -430,18 +503,22 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
             </div>
 
             {/* Bottom Locked Footer: Notes & Authorized Signature (Anchored cleanly at A4 bottom) */}
-            <div className="pt-4 mt-auto border-t border-slate-200 page-break-inside-avoid shrink-0">
+            <div className="relative z-10 pt-4 mt-auto border-t border-slate-200 page-break-inside-avoid shrink-0">
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-end">
                 <div className="sm:col-span-8 text-[11px] text-slate-500">
                   {meta.generationMode !== 'manual' ? (
+                    meta.showGeneratedNote === false ? null : (
                     <div>
                       <div className="font-semibold text-slate-700 text-[10px] uppercase tracking-wider mb-0.5">
                         Note
                       </div>
                       <p className="text-slate-600 leading-relaxed text-[11px]">
-                        This is a computer-generated document. No signature is required.
+                        {isEstimate
+                          ? 'This is a computer-generated estimate, not a tax invoice. Figures are indicative. No payment is due until the estimate is accepted.'
+                          : 'This is a computer-generated document. No signature is required.'}
                       </p>
                     </div>
+                    )
                   ) : meta.notes ? (
                     <div>
                       <div className="font-semibold text-slate-700 text-[10px] uppercase tracking-wider mb-0.5">
@@ -459,7 +536,8 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                       <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mb-1 text-center sm:text-right w-full">
                         Authorized by
                       </div>
-                      <div className="h-10 w-44" />
+                      {/* min-height (not height): print CSS forces `div { height: auto !important }`, which would collapse this signing space */}
+                      <div className="w-44" style={{ minHeight: '3rem' }} />
                       <div className="w-44 border-b border-slate-400 pb-1 mb-1 text-center sm:text-right font-medium text-slate-700 text-[11px]">
                         Signature &amp; Seal
                       </div>
@@ -472,6 +550,8 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                       <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mb-0.5">
                         Authorized by
                       </div>
+                      {/* min-height (not height): print CSS forces `div { height: auto !important }` */}
+                      <div className="w-48" style={{ minHeight: '2.5rem' }} />
                       <div className="w-48 border-b border-slate-300 pb-1 mb-1 font-semibold text-slate-900 text-xs">
                         {meta.signatoryName || 'Authorized Signatory'}
                       </div>

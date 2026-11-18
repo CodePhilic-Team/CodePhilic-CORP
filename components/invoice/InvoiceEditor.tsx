@@ -12,8 +12,9 @@ import {
   FileText,
   Receipt,
   Calendar,
+  Calculator,
 } from 'lucide-react';
-import { InvoiceData, InvoiceItem, SUPPORTED_CURRENCIES, InvoiceStatus } from '@/types/invoice';
+import { InvoiceData, InvoiceItem, SUPPORTED_CURRENCIES, InvoiceStatus, DocumentType } from '@/types/invoice';
 import { DEFAULT_SIGNATORY_NAMES, DEFAULT_SIGNATORY_TITLES } from '@/utils/invoiceDefaults';
 
 interface InvoiceEditorProps {
@@ -366,9 +367,10 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
     }
   };
 
-  const generateNextInvoiceNo = (targetType?: 'INVOICE' | 'PAYMENT_RECEIPT') => {
+  const generateNextInvoiceNo = (targetType?: DocumentType) => {
     const type = targetType || meta.documentType;
-    const prefix = type === 'PAYMENT_RECEIPT' ? 'CP-RCP' : 'CP-INV';
+    const prefix =
+      type === 'PAYMENT_RECEIPT' ? 'CP-RCP' : type === 'FINANCIAL_ESTIMATE' ? 'CP-EST' : 'CP-INV';
     const year = 2026;
     const randomSeq = Math.floor(1000 + Math.random() * 9000);
     updateMeta('invoiceNumber', `${prefix}-${year}-${randomSeq}`);
@@ -395,8 +397,8 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
               type="button"
               onClick={() => {
                 updateMeta('documentType', 'INVOICE');
-                if (meta.invoiceNumber.startsWith('CP-RCP-')) {
-                  updateMeta('invoiceNumber', meta.invoiceNumber.replace(/^CP-RCP-/, 'CP-INV-'));
+                if (/^CP-(RCP|EST)-/.test(meta.invoiceNumber)) {
+                  updateMeta('invoiceNumber', meta.invoiceNumber.replace(/^CP-(RCP|EST)-/, 'CP-INV-'));
                 } else if (!meta.invoiceNumber.startsWith('CP-INV-')) {
                   const randomSeq = Math.floor(1000 + Math.random() * 9000);
                   updateMeta('invoiceNumber', `CP-INV-2026-${randomSeq}`);
@@ -418,8 +420,8 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
                 if (meta.status !== 'PAID') {
                   updateMeta('status', 'PAID');
                 }
-                if (meta.invoiceNumber.startsWith('CP-INV-')) {
-                  updateMeta('invoiceNumber', meta.invoiceNumber.replace(/^CP-INV-/, 'CP-RCP-'));
+                if (/^CP-(INV|EST)-/.test(meta.invoiceNumber)) {
+                  updateMeta('invoiceNumber', meta.invoiceNumber.replace(/^CP-(INV|EST)-/, 'CP-RCP-'));
                 } else if (!meta.invoiceNumber.startsWith('CP-RCP-')) {
                   const randomSeq = Math.floor(1000 + Math.random() * 9000);
                   updateMeta('invoiceNumber', `CP-RCP-2026-${randomSeq}`);
@@ -433,6 +435,29 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
             >
               <Receipt className="w-3.5 h-3.5" />
               <span>Payment Receipt</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                updateMeta('documentType', 'FINANCIAL_ESTIMATE');
+                if (meta.status === 'PAID' || meta.status === 'PARTIALLY_PAID' || meta.status === 'OVERDUE') {
+                  updateMeta('status', 'DRAFT');
+                }
+                if (/^CP-(INV|RCP)-/.test(meta.invoiceNumber)) {
+                  updateMeta('invoiceNumber', meta.invoiceNumber.replace(/^CP-(INV|RCP)-/, 'CP-EST-'));
+                } else if (!meta.invoiceNumber.startsWith('CP-EST-')) {
+                  const randomSeq = Math.floor(1000 + Math.random() * 9000);
+                  updateMeta('invoiceNumber', `CP-EST-2026-${randomSeq}`);
+                }
+              }}
+              className={`px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5 ${
+                meta.documentType === 'FINANCIAL_ESTIMATE'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Calculator className="w-3.5 h-3.5" />
+              <span>Financial Estimate</span>
             </button>
           </div>
         </div>
@@ -471,6 +496,24 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
             </button>
           </div>
         </div>
+
+        {/* Online Generated: show / hide the computer-generated note on the document */}
+        {meta.generationMode !== 'manual' && (
+          <div className="flex items-center justify-between gap-3 pt-1 border-t border-slate-200/60">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              Show Note
+            </span>
+            <label className="relative inline-flex items-center cursor-pointer" title="Show or hide the computer-generated note on the document">
+              <input
+                type="checkbox"
+                checked={meta.showGeneratedNote !== false}
+                onChange={(e) => updateMeta('showGeneratedNote', e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
@@ -480,7 +523,13 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
             onClick={() => toggleSection('details')}
             className="flex items-center justify-between cursor-pointer select-none font-semibold text-slate-900 text-sm pb-1"
           >
-            <span>{meta.documentType === 'PAYMENT_RECEIPT' ? 'Receipt Details' : 'Invoice Details'}</span>
+            <span>
+              {meta.documentType === 'PAYMENT_RECEIPT'
+                ? 'Receipt Details'
+                : meta.documentType === 'FINANCIAL_ESTIMATE'
+                  ? 'Estimate Details'
+                  : 'Invoice Details'}
+            </span>
             <div className="text-slate-400">
               {sectionsOpen.details ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </div>
@@ -492,7 +541,11 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
               <div>
                 <div className="flex justify-between items-center mb-1">
                   <label className="text-xs font-medium text-slate-700">
-                    {meta.documentType === 'PAYMENT_RECEIPT' ? 'Receipt Number' : 'Invoice Number'}
+                    {meta.documentType === 'PAYMENT_RECEIPT'
+                      ? 'Receipt Number'
+                      : meta.documentType === 'FINANCIAL_ESTIMATE'
+                        ? 'Estimate Number'
+                        : 'Invoice Number'}
                   </label>
                   <button
                     onClick={() => generateNextInvoiceNo()}
@@ -564,12 +617,19 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
 
               <div>
                 <DatePickerDMY
-                  label={meta.documentType === 'PAYMENT_RECEIPT' ? 'Receipt Date' : 'Issue Date'}
+                  label={
+                    meta.documentType === 'PAYMENT_RECEIPT'
+                      ? 'Receipt Date'
+                      : meta.documentType === 'FINANCIAL_ESTIMATE'
+                        ? 'Submission Date'
+                        : 'Issue Date'
+                  }
                   value={meta.issueDate}
                   onChange={(dmy) => updateMeta('issueDate', dmy)}
                 />
               </div>
 
+              {meta.documentType !== 'FINANCIAL_ESTIMATE' && (
               <div>
                 <DatePickerDMY
                   label="Due Date"
@@ -577,7 +637,9 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
                   onChange={(dmy) => updateMeta('dueDate', dmy)}
                 />
               </div>
+              )}
 
+              {meta.documentType !== 'FINANCIAL_ESTIMATE' && (
               <div className="sm:col-span-2">
                 <div className="flex items-center gap-1.5 text-xs text-slate-600">
                   <span className="text-[11px] text-slate-500">Quick Due Date:</span>
@@ -607,6 +669,7 @@ export default function InvoiceEditor({ invoice, setInvoice }: InvoiceEditorProp
                   </button>
                 </div>
               </div>
+              )}
 
               <div>
                 <label className="text-xs font-medium text-slate-700 block mb-1">Currency</label>

@@ -228,6 +228,26 @@
     overflow: hidden !important;
   }
 
+  /* Let the company-logo watermark show through the content layers
+     (the generic `div` rule above forces white, which would cover it). */
+  #invoice-printable-document div {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  #invoice-printable-document .invoice-watermark {
+    position: absolute !important;
+    inset: 0 !important;
+    height: 100% !important;
+    z-index: 0 !important;
+  }
+
+  #invoice-printable-document .invoice-watermark img {
+    opacity: 1;
+    visibility: visible !important;
+    display: block !important;
+  }
+
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;

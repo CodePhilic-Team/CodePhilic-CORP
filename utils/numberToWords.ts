@@ -79,7 +79,7 @@ function getCurrencyName(code: string): string {
     case 'GBP':
       return 'Pounds Sterling';
     case 'BDT':
-      return 'Bangladeshi Taka';
+      return 'Taka';
     case 'INR':
       return 'Indian Rupees';
     case 'CAD':

@@ -1,4 +1,4 @@
-export type DocumentType = 'INVOICE' | 'PAYMENT_RECEIPT';
+export type DocumentType = 'INVOICE' | 'PAYMENT_RECEIPT' | 'FINANCIAL_ESTIMATE';
 export type GenerationMode = 'online' | 'manual';
 export type UnitType = 'Qty' | 'Hrs' | 'Months' | 'Qty / Hrs';
 
@@ -77,6 +77,7 @@ export interface InvoiceMeta {
   paidSealStyle?: 'circular' | 'stamp' | 'badge';
   paidSealColor?: 'emerald' | 'red' | 'blue';
   showQrCode?: boolean;
+  showGeneratedNote?: boolean; // Online Generated mode: show/hide the "computer-generated" note
   paymentMethodType?: 'bank' | 'cash' | 'none';
   documentType?: DocumentType;
   generationMode?: GenerationMode;
