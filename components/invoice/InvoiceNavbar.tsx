@@ -35,6 +35,7 @@ interface NavbarProps {
   activeMobileTab: 'editor' | 'preview';
   setActiveMobileTab: (tab: 'editor' | 'preview') => void;
   openSavedModal: () => void;
+  onSaveCurrent: (title?: string) => void;
   savedCount: number;
 }
 
@@ -44,6 +45,7 @@ export default function Navbar({
   activeMobileTab,
   setActiveMobileTab,
   openSavedModal,
+  onSaveCurrent,
   savedCount,
 }: NavbarProps) {
   const [exportOpen, setExportOpen] = useState(false);
@@ -84,7 +86,17 @@ export default function Navbar({
       setActiveMobileTab('preview');
       await new Promise((r) => setTimeout(r, 150));
     }
-    await downloadPdf('invoice-printable-document', `${invoice.meta.invoiceNumber || 'CodePhilic-Invoice'}`);
+    const downloaded = await downloadPdf(
+      'invoice-printable-document',
+      `${invoice.meta.invoiceNumber || 'CodePhilic-Invoice'}`
+    );
+    if (downloaded) {
+      onSaveCurrent(
+        `${invoice.meta.documentType === 'FINANCIAL_ESTIMATE' ? 'Estimate' : 'Invoice'} - ${
+          invoice.meta.invoiceNumber || 'Untitled'
+        }`
+      );
+    }
     setIsExporting(false);
   };
 

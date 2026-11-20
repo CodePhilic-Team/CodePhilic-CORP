@@ -86,6 +86,7 @@ export interface InvoiceMeta {
 
 export interface InvoiceData {
   id: string;
+  title?: string;
   createdAt: string;
   updatedAt: string;
   company: CompanyDetails;

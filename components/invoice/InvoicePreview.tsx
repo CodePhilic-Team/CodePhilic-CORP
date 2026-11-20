@@ -234,7 +234,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                     </div>
                   </div>
 
-                  <div className="text-xs text-slate-500 leading-normal pt-0.5">
+                  <div className="text-xs text-black leading-normal pt-0.5">
                     <span>{company.address || 'Arif Nagar, Santosh, Tangail.'}</span>
                     {company.cityCountry && <span>, {company.cityCountry}</span>}
                     <br />
@@ -276,16 +276,16 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                   </div>
 
                   {/* 3rd Line: Dates */}
-                  <div className="flex flex-wrap sm:justify-end gap-x-3.5 gap-y-1 text-[11px] text-slate-500 pt-1">
+                  <div className="flex flex-wrap sm:justify-end gap-x-3.5 gap-y-1 text-[11px] text-black pt-1">
                     <div>
-                      <span className="text-slate-400">
+                      <span className="text-black">
                         {isReceipt ? 'Receipt Date: ' : isEstimate ? 'Submission Date: ' : 'Date: '}
                       </span>
                       <span className="font-medium text-slate-700">{formatDateDMY(meta.issueDate)}</span>
                     </div>
                     {!isReceipt && !isEstimate && (
                       <div>
-                        <span className="text-slate-400">Due: </span>
+                        <span className="text-black">Due: </span>
                         <span className="font-medium text-slate-700">{formatDateDMY(meta.dueDate)}</span>
                       </div>
                     )}
@@ -295,22 +295,22 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
 
               {/* Billed To / Client Section */}
               <div className="py-4 border-b border-slate-200">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-black mb-1">
                   {isReceipt ? 'Received From' : isEstimate ? 'Prepared For' : 'Billed To'}
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs">
                   <div>
                     <span className="font-semibold text-slate-900 text-sm">{client.companyName || 'Client Name'}</span>
-                    {client.contactPerson && <span className="text-slate-600 ml-2">{client.contactPerson}</span>}
+                    {client.contactPerson && <span className="text-black ml-2">{client.contactPerson}</span>}
                   </div>
                   {client.taxId && (
-                    <div className="text-[11px] font-mono text-slate-500">
+                    <div className="text-[11px] font-mono text-black">
                       Tax / VAT ID: {client.taxId}
                     </div>
                   )}
                 </div>
                 {(client.address || client.cityCountry || client.email || client.phone) && (
-                  <div className="text-[11px] text-slate-500 mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                  <div className="text-[11px] text-black mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5">
                     {client.address && <span>{client.address}</span>}
                     {client.cityCountry && <span>, {client.cityCountry}</span>}
                     {client.email && <span>&bull; {client.email}</span>}
@@ -323,8 +323,8 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
               <div className="py-4">
                 <table className="w-full text-left border-collapse text-xs">
                   <thead>
-                    <tr className="border-b-2 border-slate-300 text-slate-600 font-bold text-[11px]">
-                      <th className="py-2.5 px-2.5 w-8 text-center text-slate-400">#</th>
+                    <tr className="border-b-2 border-slate-300 text-black font-bold text-[11px]">
+                      <th className="py-2.5 px-2.5 w-8 text-center text-black">#</th>
                       <th className="py-2.5 px-2.5">Description</th>
                       <th className="py-2.5 px-2.5 text-center w-16">Unit</th>
                       <th className="py-2.5 px-2.5 text-right w-16">Qty</th>
@@ -338,7 +338,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                       const itemUnit = item.unit || (meta.unitType?.includes('Hrs') ? 'Hrs' : meta.unitType?.includes('Months') ? 'Months' : 'Qty');
                       return (
                         <tr key={item.id || index} className="align-top hover:bg-slate-50/40 transition-colors">
-                          <td className="py-2.5 px-2.5 text-center text-slate-400 font-mono text-[11px]">
+                          <td className="py-2.5 px-2.5 text-center text-black font-mono text-[11px]">
                             {index + 1}
                           </td>
                           <td className="py-2.5 px-2.5 pr-4">
@@ -346,12 +346,12 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                               {item.title}
                             </div>
                             {item.description && (
-                              <div className="text-[11px] text-slate-500 mt-0.5 leading-relaxed whitespace-pre-line">
+                              <div className="text-[11px] text-black mt-0.5 leading-relaxed whitespace-pre-line">
                                 {item.description}
                               </div>
                             )}
                           </td>
-                          <td className="py-2.5 px-2.5 text-center font-medium text-slate-600 text-[11px]">
+                          <td className="py-2.5 px-2.5 text-center font-medium text-black text-[11px]">
                             {itemUnit}
                           </td>
                           <td className="py-2.5 px-2.5 text-right font-mono text-slate-700">
@@ -393,15 +393,15 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                             </div>
                             <div className="space-y-0.5 text-[11px] text-slate-700">
                               <div>
-                                <span className="text-slate-400">Bank: </span>
+                                <span className="text-black">Bank: </span>
                                 <span className="font-medium text-slate-800">{payment.bankName}</span>
                               </div>
                               <div>
-                                <span className="text-slate-400">Account Name: </span>
+                                <span className="text-black">Account Name: </span>
                                 <span className="font-medium text-slate-800">{payment.accountName}</span>
                               </div>
                               <div>
-                                <span className="text-slate-400">Account Number: </span>
+                                <span className="text-black">Account Number: </span>
                                 <span className="font-mono font-medium text-slate-800">{payment.accountNumber}</span>
                               </div>
                             </div>
@@ -423,28 +423,28 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                         />
                         <div className="text-[11px] text-emerald-700 leading-tight">
                           <div className="font-bold tracking-wider uppercase text-[10px]">Payment Confirmed</div>
-                          <div className="text-[10px] text-slate-500 font-mono mt-0.5">{meta.issueDate}</div>
+                          <div className="text-[10px] text-black font-mono mt-0.5">{meta.issueDate}</div>
                         </div>
                       </div>
                     )}
                   </div>
 
                   {/* Amount in words */}
-                  <div className="text-[11px] text-slate-600 pt-1">
-                    <span className="text-slate-400 font-medium">Amount in Words: </span>
+                  <div className="text-[11px] text-black pt-1">
+                    <span className="text-black font-medium">Amount in Words: </span>
                     <span className="italic font-serif text-slate-800">&ldquo;{amountInWords}&rdquo;</span>
                   </div>
                 </div>
 
                 {/* Right Column: Totals Calculations (Unobstructed, Clean) (5 cols) */}
                 <div className="sm:col-span-5 space-y-1 text-xs">
-                  <div className="flex justify-between py-0.5 text-slate-600">
+                  <div className="flex justify-between py-0.5 text-black">
                     <span>Subtotal:</span>
                     <span className="font-mono font-medium text-slate-800">{formatCurrency(subtotal)}</span>
                   </div>
 
                   {discountAmount > 0 && (
-                    <div className="flex justify-between py-0.5 text-slate-600">
+                    <div className="flex justify-between py-0.5 text-black">
                       <span>
                         Discount {meta.discountType === 'percentage' ? `(${meta.discountValue}%)` : ''}:
                       </span>
@@ -453,14 +453,14 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                   )}
 
                   {meta.taxRate > 0 && (
-                    <div className="flex justify-between py-0.5 text-slate-600">
+                    <div className="flex justify-between py-0.5 text-black">
                       <span>Tax / VAT ({meta.taxRate}%):</span>
                       <span className="font-mono text-slate-700">{formatCurrency(taxAmount)}</span>
                     </div>
                   )}
 
                   {shippingFee > 0 && (
-                    <div className="flex justify-between py-0.5 text-slate-600">
+                    <div className="flex justify-between py-0.5 text-black">
                       <span>Additional Fee:</span>
                       <span className="font-mono text-slate-700">{formatCurrency(shippingFee)}</span>
                     </div>
@@ -493,7 +493,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                         fgColor="#0f172a"
                         bgColor="#ffffff"
                       />
-                      <div className="text-[10px] text-slate-500 leading-tight">
+                      <div className="text-[10px] text-black leading-tight">
                         {isEstimate ? 'Scan to verify this estimate online.' : 'Scan to verify or remit payment online.'}
                       </div>
                     </div>
@@ -505,14 +505,14 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
             {/* Bottom Locked Footer: Notes & Authorized Signature (Anchored cleanly at A4 bottom) */}
             <div className="relative z-10 pt-4 mt-auto border-t border-slate-200 page-break-inside-avoid shrink-0">
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-end">
-                <div className="sm:col-span-8 text-[11px] text-slate-500">
+                <div className="sm:col-span-8 text-[11px] text-black">
                   {meta.generationMode !== 'manual' ? (
                     meta.showGeneratedNote === false ? null : (
                     <div>
                       <div className="font-semibold text-slate-700 text-[10px] uppercase tracking-wider mb-0.5">
                         Note
                       </div>
-                      <p className="text-slate-600 leading-relaxed text-[11px]">
+                      <p className="text-black leading-relaxed text-[11px]">
                         {isEstimate
                           ? 'This is a computer-generated estimate, not a tax invoice. Figures are indicative. No payment is due until the estimate is accepted.'
                           : 'This is a computer-generated document. No signature is required.'}
@@ -533,7 +533,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                 <div className="sm:col-span-4 flex flex-col justify-end items-start sm:items-end">
                   {meta.generationMode === 'manual' ? (
                     <div className="flex flex-col items-center sm:items-end">
-                      <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mb-1 text-center sm:text-right w-full">
+                      <div className="text-[10px] uppercase tracking-wider font-semibold text-black mb-1 text-center sm:text-right w-full">
                         Authorized by
                       </div>
                       {/* min-height (not height): print CSS forces `div { height: auto !important }`, which would collapse this signing space */}
@@ -541,13 +541,13 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                       <div className="w-44 border-b border-slate-400 pb-1 mb-1 text-center sm:text-right font-medium text-slate-700 text-[11px]">
                         Signature &amp; Seal
                       </div>
-                      <div className="text-[10px] text-slate-400 font-normal">
+                      <div className="text-[10px] text-black font-normal">
                         CodePhilic Limited
                       </div>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center sm:items-end text-center sm:text-right">
-                      <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mb-0.5">
+                      <div className="text-[10px] uppercase tracking-wider font-semibold text-black mb-0.5">
                         Authorized by
                       </div>
                       {/* min-height (not height): print CSS forces `div { height: auto !important }` */}
@@ -556,11 +556,11 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
                         {meta.signatoryName || 'Authorized Signatory'}
                       </div>
                       {meta.signatoryRole && (
-                        <div className="text-[10px] text-slate-600 font-medium">
+                        <div className="text-[10px] text-black font-medium">
                           {meta.signatoryRole}
                         </div>
                       )}
-                      <div className="text-[10px] text-slate-500 font-normal">
+                      <div className="text-[10px] text-black font-normal">
                         CodePhilic Limited
                       </div>
                     </div>

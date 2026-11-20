@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   X,
   FolderOpen,
@@ -33,21 +33,16 @@ export default function SavedInvoicesModal({
   onSaveCurrent,
   onDeleteInvoice,
 }: SavedInvoicesModalProps) {
-  const [saveTitle, setSaveTitle] = useState('');
+  const saveTitleRef = useRef<HTMLInputElement>(null);
   const [justSaved, setJustSaved] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setSaveTitle(
-        `${currentInvoice.meta.invoiceNumber} - ${currentInvoice.client.companyName || 'Untitled'}`
-      );
-    }
-  }, [isOpen, currentInvoice]);
 
   if (!isOpen) return null;
 
   const handleSave = () => {
-    onSaveCurrent(saveTitle);
+    onSaveCurrent(
+      saveTitleRef.current?.value.trim() ||
+        `${currentInvoice.meta.invoiceNumber} - ${currentInvoice.client.companyName || 'Untitled'}`
+    );
     setJustSaved(true);
     setTimeout(() => setJustSaved(false), 2000);
   };
@@ -91,9 +86,10 @@ export default function SavedInvoicesModal({
           </label>
           <div className="flex gap-2">
             <input
+              key={`${isOpen}-${currentInvoice.updatedAt}`}
               type="text"
-              value={saveTitle}
-              onChange={(e) => setSaveTitle(e.target.value)}
+              ref={saveTitleRef}
+              defaultValue={`${currentInvoice.meta.invoiceNumber} - ${currentInvoice.client.companyName || 'Untitled'}`}
               placeholder="Invoice description or client"
               className="flex-1 px-3 py-1.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -139,7 +135,7 @@ export default function SavedInvoicesModal({
               <FileText className="w-6 h-6 mx-auto opacity-50" />
               <p className="text-xs">No saved invoices yet.</p>
               <p className="text-[11px] text-slate-400">
-                Click &ldquo;Save&rdquo; above to save the current invoice to browser memory.
+                Click &ldquo;Save&rdquo; above to save a copy in this browser. Every saved copy remains in your history.
               </p>
             </div>
           ) : (
@@ -165,12 +161,14 @@ export default function SavedInvoicesModal({
                       </span>
                     </div>
                     <div className="text-xs text-slate-600 truncate">
-                      {inv.client.companyName || 'Unknown Client'}
+                      {inv.title || inv.client.companyName || 'Untitled Invoice'}
                     </div>
                     <div className="text-[11px] text-slate-400 flex items-center gap-2 font-mono">
                       <span>{inv.meta.currencySymbol}{total.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                       <span>•</span>
                       <span>{inv.meta.issueDate}</span>
+                      <span>•</span>
+                      <span>{new Date(inv.updatedAt).toLocaleString()}</span>
                     </div>
                   </div>
 

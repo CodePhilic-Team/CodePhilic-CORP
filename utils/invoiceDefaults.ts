@@ -123,6 +123,60 @@ export const DEFAULT_INVOICE: InvoiceData = {
   payment: { ...DEFAULT_PAYMENT_DETAILS },
 };
 
+// One-time seeded history entry: MBSTU Transport Office GPS tracker estimate.
+export const SEED_ESTIMATE_FLAG = 'codephilic_seed_estimate_cp_est_2026_0042';
+
+export const SEED_ESTIMATE_MBSTU: InvoiceData = {
+  id: 'seed-cp-est-2026-0042',
+  title: 'MBSTU Transport Office - GPS Tracker Estimate',
+  createdAt: '2026-11-21T00:00:00.000Z',
+  updatedAt: '2026-11-21T00:00:00.000Z',
+  company: { ...CODEPHILIC_COMPANY_DEFAULT },
+  client: {
+    companyName: 'MBSTU Transport Office',
+    contactPerson: '',
+    email: '',
+    phone: '',
+    address: 'Santosh',
+    cityCountry: 'Tangail',
+    taxId: '',
+    poNumber: '',
+  },
+  items: [
+    {
+      id: 'item-1',
+      title: 'GPS Tracker ( Sinotrack ST-901L 4G)',
+      description: 'Included Installation Charge , Sim Card (Teletalk)',
+      quantity: 12,
+      unit: 'Qty',
+      rate: 5850,
+      taxable: false,
+    },
+  ],
+  meta: {
+    ...DEFAULT_INVOICE.meta,
+    invoiceNumber: 'CP-EST-2026-0042',
+    issueDate: '21/11/2026',
+    dueDate: '',
+    paymentTerms: '',
+    currency: 'BDT',
+    currencySymbol: '৳',
+    status: 'DRAFT',
+    terms: '',
+    notes: '',
+    signatoryName: 'Md. Rakibul Islam',
+    signatoryRole: 'CEO',
+    documentType: 'FINANCIAL_ESTIMATE',
+    unitType: 'Qty',
+    discountType: 'percentage',
+    discountValue: 0,
+    taxRate: 0,
+    shippingFee: 0,
+    amountPaid: 0,
+  },
+  payment: { ...DEFAULT_PAYMENT_DETAILS },
+};
+
 export interface InvoiceTemplatePreset {
   id: string;
   name: string;

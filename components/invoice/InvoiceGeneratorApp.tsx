@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { InvoiceData } from '@/types/invoice';
-import { DEFAULT_INVOICE } from '@/utils/invoiceDefaults';
+import { DEFAULT_INVOICE, SEED_ESTIMATE_MBSTU, SEED_ESTIMATE_FLAG } from '@/utils/invoiceDefaults';
 import InvoiceNavbar from '@/components/invoice/InvoiceNavbar';
 import InvoiceEditor from '@/components/invoice/InvoiceEditor';
 import InvoicePreview from '@/components/invoice/InvoicePreview';
@@ -35,12 +35,20 @@ export default function InvoiceGeneratorApp() {
         }
       }
       const historyStored = localStorage.getItem('codephilic_saved_invoices_history');
+      let history: InvoiceData[] = [];
       if (historyStored) {
         const parsedHistory = JSON.parse(historyStored);
-        if (Array.isArray(parsedHistory)) {
-          setSavedInvoices(parsedHistory);
-        }
+        if (Array.isArray(parsedHistory)) history = parsedHistory;
       }
+      // Seed the MBSTU estimate into history once (user may delete it afterwards)
+      if (!localStorage.getItem(SEED_ESTIMATE_FLAG)) {
+        if (!history.some((h) => h.id === SEED_ESTIMATE_MBSTU.id)) {
+          history = [SEED_ESTIMATE_MBSTU, ...history];
+          localStorage.setItem('codephilic_saved_invoices_history', JSON.stringify(history));
+        }
+        localStorage.setItem(SEED_ESTIMATE_FLAG, '1');
+      }
+      setSavedInvoices(history);
     } catch (e) {
       console.warn('LocalStorage load failed:', e);
     } finally {
@@ -61,18 +69,12 @@ export default function InvoiceGeneratorApp() {
   const handleSaveCurrent = (title?: string) => {
     const updatedInvoice: InvoiceData = {
       ...invoice,
-      id: invoice.id || 'inv-' + Date.now(),
+      id: `inv-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      title: title?.trim() || undefined,
       updatedAt: new Date().toISOString(),
     };
     setSavedInvoices((prev) => {
-      const existingIdx = prev.findIndex((item) => item.id === updatedInvoice.id);
-      let updatedList: InvoiceData[];
-      if (existingIdx >= 0) {
-        updatedList = [...prev];
-        updatedList[existingIdx] = updatedInvoice;
-      } else {
-        updatedList = [updatedInvoice, ...prev];
-      }
+      const updatedList = [updatedInvoice, ...prev];
       try {
         localStorage.setItem('codephilic_saved_invoices_history', JSON.stringify(updatedList));
       } catch (e) {
@@ -103,6 +105,7 @@ export default function InvoiceGeneratorApp() {
         activeMobileTab={activeMobileTab}
         setActiveMobileTab={setActiveMobileTab}
         openSavedModal={() => setIsSavedModalOpen(true)}
+        onSaveCurrent={(title) => handleSaveCurrent(title)}
         savedCount={savedInvoices.length}
       />
 
